@@ -39,7 +39,7 @@ Abre la URL local que muestre Vite.
 ## Publicar en GitHub
 
 ```bash
-gh repo create c4s-scout-speaker-session --public --source=. --remote=origin --push
+gh repo create speaker-c4s-radar --public --source=. --remote=origin --push
 ```
 
 ## Historia de la sesión

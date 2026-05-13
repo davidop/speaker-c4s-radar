@@ -1,4 +1,4 @@
-Crea una app web llamada "C4S Scout" para speakers técnicos de comunidades GitHub y Microsoft.
+Crea una app web llamada "Speaker C4S Radar" para speakers técnicos de comunidades GitHub y Microsoft.
 
 Objetivo: detectar Call for Speakers activos, controlar deadlines, organizar propuestas de charla y hacer seguimiento de candidaturas.
 
