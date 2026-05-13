@@ -1,0 +1,32 @@
+:root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #090b16; color: #f5f7ff; }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background: radial-gradient(circle at top right, #5532ff55, transparent 34rem), #090b16; }
+#app { max-width: 1180px; margin: 0 auto; padding: 40px 24px; }
+.hero { display: flex; justify-content: space-between; gap: 24px; align-items: center; margin-bottom: 28px; }
+.eyebrow { color: #8ab4ff; text-transform: uppercase; letter-spacing: .2em; font-weight: 800; }
+h1 { font-size: clamp(42px, 7vw, 86px); margin: 0; line-height: .9; }
+.subtitle { max-width: 660px; color: #c9d2ff; font-size: 20px; }
+button { border: 0; border-radius: 999px; padding: 14px 22px; background: linear-gradient(90deg,#7c3aed,#0ea5e9); color: white; font-weight: 800; cursor: pointer; }
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+.kpi { border: 1px solid #26314f; background: #11172acc; border-radius: 24px; padding: 20px; }
+.kpi span { color: #9aa8d9; display: block; margin-bottom: 10px; }
+.kpi strong { font-size: 42px; }
+.layout { display: grid; grid-template-columns: 1fr 360px; gap: 24px; }
+h2 { font-size: 28px; margin: 0 0 16px; }
+.cards { display: grid; gap: 16px; }
+.card { border: 1px solid #2b3558; background: linear-gradient(180deg,#121a31,#0e1324); border-radius: 24px; padding: 20px; box-shadow: 0 24px 80px #0008; }
+.card.critical { border-color: #f97316; }
+.card.soon { border-color: #facc15; }
+.card-title { display: flex; justify-content: space-between; gap: 20px; }
+h3 { margin: 0; font-size: 20px; }
+.card-title span { background: #222b49; border-radius: 999px; padding: 8px 12px; white-space: nowrap; font-weight: 800; }
+.proposal { color: #a5b4fc; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { background: #1d2541; color: #dbe6ff; border-radius: 999px; padding: 6px 10px; font-size: 13px; }
+footer { display: flex; justify-content: space-between; margin-top: 16px; color: #e0e7ff; }
+footer em { color: #fda4af; font-style: normal; font-weight: 800; }
+aside { border: 1px solid #26314f; background: #10172acc; border-radius: 28px; padding: 20px; align-self: start; }
+.lane { border: 1px solid #26314f; border-radius: 18px; padding: 14px; margin-bottom: 12px; background: #0d1324; }
+.lane strong { color: #93c5fd; display: block; margin-bottom: 8px; }
+.lane span { color: #cbd5e1; line-height: 1.45; }
+@media (max-width: 900px) { .kpis, .layout { grid-template-columns: 1fr; } .hero { align-items: flex-start; flex-direction: column; } }
