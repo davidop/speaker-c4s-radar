@@ -40,7 +40,7 @@ function render() {
     <section class="hero">
       <div>
         <p class="eyebrow">Call for Speakers Z</p>
-        <h1>C4S Scout</h1>
+        <h1>Speaker C4S Radar</h1>
         <p class="subtitle">Detecta oportunidades, controla deadlines y convierte ideas en candidaturas.</p>
       </div>
       <button onclick="window.exportMarkdown()">Exportar plan</button>

@@ -23,7 +23,7 @@ slides/                         Presentación PowerPoint
 session/                        Guion, agenda y checklist
 .prompts/                       Prompts para Spark y Copilot
 .github/copilot-instructions.md Instrucciones de contexto para Copilot
-demo/                           Demo web local del C4S Scout
+demo/                           Demo web local del Speaker C4S Radar
 ```
 
 ## Ejecutar la demo
