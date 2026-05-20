@@ -1,0 +1,74 @@
+# Guía de contribución
+
+¡Gracias por tu interés en mejorar Speaker C4S Radar!  
+Este repositorio está pensado para ser una referencia práctica para la comunidad técnica hispana.
+
+---
+
+## ¿Cómo puedo contribuir?
+
+### 1. Añadir oportunidades C4S al dataset de ejemplo
+
+El fichero `demo/src/data/calls.json` contiene los C4S de muestra que aparecen en el dashboard.  
+Puedes abrir un **pull request** añadiendo eventos reales o representativos.
+
+Formato de cada entrada:
+
+```json
+{
+  "id": "cfs-XXX",
+  "name": "Nombre del evento",
+  "community": "GitHub | Microsoft | AWS | GDE | ...",
+  "deadline": "YYYY-MM-DD",
+  "city": "Ciudad o 'Online'",
+  "format": "In person | Remote | Hybrid",
+  "tags": ["tema1", "tema2"],
+  "status": "Idea",
+  "proposalId": null
+}
+```
+
+### 2. Reportar un bug
+
+Abre un [issue de tipo Bug](../../issues/new?template=bug_report.md) con:
+
+- Descripción del comportamiento incorrecto
+- Pasos para reproducirlo
+- Comportamiento esperado
+
+### 3. Proponer una mejora
+
+Abre un [issue de tipo Feature](../../issues/new?template=feature_request.md) explicando:
+
+- El problema que resuelve
+- La solución que propones
+- Si ya tienes código listo, enlaza el PR
+
+### 4. Adaptar el repo a tu propio radar
+
+Este repo está licenciado bajo MIT. Puedes hacer fork y usarlo como base:
+
+```bash
+gh repo fork YOUR_USER/speaker-c4s-radar --clone
+cd speaker-c4s-radar/demo
+npm install && npm run dev
+```
+
+Personaliza `calls.json` con tus propias oportunidades y el workflow de Pages se encarga del despliegue automático.
+
+---
+
+## Proceso para pull requests
+
+1. Haz fork del repo y crea una rama descriptiva (`feat/filtro-por-ciudad`, `fix/deadline-timezone`).
+2. Haz tus cambios manteniendo el estilo del código existente (JS simple, sin frameworks adicionales).
+3. Abre el PR contra `main` describiendo qué cambia y por qué.
+4. Un mantenedor revisará y hará merge si encaja con los objetivos del proyecto.
+
+---
+
+## Criterios de aceptación
+
+- El código debe ser legible en directo (sesión de 45 min). Evita abstracciones innecesarias.
+- No se aceptan dependencias nuevas sin justificación clara.
+- Los cambios de UI deben mantener el diseño existente o mejorarlo de forma coherente.

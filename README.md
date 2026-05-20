@@ -1,47 +1,102 @@
-# Call for Speakers Z: entrena, aplica y conquista el escenario
+# Speaker C4S Radar
 
-Repositorio base para una sesión práctica de 45 minutos: **PPT + demo** para construir un scouter de oportunidades C4S orientado a speakers de comunidades GitHub y Microsoft.
+[![Deploy demo to GitHub Pages](https://github.com/YOUR_USER/speaker-c4s-radar/actions/workflows/pages.yml/badge.svg)](https://github.com/YOUR_USER/speaker-c4s-radar/actions/workflows/pages.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Made with Vite](https://img.shields.io/badge/Built%20with-Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
+[![GitHub Copilot](https://img.shields.io/badge/Built%20with-GitHub%20Copilot-000?logo=github&logoColor=white)](https://github.com/features/copilot)
 
-## Objetivo de la demo
-Crear una app que permita:
+> **Detecta oportunidades de Call for Speakers, controla deadlines y convierte ideas en candidaturas.**
 
-- Detectar Call for Speakers activos.
-- Controlar deadlines y priorizar por urgencia.
-- Organizar propuestas de charla.
-- Hacer seguimiento de candidaturas.
+Repositorio de referencia para la sesión técnica **"Call for Speakers Z: entrena, aplica y conquista el escenario"** — 45 minutos de demo en vivo con GitHub Spark, GitHub Copilot y VS Code.
 
-## Stack de la sesión
+---
 
-- GitHub Spark para idear y prototipar la app.
-- GitHub Copilot para evolucionar funcionalidades.
-- Visual Studio Code para aterrizar la demo como proyecto editable.
+## ¿Para qué sirve?
 
-## Estructura
+Los C4S aparecen y desaparecen. Este radar pasa de reaccionar tarde a operar con un sistema sencillo:
 
-```text
-slides/                         Presentación PowerPoint
-session/                        Guion, agenda y checklist
-.prompts/                       Prompts para Spark y Copilot
-.github/copilot-instructions.md Instrucciones de contexto para Copilot
-demo/                           Demo web local del Speaker C4S Radar
-```
+| Fase | Qué hace la app |
+|---|---|
+| 🔍 **Detectar** | Lista Call for Speakers activos con urgencia visual por deadline |
+| ⏱️ **Priorizar** | Semáforo de riesgo: crítico / próximo / controlado |
+| 📝 **Preparar** | Asocia propuestas de charla a cada oportunidad |
+| 📬 **Seguir** | Pipeline kanban de candidaturas: Idea → Submitted → Accepted |
 
-## Ejecutar la demo
+---
+
+## Demo en vivo
+
+![Speaker C4S Radar — dashboard](https://raw.githubusercontent.com/YOUR_USER/speaker-c4s-radar/main/docs/screenshot.png)
+
+> Puedes ver la versión desplegada en **[GitHub Pages →](https://YOUR_USER.github.io/speaker-c4s-radar/)**
+
+---
+
+## Ejecutar en local
 
 ```bash
-cd demo
+git clone https://github.com/YOUR_USER/speaker-c4s-radar.git
+cd speaker-c4s-radar/demo
 npm install
 npm run dev
 ```
 
-Abre la URL local que muestre Vite.
+Abre la URL que muestre Vite (normalmente `http://localhost:5173`).
 
-## Publicar en GitHub
+---
+
+## Estructura del repositorio
+
+```text
+demo/                           App web (Vite + Vanilla JS)
+  src/
+    main.js                     Lógica principal de la app
+    styles.css                  Estilos
+    data/calls.json             Dataset de C4S de ejemplo
+slides/                         Presentación de la sesión
+session/                        Guion, agenda y runbook de demo
+.github/
+  workflows/pages.yml           CI/CD → GitHub Pages
+  copilot-instructions.md       Contexto para GitHub Copilot
+```
+
+---
+
+## Stack
+
+| Herramienta | Rol en la sesión |
+|---|---|
+| **GitHub Spark** | Prototipar la app desde un prompt |
+| **GitHub Copilot** | Evolucionar features en VS Code |
+| **Vite** | Build y dev server del frontend |
+| **GitHub Actions** | Despliegue automático a Pages |
+| **Vanilla JS** | Sin frameworks: código legible en directo |
+
+---
+
+## Adapta este radar a tu stack
+
+Puedes personalizar `demo/src/data/calls.json` con tus propias oportunidades y usar este repo como base de tu propio radar. Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para saber cómo.
+
+---
+
+## Publicar tu fork en GitHub Pages
 
 ```bash
 gh repo create speaker-c4s-radar --public --source=. --remote=origin --push
 ```
 
-## Historia de la sesión
+Activa **Pages** en `Settings → Pages → Source: GitHub Actions` y el workflow se encargará del resto.
 
-> Los C4S aparecen y desaparecen. Esta demo enseña cómo pasar de reaccionar tarde a operar con un sistema sencillo: detectar, priorizar, preparar y seguir oportunidades.
+---
+
+## Contribuir
+
+¿Tienes una mejora, un bug o quieres añadir una oportunidad C4S al dataset de ejemplo?  
+Lee [CONTRIBUTING.md](CONTRIBUTING.md) y abre un issue o un pull request.
+
+---
+
+## Licencia
+
+[MIT](LICENSE) · Hecho con GitHub Copilot para la comunidad técnica hispana.
