@@ -58,6 +58,17 @@ Personaliza `calls.json` con tus propias oportunidades y el workflow de Pages se
 
 ---
 
+## Contribuciones no técnicas
+También puedes contribuir aunque no escribas código:
+- Proponiendo nuevos Call for Speakers para el dataset.
+- Mejorando textos del README.
+- Sugiriendo estados o flujos más realistas para speakers.
+- Revisando accesibilidad y claridad visual.
+- Compartiendo ideas para futuras demos.
+
+Este proyecto quiere ser útil para la comunidad, así que las mejoras de contenido, claridad y experiencia también son bienvenidas.
+
+
 ## Proceso para pull requests
 
 1. Haz fork del repo y crea una rama descriptiva (`feat/filtro-por-ciudad`, `fix/deadline-timezone`).

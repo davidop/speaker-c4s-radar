@@ -1,13 +1,15 @@
 # Speaker C4S Radar
 
-[![Deploy demo to GitHub Pages](https://github.com/YOUR_USER/speaker-c4s-radar/actions/workflows/pages.yml/badge.svg)](https://github.com/YOUR_USER/speaker-c4s-radar/actions/workflows/pages.yml)
+[![Deploy demo to GitHub Pages](https://github.com/davidop/speaker-c4s-radar/actions/workflows/pages.yml/badge.svg)](https://github.com/davidop/speaker-c4s-radar/actions/workflows/pages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Made with Vite](https://img.shields.io/badge/Built%20with-Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 [![GitHub Copilot](https://img.shields.io/badge/Built%20with-GitHub%20Copilot-000?logo=github&logoColor=white)](https://github.com/features/copilot)
 
-> **Detecta oportunidades de Call for Speakers, controla deadlines y convierte ideas en candidaturas.**
+> Un radar visual para que speakers, MVPs y comunidades técnicas no pierdan oportunidades de Call for Speakers entre mensajes, posts y deadlines imposibles.
 
 Repositorio de referencia para la sesión técnica **"Call for Speakers Z: entrena, aplica y conquista el escenario"** — 45 minutos de demo en vivo con GitHub Spark, GitHub Copilot y VS Code.
+
+Este proyecto nace como una demo práctica para enseñar cómo GitHub Spark, GitHub Copilot y Visual Studio Code pueden ayudarnos a convertir una necesidad real de comunidad en una app útil, visual y fácil de adaptar.
 
 ---
 
@@ -26,16 +28,16 @@ Los C4S aparecen y desaparecen. Este radar pasa de reaccionar tarde a operar con
 
 ## Demo en vivo
 
-![Speaker C4S Radar — dashboard](https://raw.githubusercontent.com/YOUR_USER/speaker-c4s-radar/main/docs/screenshot.png)
+![Speaker C4S Radar — dashboard](https://raw.githubusercontent.com/davidop/speaker-c4s-radar/main/docs/screenshot.png)
 
-> Puedes ver la versión desplegada en **[GitHub Pages →](https://YOUR_USER.github.io/speaker-c4s-radar/)**
+> Puedes ver la versión desplegada en GitHub Pages cuando esté activada desde Settings → Pages → GitHub Actions.
 
 ---
 
 ## Ejecutar en local
 
 ```bash
-git clone https://github.com/YOUR_USER/speaker-c4s-radar.git
+git clone https://github.com/davidop/speaker-c4s-radar.git
 cd speaker-c4s-radar/demo
 npm install
 npm run dev

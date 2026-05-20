@@ -1,7 +1,7 @@
 [
-  {"id":"cfs-001","name":"GitHub Universe Community Stage","community":"GitHub","deadline":"2026-05-08","city":"Online","format":"Remote","tags":["GitHub Copilot","DevEx"],"status":"Draft","proposalId":"p-001"},
-  {"id":"cfs-002","name":"Global Azure Bootcamp Madrid","community":"Microsoft","deadline":"2026-05-16","city":"Madrid","format":"In person","tags":["Azure","Cloud Native"],"status":"Idea","proposalId":null},
-  {"id":"cfs-003","name":"Microsoft AI Tour Community Sessions","community":"Microsoft","deadline":"2026-05-30","city":"Barcelona","format":"Hybrid","tags":["AI","Copilot"],"status":"Ready","proposalId":"p-002"},
-  {"id":"cfs-004","name":"GitHub Field Day Europe","community":"GitHub","deadline":"2026-06-12","city":"Berlin","format":"In person","tags":["Open Source","Actions"],"status":"Submitted","proposalId":"p-003"},
-  {"id":"cfs-005","name":"Cloud Native Spain Meetup Summit","community":"Microsoft","deadline":"2026-05-06","city":"Valencia","format":"In person","tags":["Azure Container Apps","Platform Engineering"],"status":"Idea","proposalId":null}
+  {"id":"cfs-001","name":"GitHub Universe Community Stage","community":"GitHub","deadline":"2026-05-08","city":"Online","format":"Remote","tags":["GitHub Copilot","DevEx"],"status":"Draft","proposalId":"p-001","audience":"Speakers de comunidad GitHub","source":"https://example.com"},
+  {"id":"cfs-002","name":"Global Azure Bootcamp Madrid","community":"Microsoft","deadline":"2026-05-16","city":"Madrid","format":"In person","tags":["Azure","Cloud Native"],"status":"Idea","proposalId":null,"audience":"Speakers de comunidades cloud","source":"https://example.com"},
+  {"id":"cfs-003","name":"Microsoft AI Tour Community Sessions","community":"Microsoft","deadline":"2026-05-30","city":"Barcelona","format":"Hybrid","tags":["AI","Copilot"],"status":"Ready","proposalId":"p-002","audience":"Speakers interesados en AI","source":"https://example.com"},
+  {"id":"cfs-004","name":"GitHub Field Day Europe","community":"GitHub","deadline":"2026-06-12","city":"Berlin","format":"In person","tags":["Open Source","Actions"],"status":"Submitted","proposalId":"p-003","audience":"Contribuidores Open Source","source":"https://example.com"},
+  {"id":"cfs-005","name":"Cloud Native Spain Meetup Summit","community":"Microsoft","deadline":"2026-05-06","city":"Valencia","format":"In person","tags":["Azure Container Apps","Platform Engineering"],"status":"Idea","proposalId":null,"audience":"Speakers de comunidad cloud","source":"https://example.com"}
 ]
