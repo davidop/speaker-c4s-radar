@@ -14,9 +14,11 @@ const today = DEMO_DATE ? new Date(DEMO_DATE) : new Date();
 today.setHours(0, 0, 0, 0);
 
 const stateOrder = ['Idea', 'Draft', 'Ready', 'Submitted', 'Accepted', 'Rejected'];
+const formatOptions = ['Remote', 'Hybrid', 'In person'];
 
 let selectedCommunity = 'Todas';
 let selectedStatus = 'Todos';
+let callsData = [...calls];
 
 function daysLeft(deadline) {
   const diff = new Date(`${deadline}T00:00:00`) - today;
@@ -65,7 +67,7 @@ function proposalTitle(id) {
 }
 
 function filteredCalls() {
-  return calls.filter(call => {
+  return callsData.filter(call => {
     const matchesCommunity = selectedCommunity === 'Todas' || call.community === selectedCommunity;
     const matchesStatus = selectedStatus === 'Todos' || call.status === selectedStatus;
     return matchesCommunity && matchesStatus;
@@ -73,13 +75,13 @@ function filteredCalls() {
 }
 
 function render() {
-  const active = calls.filter(c => !['Accepted', 'Rejected'].includes(c.status));
-  const nextDeadlines = calls.filter(c => daysLeft(c.deadline) <= 14).length;
-  const submitted = calls.filter(c => c.status === 'Submitted').length;
-  const withoutProposal = calls.filter(c => !c.proposalId).length;
+  const active = callsData.filter(c => !['Accepted', 'Rejected'].includes(c.status));
+  const nextDeadlines = callsData.filter(c => daysLeft(c.deadline) <= 14).length;
+  const submitted = callsData.filter(c => c.status === 'Submitted').length;
+  const withoutProposal = callsData.filter(c => !c.proposalId).length;
 
   const visibleCalls = filteredCalls();
-  const communities = ['Todas', ...new Set(calls.map(c => c.community))];
+  const communities = ['Todas', ...new Set(callsData.map(c => c.community))];
   const statuses = ['Todos', ...stateOrder];
 
   document.querySelector('#app').innerHTML = `
@@ -90,6 +92,27 @@ function render() {
         <p class="subtitle">Detecta oportunidades, controla deadlines y convierte ideas en candidaturas.</p>
       </div>
       <button onclick="window.exportMarkdown()">Exportar plan</button>
+    </section>
+
+    <section class="composer" aria-label="Añadir evento">
+      <h2>Añadir evento</h2>
+      <form class="event-form" onsubmit="window.addCall(event)">
+        <input name="name" required placeholder="Nombre del evento" />
+        <input name="community" required placeholder="Comunidad" />
+        <input name="deadline" required type="date" />
+        <input name="city" required placeholder="Ciudad u Online" />
+        <select name="format" required>
+          ${formatOptions.map(format => `<option value="${format}">${format}</option>`).join('')}
+        </select>
+        <select name="status" required>
+          ${stateOrder.map(status => `<option value="${status}">${status}</option>`).join('')}
+        </select>
+        <input name="tags" placeholder="Tags separadas por coma" />
+        <input name="audience" placeholder="Audiencia" />
+        <input name="source" placeholder="URL del C4S" />
+        <button type="submit">Guardar evento</button>
+      </form>
+      <p class="form-hint">Se guarda directamente en src/data/calls.json mientras corre npm run dev.</p>
     </section>
 
     <section class="kpis">
@@ -163,7 +186,7 @@ function card(call) {
 }
 
 function column(status) {
-  const items = calls.filter(c => c.status === status);
+  const items = callsData.filter(c => c.status === status);
   return `<div class="lane"><strong>${status}</strong><span>${items.map(i => i.name).join('<br>') || '—'}</span></div>`;
 }
 
@@ -182,7 +205,7 @@ window.exportMarkdown = function exportMarkdown() {
     '',
     `Generado el ${today.toLocaleDateString('es-ES')}`,
     '',
-    ...calls.map(c => {
+    ...callsData.map(c => {
       return [
         `## ${c.name}`,
         `- Comunidad: ${c.community}`,
@@ -197,6 +220,42 @@ window.exportMarkdown = function exportMarkdown() {
   ].join('\n\n');
   navigator.clipboard?.writeText(markdown);
   alert('Plan copiado al portapapeles:\n\n' + markdown);
+};
+
+window.addCall = async function addCall(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const payload = {
+    name: String(formData.get('name') || '').trim(),
+    community: String(formData.get('community') || '').trim(),
+    deadline: String(formData.get('deadline') || '').trim(),
+    city: String(formData.get('city') || '').trim(),
+    format: String(formData.get('format') || '').trim(),
+    status: String(formData.get('status') || '').trim(),
+    tags: String(formData.get('tags') || '').split(',').map(tag => tag.trim()).filter(Boolean),
+    audience: String(formData.get('audience') || '').trim(),
+    source: String(formData.get('source') || '').trim()
+  };
+
+  try {
+    const response = await fetch('/api/calls', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error('No se pudo guardar.');
+    }
+
+    const savedCall = await response.json();
+    callsData = [...callsData, savedCall];
+    event.target.reset();
+    render();
+    alert(`Evento añadido: ${savedCall.name}`);
+  } catch {
+    alert('No se pudo guardar el evento. Verifica que npm run dev esté activo.');
+  }
 };
 
 render();

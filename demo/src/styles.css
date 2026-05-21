@@ -11,6 +11,11 @@ button { border: 0; border-radius: 999px; padding: 14px 22px; background: linear
 .kpi { border: 1px solid #26314f; background: #11172acc; border-radius: 24px; padding: 20px; }
 .kpi span { color: #9aa8d9; display: block; margin-bottom: 10px; }
 .kpi strong { font-size: 42px; }
+.composer { margin-bottom: 28px; border: 1px solid #26314f; border-radius: 24px; padding: 18px; background: rgba(11, 18, 36, 0.8); }
+.event-form { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.event-form input, .event-form select { width: 100%; border: 1px solid #334155; border-radius: 12px; padding: 10px 12px; background: #0f172a; color: #f8fafc; font: inherit; }
+.event-form button { justify-self: start; }
+.form-hint { margin: 12px 0 2px; color: #cbd5e1; font-size: 14px; }
 .layout { display: grid; grid-template-columns: 1fr 360px; gap: 24px; }
 h2 { font-size: 28px; margin: 0 0 16px; }
 .cards { display: grid; gap: 16px; }
@@ -29,7 +34,7 @@ aside { border: 1px solid #26314f; background: #10172acc; border-radius: 28px; p
 .lane { border: 1px solid #26314f; border-radius: 18px; padding: 14px; margin-bottom: 12px; background: #0d1324; }
 .lane strong { color: #93c5fd; display: block; margin-bottom: 8px; }
 .lane span { color: #cbd5e1; line-height: 1.45; }
-@media (max-width: 900px) { .kpis, .layout { grid-template-columns: 1fr; } .hero { align-items: flex-start; flex-direction: column; } }
+@media (max-width: 900px) { .kpis, .layout, .event-form { grid-template-columns: 1fr; } .hero { align-items: flex-start; flex-direction: column; } }
 
 .hero::after {
 	content: "✦";
