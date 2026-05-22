@@ -1,0 +1,54 @@
+name: Discover C4S Opportunities
+
+on:
+  schedule:
+    - cron: '0 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: demo/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: demo
+
+      - name: Run C4S discovery
+        run: node scripts/discover-c4s.mjs
+        working-directory: demo
+        env:
+          C4S_EXTRA_SOURCES_JSON: ${{ secrets.C4S_EXTRA_SOURCES_JSON }}
+
+      - name: Run tests
+        run: npm test
+        working-directory: demo
+
+      - name: Build demo
+        run: npm run build
+        working-directory: demo
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'chore(data): automated C4S discovery refresh'
+          title: 'chore(data): automated C4S discovery refresh'
+          body-path: demo/scripts/discovery-summary.md
+          branch: bot/c4s-discovery
+          delete-branch: true
+          labels: |
+            automation
+            data

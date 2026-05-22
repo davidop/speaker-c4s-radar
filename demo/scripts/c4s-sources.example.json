@@ -1,0 +1,15 @@
+[
+  {
+    "id": "my-sessionize-feed",
+    "type": "json-array",
+    "url": "https://example.com/c4s-feed.json",
+    "defaults": {
+      "community": "Sessionize Community",
+      "city": "Online",
+      "format": "Remote",
+      "tags": ["Call for Speakers"],
+      "audience": "Comunidad técnica",
+      "deadlineConfidence": "estimated"
+    }
+  }
+]

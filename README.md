@@ -132,6 +132,41 @@ Activa **Pages** en `Settings → Pages → Source: GitHub Actions` y el workflo
 
 ---
 
+## Automatizar búsqueda de C4S
+
+Se ha añadido un workflow programado en [.github/workflows/c4s-discovery.yml](.github/workflows/c4s-discovery.yml) que:
+
+1. Ejecuta discovery diario (cron) o manual.
+2. Normaliza oportunidades al formato de [demo/src/data/calls.json](demo/src/data/calls.json).
+3. Deduplica por `source` y por combinación `name + community`.
+4. Filtra deadlines pasados.
+5. Abre PR automático con resumen de resultados.
+
+### Configuración rápida
+
+1. Define fuentes activas en [demo/scripts/c4s-sources.json](demo/scripts/c4s-sources.json) o usa el secreto `C4S_EXTRA_SOURCES_JSON`.
+2. Toma como plantilla [demo/scripts/c4s-sources.example.json](demo/scripts/c4s-sources.example.json).
+3. Ejecuta localmente:
+
+  npm run discover:c4s
+
+4. El reporte queda en:
+  - [demo/scripts/discovery-report.json](demo/scripts/discovery-report.json)
+  - [demo/scripts/discovery-summary.md](demo/scripts/discovery-summary.md)
+
+### Formato esperado de fuente
+
+Cada fuente debe devolver una lista JSON. Campos aceptados por item:
+
+- `name` o `title`
+- `deadline` o `cfpDeadline` o `closesAt` o `date`
+- `source` o `url`
+- opcionales: `community`, `city`, `format`, `tags`, `audience`, `deadlineConfidence`, `status`
+
+Si faltan campos opcionales, se aplican defaults desde la definición de fuente.
+
+---
+
 ## Contribuir
 
 ¿Tienes una mejora, un bug o quieres añadir una oportunidad C4S al dataset de ejemplo?  

@@ -71,6 +71,11 @@
 - [ ] **UX-05**: Add-event composer can be collapsed/expanded to reduce visual noise.
 - [ ] **UX-06**: Pipeline lanes show item counts per status.
 
+### Automated Discovery (Roadmap Extension)
+
+- [ ] **AUTO-01**: Maintainer can run a scheduled GitHub Action that discovers and normalizes C4S opportunities into `calls.json`.
+- [ ] **AUTO-02**: Automation opens a pull request with a machine-generated summary and only proposed data changes.
+
 ## Out of Scope
 
 | Feature | Reason |
@@ -109,11 +114,13 @@
 | UX-04 | Phase 11 | Pending |
 | UX-05 | Phase 11 | Pending |
 | UX-06 | Phase 11 | Pending |
+| AUTO-01 | Phase 12 | Pending |
+| AUTO-02 | Phase 12 | Pending |
 
 **Coverage:**
 - v1 requirements: 12 total
-- v2 extension requirements: 13 total (INT-01..03, PROP-01..02, SRCH-01..02, NOTIF-01..02, NOTE-01, UX-04..06)
-- Mapped to phases: 25
+- v2 extension requirements: 15 total (INT-01..03, PROP-01..02, SRCH-01..02, NOTIF-01..02, NOTE-01, UX-04..06, AUTO-01..02)
+- Mapped to phases: 27
 - Unmapped: 0
 
 ---
