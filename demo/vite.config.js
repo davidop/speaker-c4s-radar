@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { validateCreatePayload, buildNewCall, VALID_STATUSES } from './src/server/calls-api-logic.js';
 
-const VALID_STATUSES = ['Idea', 'Draft', 'Ready', 'Submitted', 'Accepted', 'Rejected'];
 const UPDATABLE_FIELDS = ['name', 'community', 'deadline', 'city', 'format', 'tags', 'status', 'proposalId', 'audience', 'source'];
 const UPDATABLE_PROPOSAL_FIELDS = ['title', 'tags', 'level'];
 
@@ -26,42 +26,15 @@ function addCallApiPlugin() {
             const current = JSON.parse(await fs.readFile(filePath, 'utf8'));
 
             if (method === 'POST') {
-              const requiredFields = ['name', 'community', 'deadline', 'city', 'format', 'status'];
-              const missing = requiredFields.find((field) => !payload[field]);
-
-              if (missing) {
+              const validationError = validateCreatePayload(payload);
+              if (validationError) {
                 res.statusCode = 400;
                 res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ error: `Missing field: ${missing}` }));
+                res.end(JSON.stringify({ error: validationError }));
                 return;
               }
 
-              if (!VALID_STATUSES.includes(payload.status)) {
-                res.statusCode = 400;
-                res.setHeader('Content-Type', 'application/json');
-                res.end(JSON.stringify({ error: 'Invalid status value' }));
-                return;
-              }
-
-              const maxId = current.reduce((acc, item) => {
-                const parsed = Number(item.id?.replace('cfs-', ''));
-                return Number.isFinite(parsed) ? Math.max(acc, parsed) : acc;
-              }, 0);
-
-              const newId = `cfs-${String(maxId + 1).padStart(3, '0')}`;
-              const newCall = {
-                id: newId,
-                name: payload.name,
-                community: payload.community,
-                deadline: payload.deadline,
-                city: payload.city,
-                format: payload.format,
-                tags: Array.isArray(payload.tags) ? payload.tags : [],
-                status: payload.status,
-                proposalId: payload.proposalId || null,
-                audience: payload.audience || 'Comunidad técnica',
-                source: payload.source || ''
-              };
+              const newCall = buildNewCall(payload, current);
 
               const updated = [...current, newCall];
               await fs.writeFile(filePath, `${JSON.stringify(updated, null, 2)}\n`, 'utf8');

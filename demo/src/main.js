@@ -1,5 +1,6 @@
 import calls from './data/calls.json';
 import proposalSeed from './data/proposals.json';
+import { daysLeftFrom, urgencyFromDays, riskFromCall, nextActionFromCall } from './domain/radar-logic.js';
 import './styles.css';
 
 const DEMO_DATE = null;
@@ -40,45 +41,20 @@ function escapeAttr(value) {
 }
 
 function daysLeft(deadline) {
-  const diff = new Date(`${deadline}T00:00:00`) - today;
-  return Math.ceil(diff / (1000 * 60 * 60 * 24));
+  return daysLeftFrom(deadline, today);
 }
 
 function urgency(call) {
   const days = daysLeft(call.deadline);
-  if (days <= 7) return 'critical';
-  if (days <= 14) return 'soon';
-  return 'safe';
+  return urgencyFromDays(days);
 }
 
 function risk(call) {
-  return daysLeft(call.deadline) <= 7 && !call.proposalId ? 'Riesgo alto' : 'Controlado';
+  return riskFromCall(call, today);
 }
 
 function nextAction(call) {
-  const days = daysLeft(call.deadline);
-  if (!call.proposalId && days <= 7) {
-    return 'Crear propuesta hoy';
-  }
-  if (!call.proposalId) {
-    return 'Definir idea de charla';
-  }
-  if (call.status === 'Draft') {
-    return 'Revisar abstract';
-  }
-  if (call.status === 'Ready') {
-    return 'Enviar candidatura';
-  }
-  if (call.status === 'Submitted') {
-    return 'Hacer seguimiento';
-  }
-  if (call.status === 'Accepted') {
-    return 'Preparar sesión';
-  }
-  if (call.status === 'Rejected') {
-    return 'Guardar aprendizajes';
-  }
-  return 'Revisar oportunidad';
+  return nextActionFromCall(call, today);
 }
 
 function proposalTitle(id) {
