@@ -14,7 +14,7 @@ This roadmap evolves the existing brownfield demo in incremental, low-risk phase
 - [ ] **Phase 2: Automated Quality Gates** - Add testing and CI safeguards around business-critical behavior.
 - [ ] **Phase 3: Safe Modular Refactor** - Break up monolithic app logic while preserving user-visible behavior.
 - [ ] **Phase 4: GSD Delivery Loop** - Operationalize planning, verification, and PR summary workflow.
-- [ ] **Phase 5: Responsive, PWA y Auditoría UX para Comunidad Tech** - Hacer la app instalable en móvil y optimizar la experiencia para perfiles Microsoft, GitHub y Sessionize.
+- [ ] **Phase 5: Responsive, PWA y Auditoría UX para Comunidad Tech** ← IN PROGRESS - Hacer la app instalable en móvil y optimizar la experiencia para perfiles Microsoft, GitHub y Sessionize.
 
 ## Phase Details
 

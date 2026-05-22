@@ -5,13 +5,13 @@
 See: .planning/PROJECT.md (updated 2026-05-21)
 
 **Core value:** Help community speakers avoid missing opportunities by making deadlines, proposal readiness, and next actions immediately visible.
-**Current focus:** Phase 1 - Baseline and Data Confidence
+**Current focus:** Phase 5 - Responsive, PWA y Auditoría UX para Comunidad Tech
 
 ## Current Position
 
 Phase: 1 of 4 (Baseline and Data Confidence)
 Plan: 0 of 2 in current phase
-Status: Ready to plan
+Status: Planned
 Last activity: 2026-05-21 - Initialized project artifacts from existing brownfield codebase map
 
 Progress: [░░░░░░░░░░] 0%
