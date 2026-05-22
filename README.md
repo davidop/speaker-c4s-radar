@@ -26,6 +26,46 @@ Los C4S aparecen y desaparecen. Este radar pasa de reaccionar tarde a operar con
 
 ---
 
+## Diagrama de arquitectura
+
+```mermaid
+flowchart LR
+  U[Speaker / Community Lead] --> UI[UI Radar\nVite + Vanilla JS]
+  UI --> D[(calls.json\nproposals.json)]
+  UI --> SW[Service Worker\nPWA + cache + notificaciones]
+  UI --> API[/Dev Middleware API\n/api/calls\n/api/proposals/]
+  API --> D
+  CI[GitHub Actions] --> GH[GitHub Pages]
+  GH --> U
+```
+
+## Flujo de trabajo del usuario
+
+```mermaid
+flowchart TD
+  A[Detectar oportunidad C4S] --> B[Evaluar urgencia\ncritical/soon/safe]
+  B --> C[Asociar propuesta\no crear nueva]
+  C --> D[Actualizar estado\nIdea -> Draft -> Ready -> Submitted]
+  D --> E[Guardar notas y aprendizajes]
+  E --> F[Exportar plan Markdown]
+  D --> G{Deadline <= 7 dias}
+  G -- Si --> H[Notificacion PWA]
+  G -- No --> I[Seguimiento normal]
+```
+
+## Flujo de entrega CI/CD
+
+```mermaid
+flowchart LR
+  P[Push a main] --> T[npm test]
+  T --> B[npm run build]
+  B --> A[upload-pages-artifact]
+  A --> D[deploy-pages]
+  D --> S[Demo publicada en GitHub Pages]
+```
+
+---
+
 ## Demo en vivo
 
 ![Speaker C4S Radar — dashboard](https://raw.githubusercontent.com/davidop/speaker-c4s-radar/main/docs/screenshot.png)
