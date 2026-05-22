@@ -37,6 +37,8 @@ Progress: [░░░░░░░░░░] 0%
 
 ### Roadmap Evolution
 - Phase 5 added: Responsive, PWA y Auditoría UX para Comunidad Tech
+- Phases 6-11 added from product evaluation: interactive calls, proposal management, search/tag filter, PWA push notifications, notes per card, UX quick wins
+
 
 ### Decisions
 
