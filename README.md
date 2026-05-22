@@ -1,4 +1,5 @@
 # Speaker C4S Radar
+[![CodeQL Analysis](https://github.com/davidop/speaker-c4s-radar/actions/workflows/codeql.yml/badge.svg)](https://github.com/davidop/speaker-c4s-radar/actions/workflows/codeql.yml) [![Security Policy](https://img.shields.io/badge/Security-Policy-blue)](./SECURITY.md)
 
 [![Deploy demo to GitHub Pages](https://github.com/davidop/speaker-c4s-radar/actions/workflows/pages.yml/badge.svg)](https://github.com/davidop/speaker-c4s-radar/actions/workflows/pages.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
