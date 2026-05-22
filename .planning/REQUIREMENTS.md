@@ -61,6 +61,10 @@
 - [ ] **NOTIF-01**: User can opt in/out of browser notifications from the UI.
 - [ ] **NOTIF-02**: User receives notifications for opportunities with deadline in 7 days or less.
 
+### Notes and Learning (Roadmap Extension)
+
+- [ ] **NOTE-01**: User can write and persist personal notes per opportunity and include them in Markdown export.
+
 ## Out of Scope
 
 | Feature | Reason |
@@ -95,11 +99,12 @@
 | SRCH-02 | Phase 8 | Pending |
 | NOTIF-01 | Phase 9 | Pending |
 | NOTIF-02 | Phase 9 | Pending |
+| NOTE-01 | Phase 10 | Pending |
 
 **Coverage:**
 - v1 requirements: 12 total
-- v2 extension requirements: 9 total (INT-01..03, PROP-01..02, SRCH-01..02, NOTIF-01..02)
-- Mapped to phases: 21
+- v2 extension requirements: 10 total (INT-01..03, PROP-01..02, SRCH-01..02, NOTIF-01..02, NOTE-01)
+- Mapped to phases: 22
 - Unmapped: 0
 
 ---
