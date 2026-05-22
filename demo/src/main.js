@@ -19,6 +19,15 @@ const formatOptions = ['Remote', 'Hybrid', 'In person'];
 let selectedCommunity = 'Todas';
 let selectedStatus = 'Todos';
 let callsData = [...calls];
+let editingCallId = null;
+
+function escapeAttr(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;');
+}
 
 function daysLeft(deadline) {
   const diff = new Date(`${deadline}T00:00:00`) - today;
@@ -79,6 +88,7 @@ function render() {
   const nextDeadlines = callsData.filter(c => daysLeft(c.deadline) <= 14).length;
   const submitted = callsData.filter(c => c.status === 'Submitted').length;
   const withoutProposal = callsData.filter(c => !c.proposalId).length;
+  const editingCall = editingCallId ? callsData.find((c) => c.id === editingCallId) : null;
 
   const visibleCalls = filteredCalls();
   const communities = ['Todas', ...new Set(callsData.map(c => c.community))];
@@ -94,23 +104,24 @@ function render() {
       <button onclick="window.exportMarkdown()">Exportar plan</button>
     </section>
 
-    <section class="composer" aria-label="Añadir evento">
-      <h2>Añadir evento</h2>
+    <section class="composer ${editingCall ? 'is-editing' : ''}" aria-label="Añadir evento">
+      <h2>${editingCall ? 'Editar evento' : 'Añadir evento'}</h2>
       <form class="event-form" onsubmit="window.addCall(event)">
-        <input name="name" required placeholder="Nombre del evento" />
-        <input name="community" required placeholder="Comunidad" />
-        <input name="deadline" required type="date" />
-        <input name="city" required placeholder="Ciudad u Online" />
+        <input name="name" required placeholder="Nombre del evento" value="${escapeAttr(editingCall?.name)}" />
+        <input name="community" required placeholder="Comunidad" value="${escapeAttr(editingCall?.community)}" />
+        <input name="deadline" required type="date" value="${escapeAttr(editingCall?.deadline)}" />
+        <input name="city" required placeholder="Ciudad u Online" value="${escapeAttr(editingCall?.city)}" />
         <select name="format" required>
-          ${formatOptions.map(format => `<option value="${format}">${format}</option>`).join('')}
+          ${formatOptions.map(format => `<option value="${format}" ${format === editingCall?.format ? 'selected' : ''}>${format}</option>`).join('')}
         </select>
         <select name="status" required>
-          ${stateOrder.map(status => `<option value="${status}">${status}</option>`).join('')}
+          ${stateOrder.map(status => `<option value="${status}" ${status === editingCall?.status ? 'selected' : ''}>${status}</option>`).join('')}
         </select>
-        <input name="tags" placeholder="Tags separadas por coma" />
-        <input name="audience" placeholder="Audiencia" />
-        <input name="source" placeholder="URL del C4S" />
-        <button type="submit">Guardar evento</button>
+        <input name="tags" placeholder="Tags separadas por coma" value="${escapeAttr(editingCall?.tags?.join(', ') || '')}" />
+        <input name="audience" placeholder="Audiencia" value="${escapeAttr(editingCall?.audience || '')}" />
+        <input name="source" placeholder="URL del C4S" value="${escapeAttr(editingCall?.source || '')}" />
+        <button type="submit">${editingCall ? 'Guardar cambios' : 'Guardar evento'}</button>
+        ${editingCall ? '<button type="button" class="btn-secondary" onclick="window.cancelEditCall()">Cancelar edición</button>' : ''}
       </form>
       <p class="form-hint">Se guarda directamente en src/data/calls.json mientras corre npm run dev.</p>
     </section>
@@ -188,6 +199,7 @@ function card(call) {
             ${stateOrder.map(status => `<option value="${status}" ${status === call.status ? 'selected' : ''}>${status}</option>`).join('')}
           </select>
         </label>
+        <button type="button" class="btn-secondary" onclick="window.startEditCall('${call.id}')">Editar</button>
         <button type="button" class="danger" onclick="window.deleteCall('${call.id}')">Borrar</button>
       </div>
       <footer><b>${call.status}</b><em>${risk(call)}</em></footer>
@@ -205,6 +217,17 @@ window.setCommunityFilter = function setCommunityFilter(value) {
 };
 window.setStatusFilter = function setStatusFilter(value) {
   selectedStatus = value;
+  render();
+};
+
+window.startEditCall = function startEditCall(id) {
+  editingCallId = id;
+  render();
+  document.querySelector('.composer')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+};
+
+window.cancelEditCall = function cancelEditCall() {
+  editingCallId = null;
   render();
 };
 
@@ -276,6 +299,9 @@ window.exportMarkdown = function exportMarkdown() {
 window.addCall = async function addCall(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
+  const isEditing = Boolean(editingCallId);
+  const endpoint = isEditing ? `/api/calls/${encodeURIComponent(editingCallId)}` : '/api/calls';
+  const method = isEditing ? 'PATCH' : 'POST';
   const payload = {
     name: String(formData.get('name') || '').trim(),
     community: String(formData.get('community') || '').trim(),
@@ -289,8 +315,8 @@ window.addCall = async function addCall(event) {
   };
 
   try {
-    const response = await fetch('/api/calls', {
-      method: 'POST',
+    const response = await fetch(endpoint, {
+      method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
@@ -300,10 +326,13 @@ window.addCall = async function addCall(event) {
     }
 
     const savedCall = await response.json();
-    callsData = [...callsData, savedCall];
+    callsData = isEditing
+      ? callsData.map((call) => (call.id === editingCallId ? savedCall : call))
+      : [...callsData, savedCall];
+    editingCallId = null;
     event.target.reset();
     render();
-    alert(`Evento añadido: ${savedCall.name}`);
+    alert(isEditing ? `Evento actualizado: ${savedCall.name}` : `Evento añadido: ${savedCall.name}`);
   } catch {
     alert('No se pudo guardar el evento. Verifica que npm run dev esté activo.');
   }
