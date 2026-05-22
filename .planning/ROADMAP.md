@@ -14,6 +14,7 @@ This roadmap evolves the existing brownfield demo in incremental, low-risk phase
 - [ ] **Phase 2: Automated Quality Gates** - Add testing and CI safeguards around business-critical behavior.
 - [ ] **Phase 3: Safe Modular Refactor** - Break up monolithic app logic while preserving user-visible behavior.
 - [ ] **Phase 4: GSD Delivery Loop** - Operationalize planning, verification, and PR summary workflow.
+- [ ] **Phase 5: Responsive, PWA y Auditoría UX para Comunidad Tech** - Hacer la app instalable en móvil y optimizar la experiencia para perfiles Microsoft, GitHub y Sessionize.
 
 ## Phase Details
 
@@ -77,6 +78,23 @@ Plans:
 - [ ] 04-01: Validate end-to-end GSD phase lifecycle on Phase 1-3 execution outputs.
 - [ ] 04-02: Refine artifact conventions and PR-body usage guidance for maintainers.
 
+### Phase 5: Responsive, PWA y Auditoría UX para Comunidad Tech
+**Goal**: Como speaker y contribuidor técnico de la comunidad Microsoft, GitHub o Sessionize, quiero usar el radar desde mi móvil y ver una interfaz que entiende mi contexto (eventos Microsoft, repos GitHub, sesiones Sessionize), para gestionar mis CFPs en cualquier momento y lugar.
+**Mode:** mvp
+**Depends on**: Phase 3
+**Requirements**: [UX-01, UX-02, UX-03, PWA-01]
+**Success Criteria** (what must be TRUE):
+  1. La app es instalable como PWA en iOS y Android con icono y splash screen.
+  2. El layout es usable y legible en pantallas de 375px en adelante sin scroll horizontal.
+  3. Las comunidades, etiquetas y fuentes del dataset reflejan eventos reales de Microsoft, GitHub y Sessionize.
+  4. La auditoría UX identifica y resuelve al menos 3 puntos de fricción para estos perfiles de usuario.
+**Plans**: 2 plans
+
+Plans:
+- [ ] 05-01: Auditoría UX y responsive — revisar contraste, layout móvil, y adaptar datos al perfil de usuario.
+- [ ] 05-02: Implementar PWA (manifest, service worker, iconos) y validar instalación en móvil.
+
+
 ## Progress
 
 | Phase | Plans Complete | Status | Completed |
@@ -85,3 +103,4 @@ Plans:
 | 2. Automated Quality Gates | 0/2 | Not started | - |
 | 3. Safe Modular Refactor | 0/2 | Not started | - |
 | 4. GSD Delivery Loop | 0/2 | Not started | - |
+| 5. Responsive, PWA y Auditoría UX para Comunidad Tech | 0/2 | Not started | - |

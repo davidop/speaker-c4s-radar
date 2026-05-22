@@ -35,6 +35,9 @@ Progress: [░░░░░░░░░░] 0%
 
 ## Accumulated Context
 
+### Roadmap Evolution
+- Phase 5 added: Responsive, PWA y Auditoría UX para Comunidad Tech
+
 ### Decisions
 
 Decisions are logged in PROJECT.md Key Decisions table.
