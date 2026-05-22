@@ -65,6 +65,12 @@
 
 - [ ] **NOTE-01**: User can write and persist personal notes per opportunity and include them in Markdown export.
 
+### UX Polish (Roadmap Extension)
+
+- [ ] **UX-04**: Hero eyebrow text is clean and free of placeholder content.
+- [ ] **UX-05**: Add-event composer can be collapsed/expanded to reduce visual noise.
+- [ ] **UX-06**: Pipeline lanes show item counts per status.
+
 ## Out of Scope
 
 | Feature | Reason |
@@ -100,11 +106,14 @@
 | NOTIF-01 | Phase 9 | Pending |
 | NOTIF-02 | Phase 9 | Pending |
 | NOTE-01 | Phase 10 | Pending |
+| UX-04 | Phase 11 | Pending |
+| UX-05 | Phase 11 | Pending |
+| UX-06 | Phase 11 | Pending |
 
 **Coverage:**
 - v1 requirements: 12 total
-- v2 extension requirements: 10 total (INT-01..03, PROP-01..02, SRCH-01..02, NOTIF-01..02, NOTE-01)
-- Mapped to phases: 22
+- v2 extension requirements: 13 total (INT-01..03, PROP-01..02, SRCH-01..02, NOTIF-01..02, NOTE-01, UX-04..06)
+- Mapped to phases: 25
 - Unmapped: 0
 
 ---
