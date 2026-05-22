@@ -40,6 +40,12 @@
 - **PROD-02**: User can manage personal proposals and reminders across sessions/accounts.
 - **PROD-03**: User can receive deadline notifications through email or chat integrations.
 
+### Interaction and Editing (Roadmap Extension)
+
+- [ ] **INT-01**: User can update a call status directly from each card and see KPI/pipeline updates immediately.
+- [ ] **INT-02**: User can edit an existing call from the UI using a pre-filled form and persist changes in dev mode.
+- [ ] **INT-03**: User can delete an existing call with confirmation and reflected UI updates.
+
 ## Out of Scope
 
 | Feature | Reason |
@@ -65,10 +71,14 @@
 | MAIN-02 | Phase 3 | Pending |
 | FLOW-01 | Phase 4 | Pending |
 | FLOW-02 | Phase 4 | Pending |
+| INT-01 | Phase 6 | Pending |
+| INT-02 | Phase 6 | Pending |
+| INT-03 | Phase 6 | Pending |
 
 **Coverage:**
 - v1 requirements: 12 total
-- Mapped to phases: 12
+- v2 extension requirements: 3 total (INT-01..03)
+- Mapped to phases: 15
 - Unmapped: 0
 
 ---
