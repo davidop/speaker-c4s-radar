@@ -8,11 +8,12 @@
     "build": "node node_modules/vite/bin/vite.js build",
     "preview": "node node_modules/vite/bin/vite.js preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "discover:c4s": "node scripts/discover-c4s.mjs"
   },
   "dependencies": {
-    "@vitejs/plugin-basic-ssl": "latest",
-    "vite": "latest"
+    "@vitejs/plugin-basic-ssl": "^2.3.0",
+    "vite": "^8.0.12"
   },
   "devDependencies": {
     "vitest": "^4.1.7"
