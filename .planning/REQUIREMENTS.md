@@ -51,6 +51,11 @@
 - [ ] **PROP-01**: User can create, edit, and delete proposals from the UI in dev mode.
 - [ ] **PROP-02**: User can link/unlink a proposal to a call using a dynamic selector in the call form.
 
+### Search and Discovery (Roadmap Extension)
+
+- [ ] **SRCH-01**: User can search opportunities by text (event, community, tags, audience) with fast feedback.
+- [ ] **SRCH-02**: User can click a tag to filter opportunities and combine this with other filters.
+
 ## Out of Scope
 
 | Feature | Reason |
@@ -81,11 +86,13 @@
 | INT-03 | Phase 6 | Pending |
 | PROP-01 | Phase 7 | Pending |
 | PROP-02 | Phase 7 | Pending |
+| SRCH-01 | Phase 8 | Pending |
+| SRCH-02 | Phase 8 | Pending |
 
 **Coverage:**
 - v1 requirements: 12 total
-- v2 extension requirements: 5 total (INT-01..03, PROP-01..02)
-- Mapped to phases: 17
+- v2 extension requirements: 7 total (INT-01..03, PROP-01..02, SRCH-01..02)
+- Mapped to phases: 19
 - Unmapped: 0
 
 ---
