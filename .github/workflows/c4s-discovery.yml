@@ -41,8 +41,22 @@ jobs:
         run: npm run build
         working-directory: demo
 
+      - name: Detect repository changes
+        id: changes
+        run: |
+          changed="false"
+          if ! git diff --quiet; then
+            changed="true"
+          fi
+          echo "changed=$changed" >> "$GITHUB_OUTPUT"
+
       - name: Create Pull Request
+        id: create_pull_request
+        if: steps.changes.outputs.changed == 'true'
+        continue-on-error: true
         uses: peter-evans/create-pull-request@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           commit-message: 'chore(data): automated C4S discovery refresh'
           title: 'chore(data): automated C4S discovery refresh'
@@ -51,4 +65,10 @@ jobs:
           delete-branch: true
           labels: |
             automation
-            data
+            dataset
+
+      - name: Warn if PR creation failed
+        if: steps.changes.outputs.changed == 'true' && steps.create_pull_request.outcome == 'failure'
+        run: |
+          echo "PR creation failed. This usually means repository settings block GitHub Actions from creating PRs."
+          echo "Enable this in Settings > Actions > General > Workflow permissions."

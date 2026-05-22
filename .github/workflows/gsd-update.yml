@@ -67,8 +67,12 @@ jobs:
           EOF
 
       - name: Create Pull Request
+        id: create_pull_request
         if: steps.summary.outputs.changed == 'true'
+        continue-on-error: true
         uses: peter-evans/create-pull-request@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           commit-message: "chore(gsd): update runtime to latest"
           title: "chore(gsd): update GSD runtime to latest"
@@ -84,3 +88,9 @@ jobs:
             .github/agents/**
             .github/gsd-file-manifest.json
             .github/gsd-install-state.json
+
+      - name: Warn if PR creation failed
+        if: steps.summary.outputs.changed == 'true' && steps.create_pull_request.outcome == 'failure'
+        run: |
+          echo "PR creation failed. This usually means repository settings block GitHub Actions from creating PRs."
+          echo "Enable this in Settings > Actions > General > Workflow permissions."
