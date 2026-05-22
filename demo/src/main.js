@@ -259,3 +259,12 @@ window.addCall = async function addCall(event) {
 };
 
 render();
+
+// Registro PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch((err) => {
+      console.warn('SW registration failed:', err);
+    });
+  });
+}
