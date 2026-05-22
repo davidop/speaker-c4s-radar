@@ -19,6 +19,7 @@ let searchDebounceId = null;
 let callsData = [...calls];
 let proposalsData = [...proposalSeed];
 let editingCallId = null;
+let isComposerOpen = false;
 let swRegistration = null;
 const NOTIFIED_DEADLINES_KEY = 'c4s-notified-deadlines';
 const CALL_NOTES_KEY = 'c4s-call-notes';
@@ -206,7 +207,7 @@ function render() {
   document.querySelector('#app').innerHTML = `
     <section class="hero">
       <div>
-        <p class="eyebrow">Call for Speakers Z</p>
+        <p class="eyebrow">Call for Speakers</p>
         <h1>Speaker C4S Radar</h1>
         <p class="subtitle">Detecta oportunidades, controla deadlines y convierte ideas en candidaturas.</p>
       </div>
@@ -214,8 +215,11 @@ function render() {
     </section>
 
     <section class="composer ${editingCall ? 'is-editing' : ''}" aria-label="Añadir evento">
-      <h2>${editingCall ? 'Editar evento' : 'Añadir evento'}</h2>
-      <form class="event-form" onsubmit="window.addCall(event)">
+      <div class="composer-header">
+        <h2>${editingCall ? 'Editar evento' : 'Añadir evento'}</h2>
+        ${editingCall ? '' : `<button type="button" class="btn-secondary" onclick="window.toggleComposer()">${isComposerOpen ? 'Ocultar formulario' : 'Mostrar formulario'}</button>`}
+      </div>
+      ${editingCall || isComposerOpen ? `<form class="event-form" onsubmit="window.addCall(event)">
         <input name="name" required placeholder="Nombre del evento" value="${escapeAttr(editingCall?.name)}" />
         <input name="community" required placeholder="Comunidad" value="${escapeAttr(editingCall?.community)}" />
         <input name="deadline" required type="date" value="${escapeAttr(editingCall?.deadline)}" />
@@ -235,7 +239,7 @@ function render() {
         <button type="submit">${editingCall ? 'Guardar cambios' : 'Guardar evento'}</button>
         ${editingCall ? '<button type="button" class="btn-secondary" onclick="window.cancelEditCall()">Cancelar edición</button>' : ''}
       </form>
-      <p class="form-hint">Se guarda directamente en src/data/calls.json mientras corre npm run dev.</p>
+      <p class="form-hint">Se guarda directamente en src/data/calls.json mientras corre npm run dev.</p>` : '<p class="form-hint">Formulario oculto para mantener foco en el radar. Pulsa "Mostrar formulario" para añadir evento.</p>'}
     </section>
 
     ${proposalsPanel()}
@@ -349,7 +353,7 @@ function card(call) {
 
 function column(status) {
   const items = callsData.filter(c => c.status === status);
-  return `<div class="lane"><strong>${status}</strong><span>${items.map(i => i.name).join('<br>') || '—'}</span></div>`;
+  return `<div class="lane"><strong>${status} (${items.length})</strong><span>${items.map(i => i.name).join('<br>') || '—'}</span></div>`;
 }
 
 window.setCommunityFilter = function setCommunityFilter(value) {
@@ -423,12 +427,18 @@ window.updateCallNote = function updateCallNote(id, value) {
 
 window.startEditCall = function startEditCall(id) {
   editingCallId = id;
+  isComposerOpen = true;
   render();
   document.querySelector('.composer')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 };
 
 window.cancelEditCall = function cancelEditCall() {
   editingCallId = null;
+  render();
+};
+
+window.toggleComposer = function toggleComposer() {
+  isComposerOpen = !isComposerOpen;
   render();
 };
 
@@ -628,6 +638,7 @@ window.addCall = async function addCall(event) {
       ? callsData.map((call) => (call.id === editingCallId ? savedCall : call))
       : [...callsData, savedCall];
     editingCallId = null;
+    isComposerOpen = false;
     event.target.reset();
     render();
     alert(isEditing ? `Evento actualizado: ${savedCall.name}` : `Evento añadido: ${savedCall.name}`);
