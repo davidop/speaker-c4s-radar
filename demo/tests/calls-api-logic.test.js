@@ -41,6 +41,7 @@ describe('calls api logic', () => {
 
     const call = buildNewCall(payload, baseCalls);
     expect(call.id).toBe('cfs-011');
+    expect(call.deadlineConfidence).toBe('exact');
     expect(call.proposalId).toBeNull();
     expect(call.tags).toEqual([]);
     expect(call.audience).toBe('Comunidad técnica');

@@ -37,6 +37,7 @@ h2 { font-size: 28px; margin: 0 0 16px; }
 .card { border: 1px solid #2b3558; background: linear-gradient(180deg,#121a31,#0e1324); border-radius: 24px; padding: 20px; box-shadow: 0 24px 80px #0008; }
 .card.critical { border-color: #f97316; }
 .card.soon { border-color: #facc15; }
+.card.uncertain { border-style: dashed; border-color: #94a3b8; }
 .card-title { display: flex; justify-content: space-between; gap: 20px; }
 h3 { margin: 0; font-size: 20px; }
 .card-title span { background: #222b49; border-radius: 999px; padding: 8px 12px; white-space: nowrap; font-weight: 800; }
@@ -173,6 +174,11 @@ aside { border: 1px solid #26314f; background: #10172acc; border-radius: 28px; p
 }
 .audience {
 	color: #cbd5e1;
+}
+.confidence {
+  color: #cbd5e1;
+  font-size: 14px;
+  margin: 8px 0;
 }
 .source-link {
 	display: inline-flex;

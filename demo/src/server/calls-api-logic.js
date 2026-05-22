@@ -26,6 +26,7 @@ export function buildNewCall(payload, current) {
     name: payload.name,
     community: payload.community,
     deadline: payload.deadline,
+    deadlineConfidence: payload.deadlineConfidence || 'exact',
     city: payload.city,
     format: payload.format,
     tags: Array.isArray(payload.tags) ? payload.tags : [],

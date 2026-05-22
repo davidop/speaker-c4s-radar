@@ -3,7 +3,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { validateCreatePayload, buildNewCall, VALID_STATUSES } from './src/server/calls-api-logic.js';
 
-const UPDATABLE_FIELDS = ['name', 'community', 'deadline', 'city', 'format', 'tags', 'status', 'proposalId', 'audience', 'source'];
+const UPDATABLE_FIELDS = ['name', 'community', 'deadline', 'deadlineConfidence', 'city', 'format', 'tags', 'status', 'proposalId', 'audience', 'source'];
 const UPDATABLE_PROPOSAL_FIELDS = ['title', 'tags', 'level'];
 
 function addCallApiPlugin() {

@@ -6,11 +6,17 @@
     "deadline": "2026-06-03",
     "city": "Madrid, España",
     "format": "Hybrid",
-    "tags": ["Azure", "AI Foundry", "MCP", "Agentes"],
+    "tags": [
+      "Azure",
+      "AI Foundry",
+      "MCP",
+      "Agentes"
+    ],
     "status": "Ready",
     "proposalId": null,
     "audience": "Desarrolladores y arquitectos cloud interesados en IA generativa.",
-    "source": "https://developer.microsoft.com/en-us/reactor/"
+    "source": "https://developer.microsoft.com/en-us/reactor/",
+    "deadlineConfidence": "exact"
   },
   {
     "id": "cfs-002",
@@ -19,11 +25,17 @@
     "deadline": "2026-06-15",
     "city": "San Francisco, CA",
     "format": "In person",
-    "tags": ["GitHub Copilot", "Open Source", "DevEx", "AI"],
+    "tags": [
+      "GitHub Copilot",
+      "Open Source",
+      "DevEx",
+      "AI"
+    ],
     "status": "Draft",
     "proposalId": "p-001",
     "audience": "Developers, maintainers y contributors de open source a nivel mundial.",
-    "source": "https://sessionize.com/github-universe-2026/"
+    "source": "https://sessionize.com/github-universe-2026/",
+    "deadlineConfidence": "estimated"
   },
   {
     "id": "cfs-003",
@@ -32,11 +44,17 @@
     "deadline": "2026-07-01",
     "city": "Online — LATAM",
     "format": "Remote",
-    "tags": [".NET", "C#", "Blazor", "ASP.NET"],
+    "tags": [
+      ".NET",
+      "C#",
+      "Blazor",
+      "ASP.NET"
+    ],
     "status": "Idea",
     "proposalId": null,
     "audience": "Desarrolladores .NET de toda Latinoamérica.",
-    "source": "https://sessionize.com/dotnetconf-latam/"
+    "source": "https://sessionize.com/dotnetconf-latam/",
+    "deadlineConfidence": "estimated"
   },
   {
     "id": "cfs-004",
@@ -45,11 +63,17 @@
     "deadline": "2026-07-20",
     "city": "Barcelona, España",
     "format": "In person",
-    "tags": ["DevOps", "GitHub Actions", "Platform Engineering", "Cloud Native"],
+    "tags": [
+      "DevOps",
+      "GitHub Actions",
+      "Platform Engineering",
+      "Cloud Native"
+    ],
     "status": "Ready",
     "proposalId": null,
     "audience": "Ingenieros DevOps, SREs y equipos de plataforma.",
-    "source": "https://sessionize.com/devopsdays-spain-2026/"
+    "source": "https://sessionize.com/devopsdays-spain-2026/",
+    "deadlineConfidence": "estimated"
   },
   {
     "id": "cfs-005",
@@ -58,11 +82,17 @@
     "deadline": "2026-08-01",
     "city": "Dublin, Ireland",
     "format": "In person",
-    "tags": ["Azure", "AI", "Copilot Studio", "Call for Speakers"],
+    "tags": [
+      "Azure",
+      "AI",
+      "Copilot Studio",
+      "Call for Speakers"
+    ],
     "status": "Submitted",
     "proposalId": "p-002",
     "audience": "Comunidad Azure, MVPs y partners.",
-    "source": "https://sessionize.com/azure-ai-community-day/"
+    "source": "https://sessionize.com/azure-ai-community-day/",
+    "deadlineConfidence": "estimated"
   },
   {
     "id": "cfs-006",
@@ -71,11 +101,17 @@
     "deadline": "2026-08-15",
     "city": "Madrid, España",
     "format": "In person",
-    "tags": ["GitHub", "Open Source", "Innersource", "GitHub Actions"],
+    "tags": [
+      "GitHub",
+      "Open Source",
+      "Innersource",
+      "GitHub Actions"
+    ],
     "status": "Accepted",
     "proposalId": "p-003",
     "audience": "Comunidad developer de Madrid: contributors, maintainers y tech leads.",
-    "source": "https://github.com/community"
+    "source": "https://github.com/community",
+    "deadlineConfidence": "exact"
   },
   {
     "id": "cfs-007",
@@ -84,11 +120,17 @@
     "deadline": "2026-05-10",
     "city": "Buenos Aires, Argentina",
     "format": "Hybrid",
-    "tags": ["Power Platform", "Power Automate", "Copilot Studio", "Low Code"],
+    "tags": [
+      "Power Platform",
+      "Power Automate",
+      "Copilot Studio",
+      "Low Code"
+    ],
     "status": "Rejected",
     "proposalId": "p-001",
     "audience": "Power Users, citizen developers y equipos de negocio.",
-    "source": "https://sessionize.com/power-platform-world-tour/"
+    "source": "https://sessionize.com/power-platform-world-tour/",
+    "deadlineConfidence": "estimated"
   },
   {
     "id": "cfs-008",
@@ -97,10 +139,16 @@
     "deadline": "2026-09-05",
     "city": "Online",
     "format": "Remote",
-    "tags": ["Microsoft Fabric", "Power BI", "Data Engineering", "Lakehouse"],
+    "tags": [
+      "Microsoft Fabric",
+      "Power BI",
+      "Data Engineering",
+      "Lakehouse"
+    ],
     "status": "Ready",
     "proposalId": null,
     "audience": "Profesionales de datos, analistas de negocio y data engineers.",
-    "source": "https://sessionize.com/microsoft-fabric-analytics-summit/"
+    "source": "https://sessionize.com/microsoft-fabric-analytics-summit/",
+    "deadlineConfidence": "estimated"
   }
 ]

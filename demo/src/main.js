@@ -63,6 +63,12 @@ function proposalTitle(id) {
   return proposalsData.find((p) => p.id === id)?.title ?? 'Sin propuesta asociada';
 }
 
+function confidenceLabel(confidence) {
+  if (confidence === 'estimated') return 'Estimado';
+  if (confidence === 'proxy') return 'Proxy evento';
+  return 'Exacto';
+}
+
 function proposalOptions(selectedId) {
   const initial = '<option value="">Sin propuesta</option>';
   const options = proposalsData.map((proposal) => {
@@ -298,13 +304,15 @@ function filters(communities, statuses) {
 
 function card(call) {
   const days = daysLeft(call.deadline);
+  const isUncertain = call.deadlineConfidence && call.deadlineConfidence !== 'exact';
   return `
-    <article class="card ${urgency(call)}">
+    <article class="card ${urgency(call)} ${isUncertain ? 'uncertain' : ''}">
       <div class="card-title">
         <h3>${call.name}</h3>
         <span>${days} días</span>
       </div>
       <p>${call.community} · ${call.city} · ${call.format}</p>
+      <p class="confidence">🗓️ Confianza deadline: ${confidenceLabel(call.deadlineConfidence || 'exact')}</p>
       <p class="proposal">${proposalTitle(call.proposalId)}</p>
       <p class="audience">👥 Audiencia: ${call.audience ?? 'Comunidad técnica'}</p>
       ${call.source ? `<a class="source-link" href="${call.source}" target="_blank" rel="noreferrer">Ver C4S original →</a>` : ''}
@@ -527,6 +535,7 @@ window.exportMarkdown = function exportMarkdown() {
         `- Comunidad: ${c.community}`,
         `- Formato: ${c.format} · ${c.city}`,
         `- Deadline: ${c.deadline} (${daysLeft(c.deadline)} días)`,
+        `- Confianza deadline: ${confidenceLabel(c.deadlineConfidence || 'exact')}`,
         `- Estado: ${c.status}`,
         `- Riesgo: ${risk(c)}`,
         `- Propuesta: ${proposalTitle(c.proposalId)}`,
