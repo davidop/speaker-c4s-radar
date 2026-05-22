@@ -121,6 +121,43 @@ aside { border: 1px solid #26314f; background: #10172acc; border-radius: 28px; p
 	text-decoration: underline;
 }
 
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: end;
+  margin-top: 12px;
+}
+
+.card-actions label {
+  display: grid;
+  gap: 6px;
+  font-weight: 700;
+  color: #c9d2ff;
+}
+
+.card-actions select {
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #0f172a;
+  color: #f8fafc;
+  font: inherit;
+  min-height: 40px;
+}
+
+.card-actions button {
+  padding: 10px 14px;
+  min-height: 40px;
+  border-radius: 10px;
+  font-weight: 700;
+  width: auto;
+}
+
+.card-actions .danger {
+  background: linear-gradient(90deg, #b91c1c, #ef4444);
+}
+
 /* === MOBILE AUDIT FINDINGS ===
    - #app padding (40px top) excessive on mobile
    - h1 clamp min 42px too large for 375px; text wraps or clips title
@@ -193,6 +230,15 @@ aside { border: 1px solid #26314f; background: #10172acc; border-radius: 28px; p
 
   .filters select {
     min-width: 100%;
+  }
+
+  .card-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .card-actions button {
+    width: 100%;
   }
 
   footer {

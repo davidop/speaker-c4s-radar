@@ -181,6 +181,15 @@ function card(call) {
       ${call.source ? `<a class="source-link" href="${call.source}" target="_blank" rel="noreferrer">Ver C4S original →</a>` : ''}
       <div class="tags">${call.tags.map(t => `<span>${t}</span>`).join('')}</div>
       <p class="next-action">✨ Siguiente acción: ${nextAction(call)}</p>
+      <div class="card-actions">
+        <label>
+          Estado
+          <select onchange="window.updateCallStatus('${call.id}', this.value)">
+            ${stateOrder.map(status => `<option value="${status}" ${status === call.status ? 'selected' : ''}>${status}</option>`).join('')}
+          </select>
+        </label>
+        <button type="button" class="danger" onclick="window.deleteCall('${call.id}')">Borrar</button>
+      </div>
       <footer><b>${call.status}</b><em>${risk(call)}</em></footer>
     </article>`;
 }
@@ -197,6 +206,48 @@ window.setCommunityFilter = function setCommunityFilter(value) {
 window.setStatusFilter = function setStatusFilter(value) {
   selectedStatus = value;
   render();
+};
+
+window.updateCallStatus = async function updateCallStatus(id, status) {
+  try {
+    const response = await fetch(`/api/calls/${encodeURIComponent(id)}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status })
+    });
+
+    if (!response.ok) {
+      throw new Error('No se pudo actualizar estado');
+    }
+
+    const updated = await response.json();
+    callsData = callsData.map((call) => (call.id === id ? updated : call));
+    render();
+  } catch {
+    alert('No se pudo actualizar el estado. Usa npm run dev para persistir cambios.');
+    render();
+  }
+};
+
+window.deleteCall = async function deleteCall(id) {
+  const confirmed = window.confirm('¿Seguro que quieres borrar este evento?');
+  if (!confirmed) return;
+
+  try {
+    const response = await fetch(`/api/calls/${encodeURIComponent(id)}`, {
+      method: 'DELETE'
+    });
+
+    if (!response.ok) {
+      throw new Error('No se pudo borrar evento');
+    }
+
+    callsData = callsData.filter((call) => call.id !== id);
+    render();
+    alert('Evento borrado.');
+  } catch {
+    alert('No se pudo borrar el evento. Usa npm run dev para persistir cambios.');
+  }
 };
 
 window.exportMarkdown = function exportMarkdown() {
