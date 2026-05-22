@@ -1,0 +1,86 @@
+name: Update GSD Runtime
+
+'on':
+  schedule:
+    - cron: '15 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: gsd-update
+  cancel-in-progress: true
+
+jobs:
+  update-gsd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Capture installed version (before)
+        id: before
+        run: |
+          before="$(cat .github/get-shit-done/VERSION 2>/dev/null || echo "unknown")"
+          echo "version=$before" >> "$GITHUB_OUTPUT"
+
+      - name: Update GSD to latest
+        run: |
+          CLAUDE_CONFIG_DIR=.github \
+          npx -y --package=get-shit-done-cc@latest -- \
+          get-shit-done-cc --claude --global
+
+      - name: Capture installed version (after)
+        id: after
+        run: |
+          after="$(cat .github/get-shit-done/VERSION 2>/dev/null || echo "unknown")"
+          echo "version=$after" >> "$GITHUB_OUTPUT"
+
+      - name: Build update summary
+        id: summary
+        run: |
+          changed="false"
+          if ! git diff --quiet; then
+            changed="true"
+          fi
+          {
+            echo "changed=$changed"
+            echo "before=${{ steps.before.outputs.version }}"
+            echo "after=${{ steps.after.outputs.version }}"
+          } >> "$GITHUB_OUTPUT"
+
+          cat > .github/gsd-update-summary.md <<EOF
+          ## GSD Auto-Update
+
+          - Previous version: `${{ steps.before.outputs.version }}`
+          - Updated version: `${{ steps.after.outputs.version }}`
+          - Trigger: `${{ github.event_name }}`
+
+          This PR was generated automatically by `.github/workflows/gsd-update.yml`.
+          EOF
+
+      - name: Create Pull Request
+        if: steps.summary.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore(gsd): update runtime to latest"
+          title: "chore(gsd): update GSD runtime to latest"
+          body-path: .github/gsd-update-summary.md
+          branch: bot/gsd-update
+          delete-branch: true
+          labels: |
+            automation
+            ci
+          add-paths: |
+            .github/get-shit-done/**
+            .github/skills/**
+            .github/agents/**
+            .github/gsd-file-manifest.json
+            .github/gsd-install-state.json
