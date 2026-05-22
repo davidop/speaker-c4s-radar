@@ -83,3 +83,30 @@ Este proyecto quiere ser útil para la comunidad, así que las mejoras de conten
 - El código debe ser legible en directo (sesión de 45 min). Evita abstracciones innecesarias.
 - No se aceptan dependencias nuevas sin justificación clara.
 - Los cambios de UI deben mantener el diseño existente o mejorarlo de forma coherente.
+
+---
+
+## Flujo mínimo de comunidad y triage
+
+### Labels base
+
+El repositorio mantiene un set versionado de labels en `.github/labels.yml`.
+
+Labels clave para empezar:
+- `good first issue`: tareas de onboarding.
+- `help wanted`: abiertas a colaboración.
+- `status:needs-triage`: pendiente de clasificar.
+- `status:ready`: lista para implementar.
+- `priority:high` / `priority:medium`: urgencia.
+
+### Cadencia recomendada
+
+- 1 vez por semana: revisar issues nuevos y asignar labels de estado/prioridad.
+- 1 vez por semana: promover al menos 1 issue a `good first issue`.
+- Cada PR mergeado: cerrar o actualizar el issue relacionado.
+
+### Backlog inicial para onboarding
+
+Consulta y mantiene propuestas en `.github/ISSUES_PROPOSALS.md`.
+
+Objetivo: tener siempre al menos 3 issues listos para personas que contribuyen por primera vez.

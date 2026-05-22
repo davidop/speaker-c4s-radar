@@ -1,0 +1,43 @@
+name: CI Checks
+
+on:
+  pull_request:
+    paths:
+      - 'demo/**'
+      - '.github/workflows/ci.yml'
+      - '.github/workflows/pages.yml'
+      - '.github/workflows/c4s-discovery.yml'
+  push:
+    branches: [ main ]
+    paths:
+      - 'demo/**'
+      - '.github/workflows/ci.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: demo/package-lock.json
+
+      - name: Install dependencies
+        working-directory: demo
+        run: npm ci
+
+      - name: Run tests
+        working-directory: demo
+        run: npm test
+
+      - name: Build
+        working-directory: demo
+        run: npm run build
