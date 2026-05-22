@@ -1,6 +1,8 @@
 import calls from './data/calls.json';
 import proposalSeed from './data/proposals.json';
 import { daysLeftFrom, urgencyFromDays, riskFromCall, nextActionFromCall } from './domain/radar-logic.js';
+import { createCall, updateCall, deleteCallById } from './services/calls-service.js';
+import { createProposal, updateProposal, deleteProposalById } from './services/proposals-service.js';
 import './styles.css';
 
 const DEMO_DATE = null;
@@ -420,17 +422,7 @@ window.toggleComposer = function toggleComposer() {
 
 window.updateCallStatus = async function updateCallStatus(id, status) {
   try {
-    const response = await fetch(`/api/calls/${encodeURIComponent(id)}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status })
-    });
-
-    if (!response.ok) {
-      throw new Error('No se pudo actualizar estado');
-    }
-
-    const updated = await response.json();
+    const updated = await updateCall(id, { status });
     callsData = callsData.map((call) => (call.id === id ? updated : call));
     render();
   } catch {
@@ -444,13 +436,7 @@ window.deleteCall = async function deleteCall(id) {
   if (!confirmed) return;
 
   try {
-    const response = await fetch(`/api/calls/${encodeURIComponent(id)}`, {
-      method: 'DELETE'
-    });
-
-    if (!response.ok) {
-      throw new Error('No se pudo borrar evento');
-    }
+    await deleteCallById(id);
 
     callsData = callsData.filter((call) => call.id !== id);
     render();
@@ -474,17 +460,7 @@ window.createProposal = async function createProposal() {
   };
 
   try {
-    const response = await fetch('/api/proposals', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    if (!response.ok) {
-      throw new Error('No se pudo crear propuesta');
-    }
-
-    const saved = await response.json();
+    const saved = await createProposal(payload);
     proposalsData = [...proposalsData, saved];
     render();
     alert(`Propuesta creada: ${saved.title}`);
@@ -509,17 +485,7 @@ window.editProposal = async function editProposal(id) {
   };
 
   try {
-    const response = await fetch(`/api/proposals/${encodeURIComponent(id)}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    if (!response.ok) {
-      throw new Error('No se pudo actualizar propuesta');
-    }
-
-    const saved = await response.json();
+    const saved = await updateProposal(id, payload);
     proposalsData = proposalsData.map((item) => (item.id === id ? saved : item));
     render();
     alert(`Propuesta actualizada: ${saved.title}`);
@@ -539,13 +505,7 @@ window.deleteProposal = async function deleteProposal(id) {
   if (!confirmed) return;
 
   try {
-    const response = await fetch(`/api/proposals/${encodeURIComponent(id)}`, {
-      method: 'DELETE'
-    });
-
-    if (!response.ok) {
-      throw new Error('No se pudo borrar propuesta');
-    }
+    await deleteProposalById(id);
 
     proposalsData = proposalsData.filter((item) => item.id !== id);
     render();
@@ -583,8 +543,6 @@ window.addCall = async function addCall(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const isEditing = Boolean(editingCallId);
-  const endpoint = isEditing ? `/api/calls/${encodeURIComponent(editingCallId)}` : '/api/calls';
-  const method = isEditing ? 'PATCH' : 'POST';
   const payload = {
     name: String(formData.get('name') || '').trim(),
     community: String(formData.get('community') || '').trim(),
@@ -599,17 +557,9 @@ window.addCall = async function addCall(event) {
   };
 
   try {
-    const response = await fetch(endpoint, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-
-    if (!response.ok) {
-      throw new Error('No se pudo guardar.');
-    }
-
-    const savedCall = await response.json();
+    const savedCall = isEditing
+      ? await updateCall(editingCallId, payload)
+      : await createCall(payload);
     callsData = isEditing
       ? callsData.map((call) => (call.id === editingCallId ? savedCall : call))
       : [...callsData, savedCall];
