@@ -19,6 +19,8 @@ let searchDebounceId = null;
 let callsData = [...calls];
 let proposalsData = [...proposalSeed];
 let editingCallId = null;
+let swRegistration = null;
+const NOTIFIED_DEADLINES_KEY = 'c4s-notified-deadlines';
 
 function escapeAttr(value) {
   return String(value ?? '')
@@ -81,6 +83,57 @@ function proposalOptions(selectedId) {
     return `<option value="${proposal.id}" ${selected}>${proposal.title}</option>`;
   }).join('');
   return initial + options;
+}
+
+function getNotificationStatusLabel() {
+  if (!('Notification' in window)) return 'No soportado';
+  if (Notification.permission === 'granted') return 'Activadas';
+  if (Notification.permission === 'denied') return 'Bloqueadas';
+  return 'Pendientes';
+}
+
+function getNotifiedDeadlines() {
+  try {
+    return JSON.parse(localStorage.getItem(NOTIFIED_DEADLINES_KEY) || '[]');
+  } catch {
+    return [];
+  }
+}
+
+function setNotifiedDeadlines(items) {
+  localStorage.setItem(NOTIFIED_DEADLINES_KEY, JSON.stringify(items));
+}
+
+function criticalCalls() {
+  return callsData.filter((call) => {
+    const days = daysLeft(call.deadline);
+    return days >= 0 && days <= 7 && !['Accepted', 'Rejected'].includes(call.status);
+  });
+}
+
+async function notifyCriticalDeadlines() {
+  if (!swRegistration || !('Notification' in window) || Notification.permission !== 'granted') {
+    return;
+  }
+
+  const notified = new Set(getNotifiedDeadlines());
+  const pending = criticalCalls().filter((call) => !notified.has(`${call.id}:${call.deadline}`));
+
+  if (pending.length === 0) return;
+
+  swRegistration.active?.postMessage({
+    type: 'notify-deadlines',
+    payload: pending.map((call) => ({
+      id: call.id,
+      name: call.name,
+      deadline: call.deadline,
+      daysLeft: daysLeft(call.deadline),
+      nextAction: nextAction(call)
+    }))
+  });
+
+  pending.forEach((call) => notified.add(`${call.id}:${call.deadline}`));
+  setNotifiedDeadlines([...notified]);
 }
 
 function proposalsPanel() {
@@ -169,6 +222,17 @@ function render() {
     </section>
 
     ${proposalsPanel()}
+
+    <section class="notify-panel" aria-label="Notificaciones">
+      <div>
+        <h2>Notificaciones</h2>
+        <p>Estado: <strong>${getNotificationStatusLabel()}</strong></p>
+      </div>
+      <div class="notify-actions">
+        <button type="button" class="btn-secondary" onclick="window.enableNotifications()">Activar notificaciones</button>
+        <button type="button" class="btn-secondary" onclick="window.testDeadlineNotifications()">Probar ahora</button>
+      </div>
+    </section>
 
     <section class="kpis">
       ${kpi('C4S activos', active.length)}
@@ -294,6 +358,34 @@ window.setTagFilter = function setTagFilter(value) {
 window.clearTagFilter = function clearTagFilter() {
   selectedTag = '';
   render();
+};
+
+window.enableNotifications = async function enableNotifications() {
+  if (!('Notification' in window)) {
+    alert('Este navegador no soporta notificaciones.');
+    return;
+  }
+
+  if (Notification.permission === 'granted') {
+    alert('Las notificaciones ya están activadas.');
+    await notifyCriticalDeadlines();
+    render();
+    return;
+  }
+
+  const permission = await Notification.requestPermission();
+  if (permission === 'granted') {
+    await notifyCriticalDeadlines();
+    alert('Notificaciones activadas.');
+  } else {
+    alert('No se activaron las notificaciones.');
+  }
+  render();
+};
+
+window.testDeadlineNotifications = async function testDeadlineNotifications() {
+  await notifyCriticalDeadlines();
+  alert('Se enviaron notificaciones para deadlines críticos pendientes.');
 };
 
 window.startEditCall = function startEditCall(id) {
@@ -515,8 +607,13 @@ render();
 // Registro PWA
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch((err) => {
-      console.warn('SW registration failed:', err);
-    });
+    navigator.serviceWorker.register('./sw.js')
+      .then((registration) => {
+        swRegistration = registration;
+        notifyCriticalDeadlines();
+      })
+      .catch((err) => {
+        console.warn('SW registration failed:', err);
+      });
   });
 }
