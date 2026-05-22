@@ -21,6 +21,14 @@ let proposalsData = [...proposalSeed];
 let editingCallId = null;
 let swRegistration = null;
 const NOTIFIED_DEADLINES_KEY = 'c4s-notified-deadlines';
+const CALL_NOTES_KEY = 'c4s-call-notes';
+let callNotes = (() => {
+  try {
+    return JSON.parse(localStorage.getItem(CALL_NOTES_KEY) || '{}');
+  } catch {
+    return {};
+  }
+})();
 
 function escapeAttr(value) {
   return String(value ?? '')
@@ -109,6 +117,15 @@ function criticalCalls() {
     const days = daysLeft(call.deadline);
     return days >= 0 && days <= 7 && !['Accepted', 'Rejected'].includes(call.status);
   });
+}
+
+function notePreview(note) {
+  if (!note) return '';
+  return note.length > 120 ? `${note.slice(0, 120)}...` : note;
+}
+
+function saveCallNotes() {
+  localStorage.setItem(CALL_NOTES_KEY, JSON.stringify(callNotes));
 }
 
 async function notifyCriticalDeadlines() {
@@ -311,6 +328,11 @@ function card(call) {
       ${call.source ? `<a class="source-link" href="${call.source}" target="_blank" rel="noreferrer">Ver C4S original →</a>` : ''}
       <div class="tags">${call.tags.map(t => `<button type="button" class="tag-btn ${t === selectedTag ? 'active' : ''}" onclick="window.setTagFilter(decodeURIComponent('${encodeURIComponent(t)}'))">${t}</button>`).join('')}</div>
       <p class="next-action">✨ Siguiente acción: ${nextAction(call)}</p>
+      <div class="card-notes">
+        <label for="note-${call.id}">Aprendizajes / notas</label>
+        <textarea id="note-${call.id}" placeholder="Qué aprendiste o qué mejorarías para este evento" onchange="window.updateCallNote('${call.id}', this.value)">${escapeAttr(callNotes[call.id] || '')}</textarea>
+        ${callNotes[call.id] ? `<p class="note-preview">${escapeAttr(notePreview(callNotes[call.id]))}</p>` : ''}
+      </div>
       <div class="card-actions">
         <label>
           Estado
@@ -386,6 +408,17 @@ window.enableNotifications = async function enableNotifications() {
 window.testDeadlineNotifications = async function testDeadlineNotifications() {
   await notifyCriticalDeadlines();
   alert('Se enviaron notificaciones para deadlines críticos pendientes.');
+};
+
+window.updateCallNote = function updateCallNote(id, value) {
+  const note = String(value || '').trim();
+  if (note) {
+    callNotes[id] = note;
+  } else {
+    delete callNotes[id];
+  }
+  saveCallNotes();
+  render();
 };
 
 window.startEditCall = function startEditCall(id) {
@@ -551,7 +584,8 @@ window.exportMarkdown = function exportMarkdown() {
         `- Estado: ${c.status}`,
         `- Riesgo: ${risk(c)}`,
         `- Propuesta: ${proposalTitle(c.proposalId)}`,
-        `- Siguiente acción: ${nextAction(c)}`
+        `- Siguiente acción: ${nextAction(c)}`,
+        `- Nota: ${callNotes[c.id] || '—'}`
       ].join('\n');
     })
   ].join('\n\n');
