@@ -46,6 +46,11 @@
 - [ ] **INT-02**: User can edit an existing call from the UI using a pre-filled form and persist changes in dev mode.
 - [ ] **INT-03**: User can delete an existing call with confirmation and reflected UI updates.
 
+### Proposal Management (Roadmap Extension)
+
+- [ ] **PROP-01**: User can create, edit, and delete proposals from the UI in dev mode.
+- [ ] **PROP-02**: User can link/unlink a proposal to a call using a dynamic selector in the call form.
+
 ## Out of Scope
 
 | Feature | Reason |
@@ -74,11 +79,13 @@
 | INT-01 | Phase 6 | Pending |
 | INT-02 | Phase 6 | Pending |
 | INT-03 | Phase 6 | Pending |
+| PROP-01 | Phase 7 | Pending |
+| PROP-02 | Phase 7 | Pending |
 
 **Coverage:**
 - v1 requirements: 12 total
-- v2 extension requirements: 3 total (INT-01..03)
-- Mapped to phases: 15
+- v2 extension requirements: 5 total (INT-01..03, PROP-01..02)
+- Mapped to phases: 17
 - Unmapped: 0
 
 ---
