@@ -18,6 +18,15 @@ button { border: 0; border-radius: 999px; padding: 14px 22px; background: linear
 .event-form button { justify-self: start; }
 .btn-secondary { background: linear-gradient(90deg, #334155, #475569); }
 .form-hint { margin: 12px 0 2px; color: #cbd5e1; font-size: 14px; }
+.proposals-panel { margin-bottom: 28px; border: 1px solid #26314f; border-radius: 24px; padding: 18px; background: rgba(11, 18, 36, 0.8); }
+.proposals-header { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+.proposal-list { display: grid; gap: 10px; }
+.proposal-item { border: 1px solid #334155; border-radius: 14px; padding: 12px; display: flex; justify-content: space-between; gap: 12px; align-items: center; background: #0f172a; }
+.proposal-item p { margin: 6px 0 0; color: #cbd5e1; font-size: 14px; }
+.proposal-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.proposal-actions button { min-height: 40px; border-radius: 10px; width: auto; padding: 10px 12px; }
+.proposal-actions .danger { background: linear-gradient(90deg, #b91c1c, #ef4444); }
+.proposal-empty { margin: 0; color: #cbd5e1; }
 .layout { display: grid; grid-template-columns: 1fr 360px; gap: 24px; }
 h2 { font-size: 28px; margin: 0 0 16px; }
 .cards { display: grid; gap: 16px; }
@@ -223,6 +232,24 @@ aside { border: 1px solid #26314f; background: #10172acc; border-radius: 28px; p
   .event-form button {
     width: 100%;
     justify-self: stretch;
+  }
+
+  .proposals-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .proposal-item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .proposal-actions {
+    width: 100%;
+  }
+
+  .proposal-actions button {
+    width: 100%;
   }
 
   .filters {

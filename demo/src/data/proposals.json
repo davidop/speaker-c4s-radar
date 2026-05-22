@@ -1,0 +1,30 @@
+[
+  {
+    "id": "p-001",
+    "title": "Copilot como copiloto real de comunidades",
+    "tags": [
+      "GitHub Copilot",
+      "DevEx"
+    ],
+    "level": "Intermedio"
+  },
+  {
+    "id": "p-002",
+    "title": "De prompt a producto con AI y cloud native",
+    "tags": [
+      "AI",
+      "Copilot",
+      "Azure"
+    ],
+    "level": "Intro"
+  },
+  {
+    "id": "p-003",
+    "title": "Automatiza tu comunidad con GitHub Actions",
+    "tags": [
+      "Open Source",
+      "Actions"
+    ],
+    "level": "Intermedio"
+  }
+]

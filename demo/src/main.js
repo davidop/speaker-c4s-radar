@@ -1,11 +1,6 @@
 import calls from './data/calls.json';
+import proposalSeed from './data/proposals.json';
 import './styles.css';
-
-const proposals = [
-  { id: 'p-001', title: 'Copilot como copiloto real de comunidades', tags: ['GitHub Copilot', 'DevEx'], level: 'Intermedio' },
-  { id: 'p-002', title: 'De prompt a producto con AI y cloud native', tags: ['AI', 'Copilot', 'Azure'], level: 'Intro' },
-  { id: 'p-003', title: 'Automatiza tu comunidad con GitHub Actions', tags: ['Open Source', 'Actions'], level: 'Intermedio' }
-];
 
 const DEMO_DATE = null;
 // Example for live demos:
@@ -19,6 +14,7 @@ const formatOptions = ['Remote', 'Hybrid', 'In person'];
 let selectedCommunity = 'Todas';
 let selectedStatus = 'Todos';
 let callsData = [...calls];
+let proposalsData = [...proposalSeed];
 let editingCallId = null;
 
 function escapeAttr(value) {
@@ -72,7 +68,41 @@ function nextAction(call) {
 }
 
 function proposalTitle(id) {
-  return proposals.find(p => p.id === id)?.title ?? 'Sin propuesta asociada';
+  return proposalsData.find((p) => p.id === id)?.title ?? 'Sin propuesta asociada';
+}
+
+function proposalOptions(selectedId) {
+  const initial = '<option value="">Sin propuesta</option>';
+  const options = proposalsData.map((proposal) => {
+    const selected = proposal.id === selectedId ? 'selected' : '';
+    return `<option value="${proposal.id}" ${selected}>${proposal.title}</option>`;
+  }).join('');
+  return initial + options;
+}
+
+function proposalsPanel() {
+  return `
+    <section class="proposals-panel" aria-label="Gestionar propuestas">
+      <div class="proposals-header">
+        <h2>Propuestas</h2>
+        <button type="button" class="btn-secondary" onclick="window.createProposal()">Nueva propuesta</button>
+      </div>
+      <div class="proposal-list">
+        ${proposalsData.map((proposal) => `
+          <article class="proposal-item">
+            <div>
+              <strong>${proposal.title}</strong>
+              <p>${proposal.level} · ${proposal.tags.join(', ') || 'Sin tags'}</p>
+            </div>
+            <div class="proposal-actions">
+              <button type="button" class="btn-secondary" onclick="window.editProposal('${proposal.id}')">Editar</button>
+              <button type="button" class="danger" onclick="window.deleteProposal('${proposal.id}')">Borrar</button>
+            </div>
+          </article>
+        `).join('') || '<p class="proposal-empty">No hay propuestas aún.</p>'}
+      </div>
+    </section>
+  `;
 }
 
 function filteredCalls() {
@@ -118,6 +148,9 @@ function render() {
           ${stateOrder.map(status => `<option value="${status}" ${status === editingCall?.status ? 'selected' : ''}>${status}</option>`).join('')}
         </select>
         <input name="tags" placeholder="Tags separadas por coma" value="${escapeAttr(editingCall?.tags?.join(', ') || '')}" />
+        <select name="proposalId">
+          ${proposalOptions(editingCall?.proposalId || '')}
+        </select>
         <input name="audience" placeholder="Audiencia" value="${escapeAttr(editingCall?.audience || '')}" />
         <input name="source" placeholder="URL del C4S" value="${escapeAttr(editingCall?.source || '')}" />
         <button type="submit">${editingCall ? 'Guardar cambios' : 'Guardar evento'}</button>
@@ -125,6 +158,8 @@ function render() {
       </form>
       <p class="form-hint">Se guarda directamente en src/data/calls.json mientras corre npm run dev.</p>
     </section>
+
+    ${proposalsPanel()}
 
     <section class="kpis">
       ${kpi('C4S activos', active.length)}
@@ -273,6 +308,101 @@ window.deleteCall = async function deleteCall(id) {
   }
 };
 
+window.createProposal = async function createProposal() {
+  const title = window.prompt('Título de la propuesta:');
+  if (!title) return;
+
+  const tagsInput = window.prompt('Tags (separadas por coma):', '');
+  const level = window.prompt('Nivel (Intro, Intermedio, Avanzado):', 'Intermedio') || 'Intermedio';
+
+  const payload = {
+    title: title.trim(),
+    tags: String(tagsInput || '').split(',').map((tag) => tag.trim()).filter(Boolean),
+    level: level.trim()
+  };
+
+  try {
+    const response = await fetch('/api/proposals', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error('No se pudo crear propuesta');
+    }
+
+    const saved = await response.json();
+    proposalsData = [...proposalsData, saved];
+    render();
+    alert(`Propuesta creada: ${saved.title}`);
+  } catch {
+    alert('No se pudo crear la propuesta. Verifica que npm run dev esté activo.');
+  }
+};
+
+window.editProposal = async function editProposal(id) {
+  const proposal = proposalsData.find((item) => item.id === id);
+  if (!proposal) return;
+
+  const title = window.prompt('Editar título:', proposal.title);
+  if (!title) return;
+  const tagsInput = window.prompt('Editar tags (coma):', proposal.tags.join(', '));
+  const level = window.prompt('Editar nivel:', proposal.level) || proposal.level;
+
+  const payload = {
+    title: title.trim(),
+    tags: String(tagsInput || '').split(',').map((tag) => tag.trim()).filter(Boolean),
+    level: level.trim()
+  };
+
+  try {
+    const response = await fetch(`/api/proposals/${encodeURIComponent(id)}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error('No se pudo actualizar propuesta');
+    }
+
+    const saved = await response.json();
+    proposalsData = proposalsData.map((item) => (item.id === id ? saved : item));
+    render();
+    alert(`Propuesta actualizada: ${saved.title}`);
+  } catch {
+    alert('No se pudo actualizar la propuesta. Verifica que npm run dev esté activo.');
+  }
+};
+
+window.deleteProposal = async function deleteProposal(id) {
+  const linked = callsData.some((call) => call.proposalId === id);
+  if (linked) {
+    alert('No se puede borrar: la propuesta está vinculada a uno o más eventos.');
+    return;
+  }
+
+  const confirmed = window.confirm('¿Seguro que quieres borrar esta propuesta?');
+  if (!confirmed) return;
+
+  try {
+    const response = await fetch(`/api/proposals/${encodeURIComponent(id)}`, {
+      method: 'DELETE'
+    });
+
+    if (!response.ok) {
+      throw new Error('No se pudo borrar propuesta');
+    }
+
+    proposalsData = proposalsData.filter((item) => item.id !== id);
+    render();
+    alert('Propuesta borrada.');
+  } catch {
+    alert('No se pudo borrar la propuesta. Verifica que npm run dev esté activo.');
+  }
+};
+
 window.exportMarkdown = function exportMarkdown() {
   const markdown = [
     '# Speaker C4S Radar · Plan de acción',
@@ -310,6 +440,7 @@ window.addCall = async function addCall(event) {
     format: String(formData.get('format') || '').trim(),
     status: String(formData.get('status') || '').trim(),
     tags: String(formData.get('tags') || '').split(',').map(tag => tag.trim()).filter(Boolean),
+    proposalId: String(formData.get('proposalId') || '').trim() || null,
     audience: String(formData.get('audience') || '').trim(),
     source: String(formData.get('source') || '').trim()
   };
