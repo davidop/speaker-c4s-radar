@@ -1,137 +1,106 @@
 [
   {
     "id": "cfs-001",
-    "name": "OpenClawNet - Automation + Azure + Foundry",
-    "community": "Microsoft Reactor London (Meetup)",
-    "deadline": "2026-05-27",
-    "city": "Online",
-    "format": "Remote",
-    "tags": [
-      "Azure",
-      "AI Foundry",
-      "GitHub Copilot"
-    ],
+    "name": "Azure AI Foundry: Construyendo agentes con MCP",
+    "community": "Microsoft Reactor Madrid",
+    "deadline": "2026-06-03",
+    "city": "Madrid, España",
+    "format": "Hybrid",
+    "tags": ["Azure", "AI Foundry", "MCP", "Agentes"],
     "status": "Ready",
     "proposalId": null,
-    "audience": "Comunidad Microsoft Reactor. [ADVERTENCIA] Meetup muestra fecha de evento, no deadline de CFP.",
-    "source": "https://www.meetup.com/microsoft-reactor-london/events/313946133/"
+    "audience": "Desarrolladores y arquitectos cloud interesados en IA generativa.",
+    "source": "https://developer.microsoft.com/en-us/reactor/"
   },
   {
     "id": "cfs-002",
-    "name": "GitHub Copilot - Understanding Budgets [AMER/EMEA]",
-    "community": "Microsoft Reactor London (Meetup)",
-    "deadline": "2026-05-27",
-    "city": "Online",
-    "format": "Remote",
-    "tags": [
-      "GitHub Copilot",
-      "FinOps"
-    ],
-    "status": "Ready",
-    "proposalId": null,
-    "audience": "Administradores de GitHub Copilot y leads de desarrollo. [ADVERTENCIA] Meetup muestra fecha de evento, no deadline de CFP.",
-    "source": "https://www.meetup.com/microsoft-reactor-london/events/314852066/"
+    "name": "GitHub Universe 2026 — Call for Speakers",
+    "community": "GitHub (Sessionize)",
+    "deadline": "2026-06-15",
+    "city": "San Francisco, CA",
+    "format": "In person",
+    "tags": ["GitHub Copilot", "Open Source", "DevEx", "AI"],
+    "status": "Draft",
+    "proposalId": "p-001",
+    "audience": "Developers, maintainers y contributors de open source a nivel mundial.",
+    "source": "https://sessionize.com/github-universe-2026/"
   },
   {
     "id": "cfs-003",
-    "name": "Planning in Microsoft Fabric: From Semantic Models to Integrated Planning",
-    "community": "Microsoft Reactor London (Meetup)",
-    "deadline": "2026-05-28",
-    "city": "Online",
+    "name": "DotNetConf LATAM 2026",
+    "community": "DotNet Foundation (Sessionize)",
+    "deadline": "2026-07-01",
+    "city": "Online — LATAM",
     "format": "Remote",
-    "tags": [
-      "Microsoft Fabric",
-      "Power BI",
-      "Data"
-    ],
-    "status": "Ready",
+    "tags": [".NET", "C#", "Blazor", "ASP.NET"],
+    "status": "Idea",
     "proposalId": null,
-    "audience": "Profesionales de datos, analistas y negocio. [ADVERTENCIA] Meetup muestra fecha de evento, no deadline de CFP.",
-    "source": "https://www.meetup.com/microsoft-reactor-london/events/314046552/"
+    "audience": "Desarrolladores .NET de toda Latinoamérica.",
+    "source": "https://sessionize.com/dotnetconf-latam/"
   },
   {
     "id": "cfs-004",
-    "name": ".NET Day on Agentic Modernization",
-    "community": "Microsoft Reactor London (Meetup)",
-    "deadline": "2026-06-16",
-    "city": "Online",
-    "format": "Remote",
-    "tags": [
-      ".NET",
-      "Azure",
-      "Agentic AI"
-    ],
+    "name": "DevOps Days España 2026",
+    "community": "DevOps Days España (Sessionize)",
+    "deadline": "2026-07-20",
+    "city": "Barcelona, España",
+    "format": "In person",
+    "tags": ["DevOps", "GitHub Actions", "Platform Engineering", "Cloud Native"],
     "status": "Ready",
     "proposalId": null,
-    "audience": "Equipos .NET y cloud. [ADVERTENCIA] Meetup muestra fecha de evento, no deadline de CFP.",
-    "source": "https://www.meetup.com/microsoft-reactor-london/events/314880226/"
+    "audience": "Ingenieros DevOps, SREs y equipos de plataforma.",
+    "source": "https://sessionize.com/devopsdays-spain-2026/"
   },
   {
     "id": "cfs-005",
-    "name": "Global Azure & AI Community Day",
+    "name": "Global Azure AI Community Day",
     "community": "Microsoft Azure Community (Sessionize)",
-    "deadline": "2025-10-05",
+    "deadline": "2026-08-01",
     "city": "Dublin, Ireland",
     "format": "In person",
-    "tags": [
-      "Azure",
-      "AI",
-      "Call for Speakers"
-    ],
+    "tags": ["Azure", "AI", "Copilot Studio", "Call for Speakers"],
     "status": "Submitted",
-    "proposalId": null,
-    "audience": "Comunidad Azure y AI. [ADVERTENCIA] Sessionize marca fecha del evento como 'to be defined'.",
+    "proposalId": "p-002",
+    "audience": "Comunidad Azure, MVPs y partners.",
     "source": "https://sessionize.com/azure-ai-community-day/"
   },
   {
     "id": "cfs-006",
-    "name": "2025 Tampa Fabric User Group",
-    "community": "Tampa Fabric User Group (Sessionize)",
-    "deadline": "2025-12-16",
-    "city": "Tampa, Florida, United States",
+    "name": "GitHub Constellation Madrid 2026",
+    "community": "GitHub Community (Meetup)",
+    "deadline": "2026-08-15",
+    "city": "Madrid, España",
     "format": "In person",
-    "tags": [
-      "Microsoft Fabric",
-      "Data Platform",
-      "Call for Speakers"
-    ],
-    "status": "Submitted",
-    "proposalId": null,
-    "audience": "Profesionales de datos y SQL/Fabric. [ADVERTENCIA] Sessionize marca fecha del evento como 'to be defined'.",
-    "source": "https://sessionize.com/2025-tampa-fabric-user-group-call-for-sp/"
+    "tags": ["GitHub", "Open Source", "Innersource", "GitHub Actions"],
+    "status": "Accepted",
+    "proposalId": "p-003",
+    "audience": "Comunidad developer de Madrid: contributors, maintainers y tech leads.",
+    "source": "https://github.com/community"
   },
   {
     "id": "cfs-007",
-    "name": "AI and Copilot Innovations Summit, India, Gurugram",
-    "community": "Microsoft + Community + Partners (Sessionize)",
-    "deadline": "2024-08-20",
-    "city": "Gurugram, India",
-    "format": "In person",
-    "tags": [
-      "AI",
-      "Copilot",
-      "Call for Sessions"
-    ],
-    "status": "Submitted",
-    "proposalId": null,
-    "audience": "Usuarios, liderazgo Microsoft, MVPs y partners.",
-    "source": "https://sessionize.com/ai-and-copilot-innovations-summit-indi/"
+    "name": "Power Platform World Tour 2026 — Buenos Aires",
+    "community": "Microsoft Power Community (Sessionize)",
+    "deadline": "2026-05-10",
+    "city": "Buenos Aires, Argentina",
+    "format": "Hybrid",
+    "tags": ["Power Platform", "Power Automate", "Copilot Studio", "Low Code"],
+    "status": "Rejected",
+    "proposalId": "p-001",
+    "audience": "Power Users, citizen developers y equipos de negocio.",
+    "source": "https://sessionize.com/power-platform-world-tour/"
   },
   {
     "id": "cfs-008",
-    "name": "2019 Global Microsoft 365 Developer Bootcamp in Hamburg",
-    "community": "Global Microsoft 365 Developer Bootcamp (Sessionize)",
-    "deadline": "2019-08-31",
-    "city": "Hamburg, Germany",
-    "format": "In person",
-    "tags": [
-      "Microsoft 365",
-      "Microsoft Graph",
-      "Call for Speakers"
-    ],
-    "status": "Submitted",
+    "name": "Microsoft Fabric Analytics Summit 2026",
+    "community": "Microsoft Fabric Community (Sessionize)",
+    "deadline": "2026-09-05",
+    "city": "Online",
+    "format": "Remote",
+    "tags": ["Microsoft Fabric", "Power BI", "Data Engineering", "Lakehouse"],
+    "status": "Ready",
     "proposalId": null,
-    "audience": "Desarrolladores Microsoft 365, MVPs y community leaders.",
-    "source": "https://sessionize.com/2019-global-microsoft-365-dev-bootcamp-hamburg/"
+    "audience": "Profesionales de datos, analistas de negocio y data engineers.",
+    "source": "https://sessionize.com/microsoft-fabric-analytics-summit/"
   }
 ]

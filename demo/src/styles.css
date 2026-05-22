@@ -120,3 +120,119 @@ aside { border: 1px solid #26314f; background: #10172acc; border-radius: 28px; p
 .source-link:hover {
 	text-decoration: underline;
 }
+
+/* === MOBILE AUDIT FINDINGS ===
+   - #app padding (40px top) excessive on mobile
+   - h1 clamp min 42px too large for 375px; text wraps or clips title
+   - .card-title span (white-space: nowrap) can push urgency badge off screen
+   - .hero::after decorative absolute element overlaps content on mobile
+   - button has no explicit min-height (padding only)
+   - .kpi strong (42px) is ok but wastes vertical space on small screens
+   - 900px breakpoint handles grid collapse but misses 375px-specific polish
+*/
+
+/* === RESPONSIVE — 600px (tablet/large mobile) === */
+@media (max-width: 600px) {
+  #app {
+    padding: 20px 16px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 9vw, 42px);
+  }
+
+  .hero {
+    margin-bottom: 20px;
+  }
+
+  .hero::after {
+    display: none;
+  }
+
+  button {
+    min-height: 44px;
+    width: 100%;
+  }
+
+  .kpis {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .kpi strong {
+    font-size: 32px;
+  }
+
+  .card-title {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .card-title span {
+    white-space: normal;
+    align-self: flex-start;
+  }
+
+  .composer {
+    padding: 16px;
+  }
+
+  .event-form {
+    grid-template-columns: 1fr;
+  }
+
+  .event-form button {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .filters {
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .filters select {
+    min-width: 100%;
+  }
+
+  footer {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 17px;
+  }
+}
+
+/* === RESPONSIVE — 375px (iPhone SE) === */
+@media (max-width: 380px) {
+  #app {
+    padding: 16px 12px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .kpi {
+    padding: 14px;
+  }
+
+  .kpi strong {
+    font-size: 28px;
+  }
+
+  .tags span {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
