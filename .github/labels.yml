@@ -1,0 +1,47 @@
+- name: good first issue
+  color: "7057ff"
+  description: "Ideal para primera contribucion"
+
+- name: help wanted
+  color: "008672"
+  description: "Se aceptan contribuciones de la comunidad"
+
+- name: bug
+  color: "d73a4a"
+  description: "Comportamiento incorrecto"
+
+- name: enhancement
+  color: "a2eeef"
+  description: "Mejora funcional o tecnica"
+
+- name: documentation
+  color: "0075ca"
+  description: "Cambios en documentacion o guias"
+
+- name: dataset
+  color: "fbca04"
+  description: "Actualizacion del dataset de oportunidades"
+
+- name: automation
+  color: "5319e7"
+  description: "Workflows, bots o tareas automaticas"
+
+- name: ci
+  color: "1d76db"
+  description: "Cambios en pipelines de integracion continua"
+
+- name: priority:high
+  color: "b60205"
+  description: "Prioridad alta"
+
+- name: priority:medium
+  color: "fbca04"
+  description: "Prioridad media"
+
+- name: status:needs-triage
+  color: "ededed"
+  description: "Pendiente de clasificacion inicial"
+
+- name: status:ready
+  color: "0e8a16"
+  description: "Listo para implementacion"

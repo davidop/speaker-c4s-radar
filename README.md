@@ -172,6 +172,12 @@ Si faltan campos opcionales, se aplican defaults desde la definición de fuente.
 ¿Tienes una mejora, un bug o quieres añadir una oportunidad C4S al dataset de ejemplo?  
 Lee [CONTRIBUTING.md](CONTRIBUTING.md) y abre un issue o un pull request.
 
+### Flujo de comunidad
+
+- Labels base versionados en [.github/labels.yml](.github/labels.yml).
+- Backlog semilla para onboarding en [.github/ISSUES_PROPOSALS.md](.github/ISSUES_PROPOSALS.md).
+- Plantillas de issue en [.github/ISSUE_TEMPLATE](.github/ISSUE_TEMPLATE).
+
 ---
 
 ## Licencia

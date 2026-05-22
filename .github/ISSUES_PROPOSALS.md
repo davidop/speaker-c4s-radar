@@ -1,31 +1,43 @@
 # Propuestas de issues
 
-Issue 1: Improve README and remove placeholders
+Este documento funciona como backlog semilla para crear issues en GitHub.
 
-Descripción:
+## Good first issues (onboarding)
 
-Actualizar README para eliminar placeholders, mejorar la descripción del proyecto y explicar mejor el valor para speakers y comunidades técnicas.
+### 1) README: quickstart en 60 segundos
 
-Issue 2: Add Erika-style Copilot instructions
+- Labels sugeridos: `documentation`, `good first issue`, `status:ready`
+- Descripcion:
+	- Ajustar la primera pantalla del README para que un contribuidor nuevo encuentre demo, run local y como contribuir en menos de 60 segundos.
 
-Descripción:
+### 2) Plantillas de issue: ejemplos mas concretos
 
-Ampliar `.github/copilot-instructions.md` para guiar mejor a GitHub Copilot en estilo visual, tono, accesibilidad y objetivos de demo.
+- Labels sugeridos: `documentation`, `good first issue`, `status:ready`
+- Descripcion:
+	- Mejorar ejemplos en plantillas de bug/feature para aumentar la calidad del reporte inicial.
 
-Issue 3: Add recommended next action to each C4S card
+### 3) Dataset: agregar 3 C4S reales vigentes
 
-Descripción:
+- Labels sugeridos: `dataset`, `good first issue`, `help wanted`, `status:ready`
+- Descripcion:
+	- Anadir al dataset tres oportunidades reales con fuente verificable y deadlines vigentes.
 
-Añadir una acción recomendada por oportunidad según deadline, estado y propuesta asociada.
+## Issues de siguiente nivel
 
-Issue 4: Add filters by community and status
+### 4) Accion recomendada por tarjeta
 
-Descripción:
+- Labels sugeridos: `enhancement`, `help wanted`, `priority:medium`, `status:needs-triage`
+- Descripcion:
+	- Mostrar una recomendacion contextual por oportunidad segun deadline, estado y propuesta asociada.
 
-Permitir filtrar oportunidades por comunidad y estado para que el radar sea más útil en demo y uso real.
+### 5) Filtros por comunidad y estado avanzados
 
-Issue 5: Polish UI with community-first visual style
+- Labels sugeridos: `enhancement`, `priority:medium`, `status:needs-triage`
+- Descripcion:
+	- Mejorar discoverabilidad de oportunidades con combinaciones de filtros mas claras.
 
-Descripción:
+### 6) Pulido visual community-first
 
-Evolucionar la UI con una estética más visual, moderna y community-first: gradientes suaves, acentos rosa/morado/mint, tarjetas más expresivas y mejor jerarquía visual.
+- Labels sugeridos: `enhancement`, `priority:medium`, `status:needs-triage`
+- Descripcion:
+	- Refinar jerarquia visual, contraste y componentes para hacer el radar mas legible y atractivo en demo.
