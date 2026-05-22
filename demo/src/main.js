@@ -13,6 +13,9 @@ const formatOptions = ['Remote', 'Hybrid', 'In person'];
 
 let selectedCommunity = 'Todas';
 let selectedStatus = 'Todos';
+let selectedTag = '';
+let searchQuery = '';
+let searchDebounceId = null;
 let callsData = [...calls];
 let proposalsData = [...proposalSeed];
 let editingCallId = null;
@@ -109,7 +112,10 @@ function filteredCalls() {
   return callsData.filter(call => {
     const matchesCommunity = selectedCommunity === 'Todas' || call.community === selectedCommunity;
     const matchesStatus = selectedStatus === 'Todos' || call.status === selectedStatus;
-    return matchesCommunity && matchesStatus;
+    const matchesTag = !selectedTag || call.tags.includes(selectedTag);
+    const fullText = [call.name, call.community, call.audience || '', ...(call.tags || [])].join(' ').toLowerCase();
+    const matchesSearch = !searchQuery || fullText.includes(searchQuery.toLowerCase());
+    return matchesCommunity && matchesStatus && matchesTag && matchesSearch;
   });
 }
 
@@ -123,6 +129,9 @@ function render() {
   const visibleCalls = filteredCalls();
   const communities = ['Todas', ...new Set(callsData.map(c => c.community))];
   const statuses = ['Todos', ...stateOrder];
+  const tagChip = selectedTag
+    ? `<button type="button" class="tag-chip" onclick="window.clearTagFilter()">Tag activo: ${selectedTag} ×</button>`
+    : '';
 
   document.querySelector('#app').innerHTML = `
     <section class="hero">
@@ -171,7 +180,9 @@ function render() {
     <section class="layout">
       <div>
         <h2>Radar de oportunidades</h2>
+        <p class="results-count">Mostrando ${visibleCalls.length} de ${callsData.length} oportunidades</p>
         ${filters(communities, statuses)}
+        ${tagChip}
         <div class="cards">${visibleCalls.map(card).join('')}</div>
       </div>
       <aside>
@@ -189,6 +200,15 @@ function kpi(label, value) {
 function filters(communities, statuses) {
   return `
     <section class="filters" aria-label="Filtros del radar">
+      <label>
+        Buscar
+        <input
+          type="search"
+          placeholder="Evento, comunidad, tag o audiencia"
+          value="${escapeAttr(searchQuery)}"
+          oninput="window.setSearchQuery(this.value)"
+        />
+      </label>
       <label>
         Comunidad
         <select onchange="window.setCommunityFilter(this.value)">
@@ -225,7 +245,7 @@ function card(call) {
       <p class="proposal">${proposalTitle(call.proposalId)}</p>
       <p class="audience">👥 Audiencia: ${call.audience ?? 'Comunidad técnica'}</p>
       ${call.source ? `<a class="source-link" href="${call.source}" target="_blank" rel="noreferrer">Ver C4S original →</a>` : ''}
-      <div class="tags">${call.tags.map(t => `<span>${t}</span>`).join('')}</div>
+      <div class="tags">${call.tags.map(t => `<button type="button" class="tag-btn ${t === selectedTag ? 'active' : ''}" onclick="window.setTagFilter(decodeURIComponent('${encodeURIComponent(t)}'))">${t}</button>`).join('')}</div>
       <p class="next-action">✨ Siguiente acción: ${nextAction(call)}</p>
       <div class="card-actions">
         <label>
@@ -252,6 +272,27 @@ window.setCommunityFilter = function setCommunityFilter(value) {
 };
 window.setStatusFilter = function setStatusFilter(value) {
   selectedStatus = value;
+  render();
+};
+
+window.setSearchQuery = function setSearchQuery(value) {
+  const nextValue = String(value || '');
+  if (searchDebounceId) {
+    window.clearTimeout(searchDebounceId);
+  }
+  searchDebounceId = window.setTimeout(() => {
+    searchQuery = nextValue.trim();
+    render();
+  }, 200);
+};
+
+window.setTagFilter = function setTagFilter(value) {
+  selectedTag = value;
+  render();
+};
+
+window.clearTagFilter = function clearTagFilter() {
+  selectedTag = '';
   render();
 };
 
