@@ -2,7 +2,15 @@
 name: gsd-secure-phase
 description: "Retroactively verify threat mitigations for a completed phase"
 argument-hint: "[phase number]"
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - Agent
+  - AskUserQuestion
 ---
 
 <objective>
@@ -15,7 +23,7 @@ Output: updated SECURITY.md.
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/secure-phase.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/secure-phase.md
 </execution_context>
 
 <context>

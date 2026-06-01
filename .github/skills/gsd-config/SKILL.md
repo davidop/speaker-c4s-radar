@@ -2,7 +2,11 @@
 name: gsd-config
 description: "Configure GSD settings — workflow toggles, advanced knobs, integrations, and model profile"
 argument-hint: "[--advanced | --integrations | --profile <name>]"
-allowed-tools: Read, Write, Bash, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - AskUserQuestion
 ---
 
 
@@ -28,9 +32,9 @@ Mode routing:
 </routing>
 
 <execution_context>
-@.github/get-shit-done/workflows/settings.md
-@.github/get-shit-done/workflows/settings-advanced.md
-@.github/get-shit-done/workflows/settings-integrations.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/settings.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/settings-advanced.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/settings-integrations.md
 </execution_context>
 
 <context>

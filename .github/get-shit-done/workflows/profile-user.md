@@ -8,9 +8,9 @@ This workflow wires Phase 1 (session pipeline) and Phase 2 (profiling engine) in
 Read all files referenced by the invoking prompt's execution_context before starting.
 
 Key references:
-- @.github/get-shit-done/references/ui-brand.md (display patterns)
-- @.github/agents/gsd-user-profiler.md (profiler agent definition)
-- @.github/get-shit-done/references/user-profiling.md (profiling reference doc)
+- @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md (display patterns)
+- @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/agents/gsd-user-profiler.md (profiler agent definition)
+- @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/user-profiling.md (profiling reference doc)
 </required_reading>
 
 <process>
@@ -24,14 +24,14 @@ Parse flags from $ARGUMENTS:
 Check for existing profile:
 
 ```bash
-PROFILE_PATH=".github/get-shit-done/USER-PROFILE.md"
+PROFILE_PATH="$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/USER-PROFILE.md"
 [ -f "$PROFILE_PATH" ] && echo "EXISTS" || echo "NOT_FOUND"
 ```
 
 **If profile exists AND --refresh NOT set AND --questionnaire NOT set:**
 
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 Use AskUserQuestion:
 - header: "Existing Profile"
 - question: "You already have a profile. What would you like to do?"
@@ -48,7 +48,7 @@ If "Cancel": Display "No changes made." and exit.
 
 Backup existing profile:
 ```bash
-cp ".github/get-shit-done/USER-PROFILE.md" ".github/USER-PROFILE.backup.md"
+cp "$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/USER-PROFILE.md" "$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/USER-PROFILE.backup.md"
 ```
 
 Display: "Re-analyzing your sessions to update your profile."
@@ -69,7 +69,7 @@ Display consent screen:
  GSD > PROFILE YOUR CODING STYLE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-the agent starts every conversation generic. A profile teaches the agent
+Claude starts every conversation generic. A profile teaches Claude
 how YOU actually work -- not how you think you work.
 
 ## What We'll Analyze
@@ -85,14 +85,14 @@ Your recent Claude Code sessions, looking for patterns in these
 | Debugging Approach   | How you tackle errors and bugs               |
 | UX Philosophy        | How much you care about design vs. function  |
 | Vendor Philosophy    | How you evaluate libraries and tools         |
-| Frustration Triggers | What makes you correct the agent                |
+| Frustration Triggers | What makes you correct Claude                |
 | Learning Style       | How you prefer to learn new things           |
 
 ## Data Handling
 
 ✓ Reads session files locally (read-only, nothing modified)
 ✓ Analyzes message patterns (not content meaning)
-✓ Stores profile at .github/get-shit-done/USER-PROFILE.md
+✓ Stores profile at $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/USER-PROFILE.md
 ✗ Nothing is sent to external services
 ✗ Sensitive content (API keys, passwords) is automatically excluded
 ```
@@ -120,7 +120,7 @@ Use AskUserQuestion:
 - options:
   - "Let's go" -- Proceed to step 3 (session analysis)
   - "Use questionnaire instead" -- Jump to step 4b (questionnaire path)
-  - "Not now" -- Display "No worries. Run /gsd-profile-user when ready." and exit
+  - "Not now" -- Display "No worries. Run /gsd:profile-user when ready." and exit
 
 ---
 
@@ -163,13 +163,13 @@ Display: "◆ Analyzing patterns..."
 
 Use the Task tool to spawn the `gsd-user-profiler` agent. Provide it with:
 - The sampled JSONL file path from profile-sample output
-- The user-profiling reference doc at `.github/get-shit-done/references/user-profiling.md`
+- The user-profiling reference doc at `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/user-profiling.md`
 
 The agent prompt should follow this structure:
 ```
 Read the profiling reference document and the sampled session messages, then analyze the developer's behavioral patterns across all 8 dimensions.
 
-Reference: @.github/get-shit-done/references/user-profiling.md
+Reference: @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/user-profiling.md
 Session data: @{temp_dir}/profile-sample.jsonl
 
 Analyze these messages and return your analysis in the <analysis> JSON format specified in the reference document.
@@ -274,7 +274,7 @@ Display: "◆ Writing profile..."
 gsd-sdk query write-profile --input "$ANALYSIS_PATH" --json
 ```
 
-Display: "✓ Profile written to .github/get-shit-done/USER-PROFILE.md"
+Display: "✓ Profile written to $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/USER-PROFILE.md"
 
 ---
 
@@ -312,7 +312,7 @@ Pick 3-4 dimensions with the highest confidence and most evidence signals. Forma
   headers and problem statements before making requests
 - **Vendor Choices (HIGH):** You research alternatives thoroughly -- comparing
   docs, GitHub activity, and bundle sizes before committing
-- **Frustrations (MEDIUM):** You correct the agent most often for doing things
+- **Frustrations (MEDIUM):** You correct Claude most often for doing things
   you didn't ask for -- scope creep is your primary trigger
 ```
 
@@ -336,10 +336,10 @@ Use AskUserQuestion with multiSelect:
 - question: "Which artifacts should I generate?"
 - options (ALL pre-selected by default):
   - "/gsd-dev-preferences command file" -- "Load your preferences in any session"
-  - "copilot-instructions.md profile section" -- "Add profile to this project's copilot-instructions.md"
-  - "Global copilot-instructions.md" -- "Add profile to .github/copilot-instructions.md for all projects"
+  - "CLAUDE.md profile section" -- "Add profile to this project's CLAUDE.md"
+  - "Global CLAUDE.md" -- "Add profile to $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/CLAUDE.md for all projects"
 
-**If no artifacts selected:** Display "No artifacts generated. Your profile is saved at .github/get-shit-done/USER-PROFILE.md" and jump to step 10.
+**If no artifacts selected:** Display "No artifacts generated. Your profile is saved at $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/USER-PROFILE.md" and jump to step 10.
 
 ---
 
@@ -353,23 +353,23 @@ Generate selected artifacts sequentially (file I/O is fast, no benefit from para
 gsd-sdk query generate-dev-preferences --analysis "$ANALYSIS_PATH" --json
 ```
 
-Display: "✓ Generated /gsd-dev-preferences at .github/skills/gsd-dev-preferences/SKILL.md"
+Display: "✓ Generated /gsd-dev-preferences at $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/skills/gsd-dev-preferences/SKILL.md"
 
-**For copilot-instructions.md profile section (if selected):**
+**For CLAUDE.md profile section (if selected):**
 
 ```bash
 gsd-sdk query generate-claude-profile --analysis "$ANALYSIS_PATH" --json
 ```
 
-Display: "✓ Added profile section to copilot-instructions.md"
+Display: "✓ Added profile section to CLAUDE.md"
 
-**For Global copilot-instructions.md (if selected):**
+**For Global CLAUDE.md (if selected):**
 
 ```bash
 gsd-sdk query generate-claude-profile --analysis "$ANALYSIS_PATH" --global --json
 ```
 
-Display: "✓ Added profile section to .github/copilot-instructions.md"
+Display: "✓ Added profile section to $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/CLAUDE.md"
 
 **Error handling:** If any `gsd-sdk query` or gsd-tools.cjs call fails, display the error message and use AskUserQuestion to offer "Retry" or "Skip this artifact". On retry, re-run the command. On skip, continue to next artifact.
 
@@ -383,7 +383,7 @@ Read both old backup and new analysis to compare dimension ratings/confidence.
 
 Read the backed-up profile:
 ```bash
-BACKUP_PATH=".github/USER-PROFILE.backup.md"
+BACKUP_PATH="$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/USER-PROFILE.backup.md"
 ```
 
 Compare each dimension's rating and confidence between old and new. Display diff table showing only changed dimensions:
@@ -406,15 +406,15 @@ If nothing changed: Display "No changes detected -- your profile is already up t
  GSD > PROFILE COMPLETE ✓
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Your profile:    .github/get-shit-done/USER-PROFILE.md
+Your profile:    $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/USER-PROFILE.md
 ```
 
 Then list paths for each generated artifact:
 ```
 Artifacts:
-  ✓ /gsd-dev-preferences   .github/skills/gsd-dev-preferences/SKILL.md
-  ✓ copilot-instructions.md section       ./copilot-instructions.md
-  ✓ Global copilot-instructions.md        .github/copilot-instructions.md
+  ✓ /gsd-dev-preferences   $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/skills/gsd-dev-preferences/SKILL.md
+  ✓ CLAUDE.md section       ./CLAUDE.md
+  ✓ Global CLAUDE.md        $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/CLAUDE.md
 ```
 
 (Only show artifacts that were actually generated.)

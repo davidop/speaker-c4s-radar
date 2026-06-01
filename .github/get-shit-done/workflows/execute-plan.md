@@ -6,7 +6,7 @@ Execute a phase prompt (PLAN.md) and create the outcome summary (SUMMARY.md).
 Read STATE.md before any operation to load project context.
 Read config.json for planning behavior settings.
 
-@.github/get-shit-done/references/git-integration.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/git-integration.md
 </required_reading>
 
 <atomic_close_out_invariant>
@@ -161,7 +161,7 @@ gsd-sdk query phases.list --type summaries --raw
 # Extract the second-to-last summary from the JSON result
 ```
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 If previous SUMMARY has unresolved "Issues Encountered" or "Next Phase Readiness" blockers: AskUserQuestion(header="Previous Issues", options: "Proceed anyway" | "Address first" | "Review previous").
 </step>
 
@@ -169,7 +169,7 @@ If previous SUMMARY has unresolved "Issues Encountered" or "Next Phase Readiness
 Deviations are normal — handle via rules below.
 
 1. Read @context files from prompt
-2. **MCP tools:** If copilot-instructions.md or project instructions reference MCP tools (e.g. jCodeMunch for code navigation), prefer them over Grep/Glob when available. Fall back to Grep/Glob if MCP tools are not accessible.
+2. **MCP tools:** If CLAUDE.md or project instructions reference MCP tools (e.g. jCodeMunch for code navigation), prefer them over Grep/Glob when available. Fall back to Grep/Glob if MCP tools are not accessible.
 3. Per task:
    - **MANDATORY read_first gate:** If the task has a `<read_first>` field, you MUST read every listed file BEFORE making any edits. This is not optional. Do not skip files because you "already know" what's in them — read them. The read_first files establish ground truth for the task.
    - `type="auto"`: if `tdd="true"` → TDD execution. Implement with deviation rules + auth gates. Verify done criteria. Commit (see task_commit). Track hash for Summary.
@@ -246,7 +246,7 @@ For `type: tdd` plans — RED-GREEN-REFACTOR:
 
 Errors: RED doesn't fail → investigate test/existing feature. GREEN doesn't pass → debug, iterate. REFACTOR breaks → undo.
 
-See `.github/get-shit-done/references/tdd.md` for structure.
+See `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/tdd.md` for structure.
 </tdd_plan_execution>
 
 <precommit_failure_handling>
@@ -257,7 +257,7 @@ Your commits may trigger pre-commit hooks. Auto-fix hooks handle themselves tran
 **If running as a parallel executor agent (spawned by execute-phase):**
 Run commits normally — let pre-commit hooks run. Do NOT use `--no-verify` by default
 (#2924). Hooks should run so issues surface at the introducing commit, and silent
-bypass violates project copilot-instructions.md guidance. If a project explicitly opts out via
+bypass violates project CLAUDE.md guidance. If a project explicitly opts out via
 `workflow.worktree_skip_hooks=true`, the orchestrator will surface that flag in the
 prompt; absent that signal, hooks run normally. If a hook fails, follow the
 sequential-mode handling below.
@@ -295,7 +295,7 @@ Display: `CHECKPOINT: [Type]` box → Progress {X}/{Y} → Task name → type-sp
 
 After response: verify if specified. Pass → continue. Fail → inform, wait. WAIT for user — do NOT hallucinate completion.
 
-See .github/get-shit-done/references/checkpoints.md for details.
+See $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/checkpoints.md for details.
 </step>
 
 <step name="checkpoint_return_for_orchestrator">
@@ -314,7 +314,7 @@ If verification fails:
 NODE_REPAIR=$(gsd-sdk query config-get workflow.node_repair 2>/dev/null || echo "true")
 ```
 
-If `NODE_REPAIR` is `true`: invoke `@./.github/get-shit-done/workflows/node-repair.md` with:
+If `NODE_REPAIR` is `true`: invoke `@./.claude/get-shit-done/workflows/node-repair.md` with:
 - FAILED_TASK: task number, name, done-criteria
 - ERROR: expected vs actual result
 - PLAN_CONTEXT: adjacent task names + phase goal
@@ -348,7 +348,7 @@ fi
 grep -A 50 "^user_setup:" .planning/phases/XX-name/{phase}-{plan}-PLAN.md | head -50
 ```
 
-If user_setup exists: create `{phase}-USER-SETUP.md` using template `.github/get-shit-done/templates/user-setup.md`. Per service: env vars table, account setup checklist, dashboard config, local dev notes, verification commands. Status "Incomplete". Set `USER_SETUP_CREATED=true`. If empty/missing: skip.
+If user_setup exists: create `{phase}-USER-SETUP.md` using template `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/templates/user-setup.md`. Per service: env vars table, account setup checklist, dashboard config, local dev notes, verification commands. Status "Incomplete". Set `USER_SETUP_CREATED=true`. If empty/missing: skip.
 </step>
 
 <step name="create_summary">
@@ -357,7 +357,7 @@ emit narrative output between the Write tool call and the commit tool call.
 Truncation at this boundary is a known failure mode (see #2070 rescue logic in
 execute-phase.md step 5.5).
 
-Create `{phase}-{plan}-SUMMARY.md` at `.planning/phases/XX-name/`. Use `.github/get-shit-done/templates/summary.md`.
+Create `{phase}-{plan}-SUMMARY.md` at `.planning/phases/XX-name/`. Use `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/templates/summary.md`.
 
 **Frontmatter:** phase, plan, subsystem, tags | requires/provides/affects | tech-stack.added/patterns | key-files.created/modified | key-decisions | requirements-completed (**MUST** copy `requirements` array from PLAN.md frontmatter verbatim) | duration ($DURATION), completed ($PLAN_END_TIME date).
 
@@ -503,9 +503,9 @@ If `USER_SETUP_CREATED=true`: display `⚠️ USER SETUP REQUIRED` with path + e
 
 | Condition | Route | Action |
 |-----------|-------|--------|
-| summaries < plans | **A: More plans** | Find next PLAN without SUMMARY. Yolo: auto-continue. Interactive: show next plan, suggest `/gsd-execute-phase {phase}` + `/gsd-verify-work`. STOP here. |
-| summaries = plans, current < highest phase | **B: Phase done** | Show completion, suggest `/gsd-plan-phase {Z+1}` + `/gsd-verify-work {Z}` + `/gsd-discuss-phase {Z+1}` |
-| summaries = plans, current = highest phase | **C: Milestone done** | Show banner, suggest `/gsd-complete-milestone` + `/gsd-verify-work` + `/gsd-add-phase` |
+| summaries < plans | **A: More plans** | Find next PLAN without SUMMARY. Yolo: auto-continue. Interactive: show next plan, suggest `/gsd:execute-phase {phase}` + `/gsd:verify-work`. STOP here. |
+| summaries = plans, current < highest phase | **B: Phase done** | Show completion, suggest `/gsd:plan-phase {Z+1}` + `/gsd:verify-work {Z}` + `/gsd:discuss-phase {Z+1}` |
+| summaries = plans, current = highest phase | **C: Milestone done** | Show banner, suggest `/gsd:complete-milestone` + `/gsd:verify-work` + `/gsd-add-phase` |
 
 All routes: `/clear` first for fresh context.
 </step>

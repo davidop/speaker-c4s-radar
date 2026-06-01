@@ -2,7 +2,14 @@
 name: gsd-autonomous
 description: "Run all remaining phases autonomously — discuss→plan→execute per phase"
 argument-hint: "[--from N] [--to N] [--only N] [--interactive]"
-allowed-tools: Read, Write, Bash, Glob, Grep, AskUserQuestion, Agent
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
+  - Agent
 ---
 
 <objective>
@@ -19,8 +26,8 @@ Uses ROADMAP.md phase discovery and Skill() flat invocations for each phase comm
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/autonomous.md
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/autonomous.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <context>

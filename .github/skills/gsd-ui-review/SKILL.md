@@ -2,7 +2,14 @@
 name: gsd-ui-review
 description: "Retroactive 6-pillar visual audit of implemented frontend code"
 argument-hint: "[phase]"
-allowed-tools: Read, Write, Bash, Glob, Grep, Agent, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - Grep
+  - Agent
+  - AskUserQuestion
 ---
 
 <objective>
@@ -12,8 +19,8 @@ Output: {phase_num}-UI-REVIEW.md
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/ui-review.md
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/ui-review.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <context>

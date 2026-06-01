@@ -2,7 +2,12 @@
 name: gsd-undo
 description: "Safe git revert. Roll back phase or plan commits using the phase manifest with dependency checks."
 argument-hint: "--last N | --phase NN | --plan NN-MM"
-allowed-tools: Read, Bash, Glob, Grep, AskUserQuestion
+allowed-tools:
+  - Read
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
 ---
 
 
@@ -16,9 +21,9 @@ Three modes:
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/undo.md
-@.github/get-shit-done/references/ui-brand.md
-@.github/get-shit-done/references/gate-prompts.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/undo.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/gate-prompts.md
 </execution_context>
 
 <context>

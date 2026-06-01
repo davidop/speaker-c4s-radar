@@ -25,13 +25,13 @@ via filesystem and git state.
 
 <required_reading>
 Read STATE.md before any operation to load project context.
-@.github/get-shit-done/references/agent-contracts.md
-@.github/get-shit-done/references/context-budget.md
-@.github/get-shit-done/references/gates.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/agent-contracts.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/context-budget.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/gates.md
 </required_reading>
 
 <available_agent_types>
-These are the valid GSD subagent types registered in .github/agents/ (or equivalent for your runtime).
+These are the valid GSD subagent types registered in .claude/agents/ (or equivalent for your runtime).
 Always use the exact name from this list — do not fall back to 'general-purpose' or other built-in types:
 
 - gsd-executor — Executes plan tasks, commits, creates SUMMARY.md
@@ -120,8 +120,8 @@ When `CONTEXT_WINDOW >= 500000` (1M-class models), subagent prompts include rich
 - This enables cross-phase awareness and history-aware verification
 
 When `CONTEXT_WINDOW < 200000` (sub-200K models), subagent prompts are thinned to reduce static overhead:
-- Executor agents omit extended deviation rule examples and checkpoint examples from inline prompt — load on-demand via @.github/get-shit-done/references/executor-examples.md
-- Planner agents omit extended anti-pattern lists and specificity examples from inline prompt — load on-demand via @.github/get-shit-done/references/planner-antipatterns.md
+- Executor agents omit extended deviation rule examples and checkpoint examples from inline prompt — load on-demand via @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/executor-examples.md
+- Planner agents omit extended anti-pattern lists and specificity examples from inline prompt — load on-demand via @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/planner-antipatterns.md
 - Core rules and decision logic remain inline; only verbose examples and edge-case lists are extracted
 - This reduces executor static overhead by ~40% while preserving behavioral correctness
 
@@ -241,7 +241,7 @@ checkpoints between tasks. The user can review, modify, or redirect work at any 
 
    b. **If "Review first":** Read and display the full plan file. Ask again: Execute, Modify, Skip.
 
-   c. **If "Execute":** Read and follow `.github/get-shit-done/workflows/execute-plan.md` **inline**
+   c. **If "Execute":** Read and follow `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/execute-plan.md` **inline**
       (do NOT spawn a subagent). Execute tasks one at a time.
 
    d. **After each task:** Pause briefly. If the user intervenes (types anything), stop and address
@@ -415,13 +415,13 @@ Execute each selected wave in sequence. Within a wave: parallel if `PARALLELIZAT
 
 **Stream-idle-timeout prevention — checkpoint heartbeats (#2410):**
 
-Multi-plan phases can accumulate enough subagent context that the the agent API
+Multi-plan phases can accumulate enough subagent context that the Claude API
 SSE layer terminates with `Stream idle timeout - partial response received`
 between a large tool_result and the next assistant turn (seen on Claude Code
 + Opus 4.7 at ~200K+ cache_read). To keep the stream warm, emit short
 assistant-text heartbeats — **no tool call, just a literal line** — at every
 wave and plan boundary. Each heartbeat MUST start with `[checkpoint]` so
-tooling and `/gsd-manager`'s background-completion handler can grep partial
+tooling and `/gsd:manager`'s background-completion handler can grep partial
 transcripts. `{P}/{Q}` is the phase-wide completed/total plans counter and
 increases monotonically across waves. `{status}` is `complete` (success),
 `failed` (executor error), or `checkpoint` (human-gate returned).
@@ -583,7 +583,7 @@ increases monotonically across waves. `{status}` is `complete` (success),
        You are running as a PARALLEL executor agent in a git worktree. Worktree path safety (cwd-drift, absolute-path guards) is in `worktree-path-safety.md` (loaded below).
        Run `git commit` normally — hooks run by default. Do NOT pass `--no-verify`
        unless the orchestrator surfaces `workflow.worktree_skip_hooks=true` in this
-       prompt; silent bypass violates project copilot-instructions.md guidance (#2924).
+       prompt; silent bypass violates project CLAUDE.md guidance (#2924).
 
        IMPORTANT: Do NOT modify STATE.md or ROADMAP.md. execute-plan.md
        auto-detects worktree mode (`.git` is a file, not a directory) and skips
@@ -599,12 +599,12 @@ increases monotonically across waves. `{status}` is `complete` (success),
        </parallel_execution>
 
        <execution_context>
-       @.github/get-shit-done/workflows/execute-plan.md
-       @.github/get-shit-done/templates/summary.md
-       @.github/get-shit-done/references/checkpoints.md
-       @.github/get-shit-done/references/tdd.md
-       @.github/get-shit-done/references/worktree-path-safety.md
-       ${CONTEXT_WINDOW < 200000 ? '' : '@.github/get-shit-done/references/executor-examples.md'}
+       @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/execute-plan.md
+       @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/templates/summary.md
+       @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/checkpoints.md
+       @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/tdd.md
+       @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/worktree-path-safety.md
+       ${CONTEXT_WINDOW < 200000 ? '' : '@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/executor-examples.md'}
        </execution_context>
 
        <files_to_read>
@@ -618,14 +618,14 @@ increases monotonically across waves. `{status}` is `complete` (success),
        - ${phase_dir}/*-RESEARCH.md (Technical research — pitfalls and patterns to follow)
        - ${prior_wave_summaries} (SUMMARY.md files from earlier waves in this phase — what was already built)
        ` : ''}
-       - ./copilot-instructions.md (Project instructions, if exists — follow project-specific guidelines and coding conventions)
-       - .github/skills/ or .agents/skills/ (Project skills, if either exists — list skills, read SKILL.md for each, follow relevant rules during implementation)
+       - ./CLAUDE.md (Project instructions, if exists — follow project-specific guidelines and coding conventions)
+       - .claude/skills/ or .agents/skills/ (Project skills, if either exists — list skills, read SKILL.md for each, follow relevant rules during implementation)
        </files_to_read>
 
        ${AGENT_SKILLS}
 
        <mcp_tools>
-       If copilot-instructions.md or project instructions reference MCP tools (e.g. jCodeMunch, context7,
+       If CLAUDE.md or project instructions reference MCP tools (e.g. jCodeMunch, context7,
        or other MCP servers), prefer those tools over Grep/Glob for code navigation when available.
        MCP tools often save significant tokens by providing structured code indexes.
        Check tool availability first — if MCP tools are not accessible, fall back to Grep/Glob.
@@ -1014,7 +1014,7 @@ increases monotonically across waves. `{status}` is `complete` (success),
    RETRY_AFTER=$(echo "$CLASS_JSON" | jq -r '.retryAfterSeconds // empty')
    if [ -n "$RETRY_AFTER" ]; then RETRY_HINT="  Provider hinted retry-after: ${RETRY_AFTER}s"; else RETRY_HINT=""; fi
    ```
-   One classifier branch handles sentinels across the agent/Copilot/Codex/Gemini. Reference: `docs/research/provider-rate-limit-signals.md`.
+   One classifier branch handles sentinels across Claude/Copilot/Codex/Gemini. Reference: `docs/research/provider-rate-limit-signals.md`.
    **Step 7.1 — `class == "quota-exceeded"`:**
    Do not offer "retry now". Run step-5 spot-check first; if SUMMARY.md is missing but commits exist, route to safe-resume (`state.verify-against-disk`) instead of immediate redispatch.
    ```text
@@ -1027,9 +1027,9 @@ increases monotonically across waves. `{status}` is `complete` (success),
    2. Switch to a different runtime / model and resume
    3. Abort phase and report partial state
    ```
-   Re-run `/gsd-execute-phase` after quota reset for Option 1.
+   Re-run `/gsd:execute-phase` after quota reset for Option 1.
    **Step 7.2 — `class == "classify-handoff-bug"`:**
-   If error contains `classifyHandoffIfNeeded is not defined`, treat as the agent runtime bug. Run the same step-5 spot-checks; PASS => treat as success, FAIL => fall through.
+   If error contains `classifyHandoffIfNeeded is not defined`, treat as Claude runtime bug. Run the same step-5 spot-checks; PASS => treat as success, FAIL => fall through.
    **Step 7.3 — `class == "unknown-failure"`:**
    Report failed plan and ask Continue/Stop; continuing may cascade into dependent plan failures.
 
@@ -1118,13 +1118,13 @@ If `SECURITY_CFG` is `true` AND `SECURITY_FILE` is empty (no SECURITY.md yet):
 Include in the next-steps routing output:
 ```
 ⚠ Security enforcement enabled — run before advancing:
-  /gsd-secure-phase {PHASE} ${GSD_WS}
+  /gsd:secure-phase {PHASE} ${GSD_WS}
 ```
 
 If `SECURITY_CFG` is `true` AND SECURITY.md exists: check frontmatter `threats_open`. If > 0:
 ```
 ⚠ Security gate: {threats_open} threats open
-  /gsd-secure-phase {PHASE} — resolve before advancing
+  /gsd:secure-phase {PHASE} — resolve before advancing
 ```
 </step>
 
@@ -1203,8 +1203,8 @@ Apply the same "incomplete" filtering rules as earlier:
 
 Selected wave finished successfully. This phase still has incomplete plans, so phase-level verification and completion were intentionally skipped.
 
-/gsd-execute-phase {phase} ${GSD_WS}                # Continue remaining waves
-/gsd-execute-phase {phase} --wave {next} ${GSD_WS}  # Run the next wave explicitly
+/gsd:execute-phase {phase} ${GSD_WS}                # Continue remaining waves
+/gsd:execute-phase {phase} --wave {next} ${GSD_WS}  # Run the next wave explicitly
 ```
 
 **If no incomplete plans remain after the selected wave finishes:**
@@ -1237,7 +1237,7 @@ REVIEW_STATUS=$(sed -n '/^---$/,/^---$/p' "$REVIEW_FILE" | grep "^status:" | hea
 If REVIEW_STATUS is not "clean" and not "skipped" and not empty, display:
 ```
 Code review found issues. Consider running:
-/gsd-code-review ${PHASE_NUMBER} --fix
+/gsd:code-review ${PHASE_NUMBER} --fix
 ```
 
 **Error handling:** If the Skill invocation fails or throws, catch the error, display "Code review encountered an error (non-blocking): {error}" and proceed to next step. Review failures must never block execution.
@@ -1491,7 +1491,7 @@ grep "^status:" "$PHASE_DIR"/*-VERIFICATION.md | cut -d: -f2 | tr -d ' '
 |--------|--------|
 | `passed` | → update_roadmap |
 | `human_needed` | Persist and present human testing items; keep phase pending until verification reruns as `passed` |
-| `gaps_found` | Present gap summary, offer `/gsd-plan-phase {phase} --gaps ${GSD_WS}` |
+| `gaps_found` | Present gap summary, offer `/gsd:plan-phase {phase} --gaps ${GSD_WS}` |
 
 **If human_needed:**
 
@@ -1546,12 +1546,12 @@ All automated checks passed. {N} items need human testing:
 
 {From VERIFICATION.md human_verification section}
 
-Items saved to `{phase_num}-HUMAN-UAT.md` — they will appear in `/gsd-progress` and `/gsd-audit-uat`.
+Items saved to `{phase_num}-HUMAN-UAT.md` — they will appear in `/gsd:progress` and `/gsd:audit-uat`.
 
 "approved" → continue | Report issues → gap closure
 ```
 
-**If user says "approved":** Proceed to `update_roadmap`. The HUMAN-UAT.md file persists with `status: partial` and will surface in future progress checks until the user runs `/gsd-verify-work` on it.
+**If user says "approved":** Proceed to `update_roadmap`. The HUMAN-UAT.md file persists with `status: partial` and will surface in future progress checks until the user runs `/gsd:verify-work` on it.
 
 **If user reports issues:** Proceed to gap closure as currently implemented.
 
@@ -1570,13 +1570,13 @@ Items saved to `{phase_num}-HUMAN-UAT.md` — they will appear in `/gsd-progress
 
 `/clear` then:
 
-`/gsd-plan-phase {X} --gaps ${GSD_WS}`
+`/gsd:plan-phase {X} --gaps ${GSD_WS}`
 
 Also: `cat {phase_dir}/{phase_num}-VERIFICATION.md` — full report
-Also: `/gsd-verify-work {X} ${GSD_WS}` — manual testing first
+Also: `/gsd:verify-work {X} ${GSD_WS}` — manual testing first
 ```
 
-Gap closure cycle: `/gsd-plan-phase {X} --gaps ${GSD_WS}` reads VERIFICATION.md → creates gap plans with `gap_closure: true` → user runs `/gsd-execute-phase {X} --gaps-only ${GSD_WS}` → verifier re-runs.
+Gap closure cycle: `/gsd:plan-phase {X} --gaps ${GSD_WS}` reads VERIFICATION.md → creates gap plans with `gap_closure: true` → user runs `/gsd:execute-phase {X} --gaps-only ${GSD_WS}` → verifier re-runs.
 </step>
 
 <step name="update_roadmap">
@@ -1602,7 +1602,7 @@ Extract from result: `next_phase`, `next_phase_name`, `is_last_phase`, `warnings
 
 {list each warning}
 
-These items are tracked and will appear in `/gsd-progress` and `/gsd-audit-uat`.
+These items are tracked and will appear in `/gsd:progress` and `/gsd:audit-uat`.
 ```
 
 ```bash
@@ -1689,7 +1689,7 @@ gsd-sdk query commit "docs(phase-{X}): evolve PROJECT.md after phase completion"
 
 <step name="offer_next">
 
-**Exception:** If `gaps_found`, the `verify_phase_goal` step already presents the gap-closure path (`/gsd-plan-phase {X} --gaps`). No additional routing needed — skip auto-advance.
+**Exception:** If `gaps_found`, the `verify_phase_goal` step already presents the gap-closure path (`/gsd:plan-phase {X} --gaps`). No additional routing needed — skip auto-advance.
 
 **No-transition check (spawned by auto-advance chain):**
 
@@ -1733,7 +1733,7 @@ STOP. Do not proceed to auto-advance or transition.
 
 Execute the transition workflow inline (do NOT use Agent — orchestrator context is ~10-15%, transition needs phase completion data already in context):
 
-Read and follow `.github/get-shit-done/workflows/transition.md`, passing through the `--auto` flag so it propagates to the next phase invocation.
+Read and follow `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/transition.md`, passing through the `--auto` flag so it propagates to the next phase invocation.
 
 **If neither `--auto` nor `AUTO_MODE` is true:**
 
@@ -1752,10 +1752,10 @@ If CONTEXT.md does **not** exist for the next phase, present:
 ```
 ## ✓ Phase {X}: {Name} Complete
 
-/gsd-progress ${GSD_WS} — see updated roadmap
-/gsd-discuss-phase {next} ${GSD_WS} — start here: discuss next phase before planning  ← recommended
-/gsd-plan-phase {next} ${GSD_WS} — plan next phase (skip discuss)
-/gsd-execute-phase {next} ${GSD_WS} — execute next phase (skip discuss and plan)
+/gsd:progress ${GSD_WS} — see updated roadmap
+/gsd:discuss-phase {next} ${GSD_WS} — start here: discuss next phase before planning  ← recommended
+/gsd:plan-phase {next} ${GSD_WS} — plan next phase (skip discuss)
+/gsd:execute-phase {next} ${GSD_WS} — execute next phase (skip discuss and plan)
 ```
 
 If CONTEXT.md **exists** for the next phase, present:
@@ -1763,10 +1763,10 @@ If CONTEXT.md **exists** for the next phase, present:
 ```
 ## ✓ Phase {X}: {Name} Complete
 
-/gsd-progress ${GSD_WS} — see updated roadmap
-/gsd-plan-phase {next} ${GSD_WS} — start here: plan next phase (CONTEXT.md already present)  ← recommended
-/gsd-discuss-phase {next} ${GSD_WS} — re-discuss next phase
-/gsd-execute-phase {next} ${GSD_WS} — execute next phase (skip planning)
+/gsd:progress ${GSD_WS} — see updated roadmap
+/gsd:plan-phase {next} ${GSD_WS} — start here: plan next phase (CONTEXT.md already present)  ← recommended
+/gsd:discuss-phase {next} ${GSD_WS} — re-discuss next phase
+/gsd:execute-phase {next} ${GSD_WS} — execute next phase (skip planning)
 ```
 
 Only suggest the commands listed above. Do not invent or hallucinate command names.
@@ -1794,7 +1794,7 @@ For 1M+ context models, consider:
 </failure_handling>
 
 <resumption>
-Re-run `/gsd-execute-phase {phase}` → discover_plans finds completed SUMMARYs → skips them → resumes from first incomplete plan → continues wave execution.
+Re-run `/gsd:execute-phase {phase}` → discover_plans finds completed SUMMARYs → skips them → resumes from first incomplete plan → continues wave execution.
 
 STATE.md tracks: last completed plan, current wave, pending checkpoints.
 </resumption>

@@ -1,7 +1,11 @@
 ---
 name: gsd-settings
 description: "Configure GSD workflow toggles and model profile"
-allowed-tools: Read, Write, Bash, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - AskUserQuestion
 ---
 
 
@@ -17,7 +21,7 @@ Routes to the settings workflow which handles:
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/settings.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/settings.md
 </execution_context>
 
 <process>

@@ -2,7 +2,14 @@
 name: gsd-eval-review
 description: "Audit an executed AI phase's evaluation coverage and produce an EVAL-REVIEW.md remediation plan."
 argument-hint: "[phase number]"
-allowed-tools: Read, Write, Bash, Glob, Grep, Agent, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - Grep
+  - Agent
+  - AskUserQuestion
 ---
 
 <objective>
@@ -12,8 +19,8 @@ Produces EVAL-REVIEW.md with score, verdict, gaps, and remediation plan.
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/eval-review.md
-@.github/get-shit-done/references/ai-evals.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/eval-review.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ai-evals.md
 </execution_context>
 
 <context>

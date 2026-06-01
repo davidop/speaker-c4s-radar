@@ -3,7 +3,7 @@ Audit Nyquist validation gaps for a completed phase. Generate missing tests. Upd
 </purpose>
 
 <required_reading>
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </required_reading>
 
 <available_agent_types>
@@ -28,7 +28,7 @@ AUDITOR_MODEL=$(gsd-sdk query resolve-model gsd-nyquist-auditor --raw)
 NYQUIST_CFG=$(gsd-sdk query config-get workflow.nyquist_validation --raw)
 ```
 
-If `NYQUIST_CFG` is `false`: exit with "Nyquist validation is disabled. Enable via /gsd-settings."
+If `NYQUIST_CFG` is `false`: exit with "Nyquist validation is disabled. Enable via /gsd:settings."
 
 Display banner: `GSD > VALIDATE PHASE {N}: {name}`
 
@@ -41,7 +41,7 @@ SUMMARY_FILES=$(ls "${PHASE_DIR}"/*-SUMMARY.md 2>/dev/null)
 
 - **State A** (`VALIDATION_FILE` non-empty): Audit existing
 - **State B** (`VALIDATION_FILE` empty, `SUMMARY_FILES` non-empty): Reconstruct from artifacts
-- **State C** (`SUMMARY_FILES` empty): Exit — "Phase {N} not executed. Run /gsd-execute-phase {N} ${GSD_WS} first."
+- **State C** (`SUMMARY_FILES` empty): Exit — "Phase {N} not executed. Run /gsd:execute-phase {N} ${GSD_WS} first."
 
 ## 2. Discovery
 
@@ -84,7 +84,7 @@ No gaps → skip to Step 6, set `nyquist_compliant: true`.
 ## 4. Present Gap Plan
 
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 Call AskUserQuestion with gap table and options:
 1. "Fix all gaps" → Step 5
 2. "Skip — mark manual-only" → add to Manual-Only, Step 6
@@ -94,7 +94,7 @@ Call AskUserQuestion with gap table and options:
 
 ```
 Agent(
-  prompt="Read .github/agents/gsd-nyquist-auditor.md for instructions.\n\n" +
+  prompt="Read $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/agents/gsd-nyquist-auditor.md for instructions.\n\n" +
     "<files_to_read>{PLAN, SUMMARY, impl files, VALIDATION.md}</files_to_read>" +
     "<gaps>{gap list}</gaps>" +
     "<test_infrastructure>{framework, config, commands}</test_infrastructure>" +
@@ -116,7 +116,7 @@ Handle return:
 ## 6. Generate/Update VALIDATION.md
 
 **State B (create):**
-1. Read template from `.github/get-shit-done/templates/VALIDATION.md`
+1. Read template from `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/templates/VALIDATION.md`
 2. Fill: frontmatter, Test Infrastructure, Per-Task Map, Manual-Only, Sign-Off
 3. Write to `${PHASE_DIR}/${PADDED_PHASE}-VALIDATION.md`
 
@@ -148,14 +148,14 @@ gsd-sdk query commit "docs(phase-${PHASE}): add/update validation strategy"
 ```
 GSD > PHASE {N} IS NYQUIST-COMPLIANT
 All requirements have automated verification.
-▶ Next: /gsd-audit-milestone ${GSD_WS}
+▶ Next: /gsd:audit-milestone ${GSD_WS}
 ```
 
 **Partial:**
 ```
 GSD > PHASE {N} VALIDATED (PARTIAL)
 {M} automated, {K} manual-only.
-▶ Retry: /gsd-validate-phase {N} ${GSD_WS}
+▶ Retry: /gsd:validate-phase {N} ${GSD_WS}
 ```
 
 Display `/clear` reminder.
