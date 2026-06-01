@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-01T08:50:36.887Z",
+  "stats": {
+    "scannedSources": 0,
+    "fetchedItems": 0,
+    "acceptedItems": 0,
+    "skippedPastDeadline": 0,
+    "skippedInvalid": 0,
+    "dedupedExisting": 0,
+    "failedSources": []
+  },
+  "additions": []
+}
