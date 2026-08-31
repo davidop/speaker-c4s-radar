@@ -1,7 +1,7 @@
 <purpose>
 Explore design directions through throwaway HTML mockups before committing to implementation.
 Each sketch produces 2-3 variants for comparison. Saves artifacts to `.planning/sketches/`.
-Companion to `/gsd-sketch --wrap-up`.
+Companion to `/gsd:sketch --wrap-up`.
 
 Supports two modes:
 - **Idea mode** (default) — user describes a design idea to sketch
@@ -11,10 +11,10 @@ Supports two modes:
 <required_reading>
 Read all files referenced by the invoking prompt's execution_context before starting.
 
-@.github/get-shit-done/references/sketch-theme-system.md
-@.github/get-shit-done/references/sketch-variant-patterns.md
-@.github/get-shit-done/references/sketch-interactivity.md
-@.github/get-shit-done/references/sketch-tooling.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/sketch-theme-system.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/sketch-variant-patterns.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/sketch-interactivity.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/sketch-tooling.md
 </required_reading>
 
 <process>
@@ -53,7 +53,7 @@ Otherwise, load in this order:
 
 **a. MANIFEST.md** — the design direction, reference points, and sketch table with winners.
 
-**b. Findings skills** — glob `./.github/skills/sketch-findings-*/SKILL.md` and read any that exist, plus their `references/*.md`. These contain curated design decisions from prior wrap-ups.
+**b. Findings skills** — glob `./.claude/skills/sketch-findings-*/SKILL.md` and read any that exist, plus their `references/*.md`. These contain curated design decisions from prior wrap-ups.
 
 **c. All sketch READMEs** — read `.planning/sketches/*/README.md` for design questions, winners, and tags.
 
@@ -128,7 +128,7 @@ Only proceed when the user says go.
 
 If spikes exist for this project, read them to ground the sketches in reality. Mockups are still pure HTML, but they should reflect what's actually been proven — real data shapes, real component names, real interaction patterns.
 
-**a.** Glob for `./.github/skills/spike-findings-*/SKILL.md` and read any that exist, plus their `references/*.md`. These contain validated patterns and requirements.
+**a.** Glob for `./.claude/skills/spike-findings-*/SKILL.md` and read any that exist, plus their `references/*.md`. These contain validated patterns and requirements.
 
 **b.** Read `.planning/spikes/MANIFEST.md` if it exists — check the Requirements section for non-negotiable design constraints (e.g., "must support streaming", "must render markdown"). These requirements should be visible in the mockup even though the mockup doesn't implement them for real.
 
@@ -331,14 +331,14 @@ After all sketches complete:
 
 **Package findings** — wrap design decisions into a reusable skill
 
-`/gsd-sketch --wrap-up`
+`/gsd:sketch --wrap-up`
 
 ───────────────────────────────────────────────────────────────
 
 **Also available:**
-- `/gsd-sketch` — sketch more (or run with no argument for frontier mode)
-- `/gsd-plan-phase` — start building the real UI
-- `/gsd-spike` — spike technical feasibility of a design pattern
+- `/gsd:sketch` — sketch more (or run with no argument for frontier mode)
+- `/gsd:plan-phase` — start building the real UI
+- `/gsd:spike` — spike technical feasibility of a design pattern
 
 ───────────────────────────────────────────────────────────────
 </step>

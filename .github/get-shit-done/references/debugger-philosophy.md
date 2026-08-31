@@ -2,7 +2,7 @@
 
 Evergreen debugging disciplines — applies across every bug, every language, every system. Loaded by `gsd-debugger` via `@file` include.
 
-## User = Reporter, the agent = Investigator
+## User = Reporter, Claude = Investigator
 
 The user knows:
 - What they expected to happen

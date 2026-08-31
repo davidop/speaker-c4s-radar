@@ -50,7 +50,7 @@ When delegating to agents, the orchestrator cannot verify semantic correctness o
 
 ## MCP Tool Schema Cost (Harness Concern)
 
-Every enabled MCP server injects its tool schema into **every turn**, regardless of whether you call any of its tools. Heavyweight servers can cost 20k+ tokens per turn each — often dwarfing whatever GSD itself can save through `model_profile` tuning. This is a Claude Code harness concern, not a GSD concern: GSD does **not** manage MCP enablement. The toggle lives in `.github/settings.json` under `enabledMcpjsonServers` and `disabledMcpjsonServers`.
+Every enabled MCP server injects its tool schema into **every turn**, regardless of whether you call any of its tools. Heavyweight servers can cost 20k+ tokens per turn each — often dwarfing whatever GSD itself can save through `model_profile` tuning. This is a Claude Code harness concern, not a GSD concern: GSD does **not** manage MCP enablement. The toggle lives in `.claude/settings.json` under `enabledMcpjsonServers` and `disabledMcpjsonServers`.
 
 ### Why this is the biggest cost lever you don't own
 
@@ -58,7 +58,7 @@ Tool schemas count against the same context budget as model context, prompts, an
 
 ### Pre-Phase MCP Audit
 
-Before starting a long phase (especially `/gsd-execute-phase`, `/gsd-plan-phase`, or anything that fans out across many subagents), run this audit:
+Before starting a long phase (especially `/gsd:execute-phase`, `/gsd:plan-phase`, or anything that fans out across many subagents), run this audit:
 
 - [ ] **Browser / playwright tools enabled?** If this phase has no UI work, disable them. They're among the heaviest per-turn schemas.
 - [ ] **Platform-specific tools enabled?** Mac-tools / Windows-tools / OS-specific helpers should be disabled when not actively needed for the phase at hand.
@@ -69,7 +69,7 @@ Each item disabled removes its schema from every subsequent turn for the rest of
 
 ### How to toggle
 
-The keys live in `.github/settings.json` (project) or `.github/settings.json` (global) — **not** in `.planning/config.json`:
+The keys live in `.claude/settings.json` (project) or `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/settings.json` (global) — **not** in `.planning/config.json`:
 
 ```json
 {

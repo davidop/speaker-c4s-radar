@@ -2,7 +2,11 @@
 name: gsd-workspace
 description: "Manage GSD workspaces — create, list, or remove isolated workspace environments"
 argument-hint: "[--new | --list | --remove] [name]"
-allowed-tools: Read, Write, Bash, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - AskUserQuestion
 ---
 
 
@@ -26,10 +30,10 @@ Mode routing:
 </routing>
 
 <execution_context>
-@.github/get-shit-done/workflows/new-workspace.md
-@.github/get-shit-done/workflows/list-workspaces.md
-@.github/get-shit-done/workflows/remove-workspace.md
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/new-workspace.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/list-workspaces.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/remove-workspace.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <context>

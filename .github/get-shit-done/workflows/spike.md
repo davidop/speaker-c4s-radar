@@ -1,7 +1,7 @@
 <purpose>
 Spike an idea through experiential exploration — build focused experiments to feel the pieces
 of a future app, validate feasibility, and produce verified knowledge for the real build.
-Saves artifacts to `.planning/spikes/`. Companion to `/gsd-spike --wrap-up`.
+Saves artifacts to `.planning/spikes/`. Companion to `/gsd:spike --wrap-up`.
 
 Supports two modes:
 - **Idea mode** (default) — user describes an idea to spike
@@ -48,7 +48,7 @@ Otherwise, load in this order:
 
 **a. MANIFEST.md** — the overall idea, requirements, and spike table with verdicts.
 
-**b. Findings skills** — glob `./.github/skills/spike-findings-*/SKILL.md` and read any that exist, plus their `references/*.md`. These contain curated knowledge from prior wrap-ups.
+**b. Findings skills** — glob `./.claude/skills/spike-findings-*/SKILL.md` and read any that exist, plus their `references/*.md`. These contain curated knowledge from prior wrap-ups.
 
 **c. CONVENTIONS.md** — read `.planning/spikes/CONVENTIONS.md` if it exists. Established stack and patterns.
 
@@ -124,7 +124,7 @@ If `.planning/spikes/` has existing content, load context in this priority order
 
 **a. Conventions:** Read `.planning/spikes/CONVENTIONS.md` if it exists.
 
-**b. Findings skills:** Glob for `./.github/skills/spike-findings-*/SKILL.md` and read any that exist, plus their `references/*.md` files.
+**b. Findings skills:** Glob for `./.claude/skills/spike-findings-*/SKILL.md` and read any that exist, plus their `references/*.md` files.
 
 **c. Manifest:** Read `.planning/spikes/MANIFEST.md` for the index of all spikes.
 
@@ -245,7 +245,7 @@ Before starting each spike (not just the first), re-read `.planning/spikes/MANIF
 
 **a.** Create `.planning/spikes/NNN-descriptive-name/`
 
-**b.** Default to giving the user something they can experience. The bias should be toward building a simple UI or interactive demo, not toward stdout that only the agent reads. The user wants to *feel* the spike working, not just be told it works.
+**b.** Default to giving the user something they can experience. The bias should be toward building a simple UI or interactive demo, not toward stdout that only Claude reads. The user wants to *feel* the spike working, not just be told it works.
 
 **The default is: build something the user can interact with.** This could be:
 - A simple HTML page that shows the result visually
@@ -421,14 +421,14 @@ gsd-sdk query commit "docs(spikes): update conventions" --files .planning/spikes
 
 **Package findings** — wrap spike knowledge into an implementation blueprint
 
-`/gsd-spike --wrap-up`
+`/gsd:spike --wrap-up`
 
 ───────────────────────────────────────────────────────────────
 
 **Also available:**
-- `/gsd-spike` — spike more ideas (or run with no argument for frontier mode)
-- `/gsd-plan-phase` — start planning the real implementation
-- `/gsd-explore` — continue exploring the idea
+- `/gsd:spike` — spike more ideas (or run with no argument for frontier mode)
+- `/gsd:plan-phase` — start planning the real implementation
+- `/gsd:explore` — continue exploring the idea
 
 ───────────────────────────────────────────────────────────────
 </step>

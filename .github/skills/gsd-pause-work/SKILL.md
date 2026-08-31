@@ -2,7 +2,10 @@
 name: gsd-pause-work
 description: "Create context handoff when pausing work mid-phase"
 argument-hint: "[--report]"
-allowed-tools: Read, Write, Bash
+allowed-tools:
+  - Read
+  - Write
+  - Bash
 ---
 
 
@@ -18,7 +21,7 @@ Routes to the pause-work workflow which handles:
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/pause-work.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/pause-work.md
 </execution_context>
 
 <context>
@@ -27,7 +30,7 @@ State and phase progress are gathered in-workflow with targeted reads.
 
 <process>
 If `--report` is in $ARGUMENTS:
-Read and execute `.github/get-shit-done/workflows/session-report.md` end-to-end.
+Read and execute `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/session-report.md` end-to-end.
 
 **Follow the pause-work workflow**.
 
