@@ -2,7 +2,15 @@
 name: gsd-quick
 description: "Execute a quick task with GSD guarantees (atomic commits, state tracking) but skip optional agents"
 argument-hint: "[list | status <slug> | resume <slug> | --full] [--validate] [--discuss] [--research] [task description]"
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
+  - Bash
+  - Agent
+  - AskUserQuestion
 ---
 
 <objective>
@@ -32,7 +40,7 @@ Granular flags are composable: `--discuss --research --validate` gives the same 
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/quick.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/quick.md
 </execution_context>
 
 <context>
@@ -111,7 +119,7 @@ Status: {status from SUMMARY.md frontmatter, or "no summary yet"}
 Description: {first non-empty line from PLAN.md after frontmatter}
 Last action: {last meaningful line of SUMMARY.md, or "none"}
 ─────────────────────────────────────
-Resume with: /gsd-quick resume {slug}
+Resume with: /gsd:quick resume {slug}
 ```
 
 No agent spawn. STOP after printing.

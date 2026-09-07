@@ -5,7 +5,7 @@ Power user mode for discuss-phase. Generates ALL questions upfront into a JSON s
 </purpose>
 
 <trigger>
-This workflow executes when `--power` flag is present in ARGUMENTS to `/gsd-discuss-phase`.
+This workflow executes when `--power` flag is present in ARGUMENTS to `/gsd:discuss-phase`.
 
 The caller (discuss-phase.md) has already:
 - Validated the phase exists
@@ -149,7 +149,7 @@ The Save button writes the updated JSON back using the File System Access API if
 
 ```
 After answering, click "Save answers" — or download the JSON and replace the original file.
-Then return to the agent and say "refresh" to process your answers.
+Then return to Claude and say "refresh" to process your answers.
 ```
 
 **Answered question styling:**
@@ -188,7 +188,7 @@ When ready, tell me:
 </step>
 
 <step name="wait_loop">
-Enter wait mode. the agent listens for user commands and handles each:
+Enter wait mode. Claude listens for user commands and handles each:
 
 ---
 
@@ -265,7 +265,7 @@ Process all answered questions from the JSON file and generate CONTEXT.md.
 ```
 Warning: Only {answered}/{total} questions answered ({pct}%).
 CONTEXT.md generated with available decisions. Unanswered questions listed as deferred.
-Consider running /gsd-discuss-phase {N} again to refine before planning.
+Consider running /gsd:discuss-phase {N} again to refine before planning.
 ```
 
 7. Print completion message:
@@ -275,7 +275,7 @@ CONTEXT.md written: {phase_dir}/{padded_phase}-CONTEXT.md
   Decisions captured: {answered}
   Deferred:          {remaining}
 
-Next step: /gsd-plan-phase {N}
+Next step: /gsd:plan-phase {N}
 ```
 </step>
 

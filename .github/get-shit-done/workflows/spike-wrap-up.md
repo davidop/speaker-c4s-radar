@@ -1,8 +1,8 @@
 <purpose>
 Package spike experiment findings into a persistent project skill — an implementation blueprint
 for future build conversations. Reads from `.planning/spikes/`, writes skill to
-`./.github/skills/spike-findings-[project]/` (project-local) and summary to
-`.planning/spikes/WRAP-UP-SUMMARY.md`. Companion to `/gsd-spike`.
+`./.claude/skills/spike-findings-[project]/` (project-local) and summary to
+`.planning/spikes/WRAP-UP-SUMMARY.md`. Companion to `/gsd:spike`.
 </purpose>
 
 <required_reading>
@@ -24,14 +24,14 @@ Read all files referenced by the invoking prompt's execution_context before star
 
 1. Read `.planning/spikes/MANIFEST.md` for the overall idea context and requirements
 2. Glob `.planning/spikes/*/README.md` and parse YAML frontmatter from each
-3. Check if `./.github/skills/spike-findings-*/SKILL.md` exists for this project
+3. Check if `./.claude/skills/spike-findings-*/SKILL.md` exists for this project
    - If yes: read its `processed_spikes` list from the metadata section and filter those out
    - If no: all spikes are candidates
 
 If no unprocessed spikes exist:
 ```
 No unprocessed spikes found in `.planning/spikes/`.
-Run `/gsd-spike` first to create experiments.
+Run `/gsd:spike` first to create experiments.
 ```
 Exit.
 
@@ -73,7 +73,7 @@ Each group becomes one reference file in the generated skill.
 Derive the skill name from the project directory:
 
 1. Get the project root directory name (e.g., `solana-tracker`)
-2. The skill will be created at `./.github/skills/spike-findings-[project-dir-name]/`
+2. The skill will be created at `./.claude/skills/spike-findings-[project-dir-name]/`
 
 If a skill already exists at that path (append mode), update in place.
 </step>
@@ -183,7 +183,7 @@ Write `.planning/spikes/WRAP-UP-SUMMARY.md` for project history:
 **Date:** [date]
 **Spikes processed:** [count]
 **Feature areas:** [list]
-**Skill output:** `./.github/skills/spike-findings-[project]/`
+**Skill output:** `./.claude/skills/spike-findings-[project]/`
 
 ## Processed Spikes
 | # | Name | Type | Verdict | Feature Area |
@@ -195,9 +195,9 @@ Write `.planning/spikes/WRAP-UP-SUMMARY.md` for project history:
 </step>
 
 <step name="update_claude_md">
-## Update Project copilot-instructions.md
+## Update Project CLAUDE.md
 
-Add an auto-load routing line to the project's copilot-instructions.md (create the file if it doesn't exist):
+Add an auto-load routing line to the project's CLAUDE.md (create the file if it doesn't exist):
 
 ```
 - **Spike findings for [project]** (implementation patterns, constraints, gotchas) → `Skill("spike-findings-[project-dir-name]")`
@@ -258,10 +258,10 @@ gsd-sdk query commit "docs(spike-wrap-up): package [N] spike findings into proje
 
 **Processed:** {N} spikes
 **Feature areas:** {list}
-**Skill:** `./.github/skills/spike-findings-[project]/`
+**Skill:** `./.claude/skills/spike-findings-[project]/`
 **Conventions:** `.planning/spikes/CONVENTIONS.md`
 **Summary:** `.planning/spikes/WRAP-UP-SUMMARY.md`
-**copilot-instructions.md:** routing line added
+**CLAUDE.md:** routing line added
 
 The spike-findings skill will auto-load in future build conversations.
 ```
@@ -278,14 +278,14 @@ After the summary, present next-step options:
 
 **Explore frontier spikes** — see what else is worth spiking based on what we've learned
 
-`/gsd-spike` (run with no argument — its frontier mode analyzes the spike landscape and proposes integration and frontier spikes)
+`/gsd:spike` (run with no argument — its frontier mode analyzes the spike landscape and proposes integration and frontier spikes)
 
 ───────────────────────────────────────────────────────────────
 
 **Also available:**
-- `/gsd-plan-phase` — start planning the real implementation
-- `/gsd-spike [idea]` — spike a specific new idea
-- `/gsd-explore` — continue exploring
+- `/gsd:plan-phase` — start planning the real implementation
+- `/gsd:spike [idea]` — spike a specific new idea
+- `/gsd:explore` — continue exploring
 - Other
 
 ───────────────────────────────────────────────────────────────
@@ -296,11 +296,11 @@ After the summary, present next-step options:
 <success_criteria>
 - [ ] All unprocessed spikes auto-included and processed
 - [ ] Spikes grouped by feature area
-- [ ] Spike-findings skill exists at `./.github/skills/` with SKILL.md (including requirements), references/, sources/
+- [ ] Spike-findings skill exists at `./.claude/skills/` with SKILL.md (including requirements), references/, sources/
 - [ ] Reference files are implementation blueprints with Requirements, How to Build It, What to Avoid, Constraints
 - [ ] `.planning/spikes/CONVENTIONS.md` created or updated with recurring stack/structure/pattern choices
 - [ ] `.planning/spikes/WRAP-UP-SUMMARY.md` written for project history
-- [ ] Project copilot-instructions.md has auto-load routing line
+- [ ] Project CLAUDE.md has auto-load routing line
 - [ ] Summary presented
-- [ ] Next-step options presented (including frontier spike exploration via `/gsd-spike`)
+- [ ] Next-step options presented (including frontier spike exploration via `/gsd:spike`)
 </success_criteria>

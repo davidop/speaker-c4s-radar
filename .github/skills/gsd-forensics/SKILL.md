@@ -2,7 +2,12 @@
 name: gsd-forensics
 description: "Post-mortem investigation for failed GSD workflows — diagnoses what went wrong."
 argument-hint: "[problem description]"
-allowed-tools: Read, Write, Bash, Grep, Glob
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Grep
+  - Glob
 ---
 
 
@@ -14,7 +19,7 @@ Output: Forensic report saved to `.planning/forensics/`, presented inline, with 
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/forensics.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/forensics.md
 </execution_context>
 
 <context>
