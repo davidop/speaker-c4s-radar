@@ -11,8 +11,8 @@ This prevents the two most common AI development failures: choosing the wrong fr
 </purpose>
 
 <required_reading>
-@.github/get-shit-done/references/ai-frameworks.md
-@.github/get-shit-done/references/ai-evals.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ai-frameworks.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ai-evals.md
 </required_reading>
 
 <process>
@@ -43,11 +43,11 @@ AI_PHASE_ENABLED=$(gsd-sdk query config-get workflow.ai_integration_phase 2>/dev
 
 **If `AI_PHASE_ENABLED` is `false`:**
 ```
-AI phase is disabled in config. Enable via /gsd-settings.
+AI phase is disabled in config. Enable via /gsd:settings.
 ```
 Exit workflow.
 
-**If `planning_exists` is false:** Error — run `/gsd-new-project` first.
+**If `planning_exists` is false:** Error — run `/gsd:new-project` first.
 
 ## 2. Parse and Validate Phase
 
@@ -64,7 +64,7 @@ PHASE_INFO=$(gsd-sdk query roadmap.get-phase "${PHASE}")
 **If `has_context` is false:**
 ```
 No CONTEXT.md found for Phase {N}.
-Recommended: run /gsd-discuss-phase {N} first to capture framework preferences.
+Recommended: run /gsd:discuss-phase {N} first to capture framework preferences.
 Continuing without user decisions — framework selector will ask all questions.
 ```
 Continue (non-blocking).
@@ -76,7 +76,7 @@ AI_SPEC_FILE=$(ls "${PHASE_DIR}"/*-AI-SPEC.md 2>/dev/null | head -1)
 ```
 
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 **If exists:** Use AskUserQuestion:
 - header: "Existing AI-SPEC"
 - question: "AI-SPEC.md already exists for Phase {N}. What would you like to do?"
@@ -102,7 +102,7 @@ Display:
 
 Spawn `gsd-framework-selector` with:
 ```markdown
-Read .github/agents/gsd-framework-selector.md for instructions.
+Read $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/agents/gsd-framework-selector.md for instructions.
 
 <objective>
 Select the right AI framework for Phase {phase_number}: {phase_name}
@@ -122,13 +122,13 @@ Goal: {phase_goal}
 
 Parse selector output for: `primary_framework`, `system_type`, `model_provider`, `eval_concerns`, `alternative_framework`.
 
-**If selector fails or returns empty:** Exit with error — "Framework selection failed. Re-run /gsd-ai-integration-phase {N} or answer the framework question in /gsd-discuss-phase {N} first."
+**If selector fails or returns empty:** Exit with error — "Framework selection failed. Re-run /gsd:ai-integration-phase {N} or answer the framework question in /gsd:discuss-phase {N} first."
 
 ## 6. Initialize AI-SPEC.md
 
 Copy template:
 ```bash
-cp ".github/get-shit-done/templates/AI-SPEC.md" "${PHASE_DIR}/${PADDED_PHASE}-AI-SPEC.md"
+cp "$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/templates/AI-SPEC.md" "${PHASE_DIR}/${PADDED_PHASE}-AI-SPEC.md"
 ```
 
 Fill in header fields:
@@ -148,7 +148,7 @@ Display:
 
 Spawn `gsd-ai-researcher` with:
 ```markdown
-Read .github/agents/gsd-ai-researcher.md for instructions.
+Read $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/agents/gsd-ai-researcher.md for instructions.
 
 **Tool discipline (mandatory):**
 Use the Edit tool exclusively when modifying AI-SPEC.md — NEVER use Write on this file.
@@ -183,7 +183,7 @@ Display:
 
 Spawn `gsd-domain-researcher` with:
 ```markdown
-Read .github/agents/gsd-domain-researcher.md for instructions.
+Read $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/agents/gsd-domain-researcher.md for instructions.
 
 **Tool discipline (mandatory):**
 Use the Edit tool exclusively when modifying AI-SPEC.md — NEVER use Write on this file.
@@ -216,7 +216,7 @@ Display:
 
 Spawn `gsd-eval-planner` with:
 ```markdown
-Read .github/agents/gsd-eval-planner.md for instructions.
+Read $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/agents/gsd-eval-planner.md for instructions.
 
 <objective>
 Design evaluation strategy for Phase {phase_number}: {phase_name}
@@ -276,7 +276,7 @@ git commit -m "docs({phase_slug}): generate AI-SPEC.md — {primary_framework} +
 ◆ Output: {ai_spec_path}
 
 Next step:
-  /gsd-plan-phase {N}   — planner will consume AI-SPEC.md
+  /gsd:plan-phase {N}   — planner will consume AI-SPEC.md
 ```
 
 </process>

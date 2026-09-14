@@ -2,7 +2,14 @@
 name: gsd-plan-review-convergence
 description: "Cross-AI plan convergence loop — replan with review feedback until no HIGH concerns remain."
 argument-hint: "<phase> [--codex] [--gemini] [--claude] [--opencode] [--ollama] [--lm-studio] [--llama-cpp] [--text] [--ws <name>] [--all] [--max-cycles N]"
-allowed-tools: Read, Write, Bash, Glob, Grep, Agent, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - Grep
+  - Agent
+  - AskUserQuestion
 ---
 
 
@@ -18,10 +25,10 @@ Replaces gsd-plan-phase's internal gsd-plan-checker with external AI reviewers (
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/plan-review-convergence.md
-@.github/get-shit-done/references/revision-loop.md
-@.github/get-shit-done/references/gates.md
-@.github/get-shit-done/references/agent-contracts.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/plan-review-convergence.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/revision-loop.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/gates.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/agent-contracts.md
 </execution_context>
 
 <runtime_note>
@@ -34,7 +41,7 @@ Phase number: extracted from $ARGUMENTS (required)
 **Flags:**
 - `--codex` — Use Codex CLI as reviewer (default if no reviewer specified)
 - `--gemini` — Use Gemini CLI as reviewer
-- `--claude` — Use the agent CLI as reviewer (separate session)
+- `--claude` — Use Claude CLI as reviewer (separate session)
 - `--opencode` — Use OpenCode as reviewer
 - `--ollama` — Use local Ollama server as reviewer (OpenAI-compatible, default host `http://localhost:11434`; configure model via `review.models.ollama`)
 - `--lm-studio` — Use local LM Studio server as reviewer (OpenAI-compatible, default host `http://localhost:1234`; configure model via `review.models.lm_studio`)

@@ -2,7 +2,12 @@
 name: gsd-debug
 description: "Systematic debugging with persistent state across context resets"
 argument-hint: "[list | status <slug> | continue <slug> | --diagnose] [issue description]"
-allowed-tools: Read, Write, Bash, Agent, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Agent
+  - AskUserQuestion
 ---
 
 
@@ -24,7 +29,7 @@ Valid GSD subagent types (use exact names — do not fall back to 'general-purpo
 </available_agent_types>
 
 <execution_context>
-@.github/get-shit-done/workflows/debug.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/debug.md
 </execution_context>
 
 <context>

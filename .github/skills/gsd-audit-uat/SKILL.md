@@ -1,7 +1,11 @@
 ---
 name: gsd-audit-uat
 description: "Cross-phase audit of all outstanding UAT and verification items"
-allowed-tools: Read, Glob, Grep, Bash
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
+  - Bash
 ---
 
 <objective>
@@ -9,7 +13,7 @@ Scan all phases for pending, skipped, blocked, and human_needed UAT items. Cross
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/audit-uat.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/audit-uat.md
 </execution_context>
 
 <context>

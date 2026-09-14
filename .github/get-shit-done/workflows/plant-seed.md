@@ -1,6 +1,6 @@
 <purpose>
 Capture a forward-looking idea as a structured seed file with trigger conditions.
-Seeds auto-surface during /gsd-new-milestone when trigger conditions match the
+Seeds auto-surface during /gsd:new-milestone when trigger conditions match the
 new milestone's scope.
 
 Seeds beat deferred items because they:
@@ -82,17 +82,17 @@ scope: unknown
 
 ## Why This Matters
 
-_To be filled in. Run `/gsd-capture --seed --enrich SEED-{PADDED}` to add context._
+_To be filled in. Run `/gsd:capture --seed --enrich SEED-{PADDED}` to add context._
 
 ## When to Surface
 
 **Trigger:** when relevant
 
-This seed will surface during `/gsd-new-milestone` when the milestone scope matches.
+This seed will surface during `/gsd:new-milestone` when the milestone scope matches.
 
 ## Scope Estimate
 
-**Unknown** — run `/gsd-capture --seed --enrich SEED-{PADDED}` to estimate effort.
+**Unknown** — run `/gsd:capture --seed --enrich SEED-{PADDED}` to estimate effort.
 
 ## Breadcrumbs
 
@@ -146,10 +146,10 @@ gsd-sdk query commit "docs: plant seed — {$IDEA}" --files .planning/seeds/SEED
 "{$IDEA}"
 File: .planning/seeds/SEED-{PADDED}-{slug}.md
 
-Trigger and scope are set to defaults. Run `/gsd-capture --seed --enrich SEED-{PADDED}`
+Trigger and scope are set to defaults. Run `/gsd:capture --seed --enrich SEED-{PADDED}`
 to add trigger conditions, rationale, and scope estimate at your convenience.
 
-This seed will surface automatically when you run /gsd-new-milestone.
+This seed will surface automatically when you run /gsd:new-milestone.
 ```
 </step>
 
@@ -161,7 +161,7 @@ If `--enrich` flag is in `$ARGUMENTS`:
 - Ask focused questions to build a complete seed:
 
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 
 ```text
 AskUserQuestion(
