@@ -5,7 +5,7 @@ agent-skill injection (`agent_skills.<agent-type>`). Writes to
 `.planning/config.json` via `gsd-sdk`/`gsd-tools` so unrelated keys are
 preserved, never clobbered.
 
-This command is deliberately separate from `/gsd-settings` (workflow toggles)
+This command is deliberately separate from `/gsd:settings` (workflow toggles)
 and any `/gsd-settings-advanced` tuning surface. It exists because API keys and
 cross-tool routing are *connectivity* concerns, not workflow or tuning knobs.
 </purpose>
@@ -80,7 +80,7 @@ plaintext to stdout, stderr, or any log.
 
 **Text mode (`workflow.text_mode: true` or `--text` flag):** Set
 `TEXT_MODE=true` and replace every `AskUserQuestion` call with a plain-text
-numbered list. Required for non-the agent runtimes.
+numbered list. Required for non-Claude runtimes.
 
 Ask the user what they want to do for each search API key. For keys that are
 already set, show `**** already set` and offer Leave / Replace / Clear. For
@@ -157,7 +157,7 @@ AskUserQuestion([
     header: "CLI",
     multiSelect: false,
     options: [
-      { label: "the agent", description: "review.models.claude — defaults to session model when unset" },
+      { label: "Claude", description: "review.models.claude — defaults to session model when unset" },
       { label: "Codex", description: "review.models.codex — e.g. 'codex exec --model gpt-5'" },
       { label: "Gemini", description: "review.models.gemini — e.g. 'gemini -m gemini-2.5-pro'" },
       { label: "OpenCode", description: "review.models.opencode — e.g. 'opencode run --model claude-sonnet-4'" },
@@ -264,7 +264,7 @@ Notes:
   and not displayed in error messages.
 
 Quick commands:
-- /gsd-settings — workflow toggles and model profile
+- /gsd:settings — workflow toggles and model profile
 - /gsd-set-profile <profile> — switch model profile
 ```
 </step>

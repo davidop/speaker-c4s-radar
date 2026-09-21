@@ -42,15 +42,15 @@ Parse current values (default to `true` if not present):
 - `workflow.nyquist_validation` — validation architecture research during plan-phase (default: true if absent)
 - `workflow.pattern_mapper` — run gsd-pattern-mapper between research and planning (default: true if absent)
 - `workflow.ui_phase` — generate UI-SPEC.md design contracts for frontend phases (default: true if absent)
-- `workflow.ui_safety_gate` — prompt to run /gsd-ui-phase before planning frontend phases (default: true if absent)
+- `workflow.ui_safety_gate` — prompt to run /gsd:ui-phase before planning frontend phases (default: true if absent)
 - `workflow.ai_integration_phase` — framework selection + eval strategy for AI phases (default: true if absent)
 - `workflow.tdd_mode` — enforce RED/GREEN/REFACTOR gate sequence during execute-phase (default: false if absent)
-- `workflow.code_review` — enable /gsd-code-review and /gsd-code-review --fix commands (default: true if absent)
-- `workflow.code_review_depth` — default depth for /gsd-code-review: `quick`, `standard`, or `deep` (default: `"standard"` if absent; only relevant when `code_review` is on)
-- `workflow.ui_review` — run visual quality audit (/gsd-ui-review) in autonomous mode (default: true if absent)
+- `workflow.code_review` — enable /gsd:code-review and /gsd:code-review --fix commands (default: true if absent)
+- `workflow.code_review_depth` — default depth for /gsd:code-review: `quick`, `standard`, or `deep` (default: `"standard"` if absent; only relevant when `code_review` is on)
+- `workflow.ui_review` — run visual quality audit (/gsd:ui-review) in autonomous mode (default: true if absent)
 - `commit_docs` — whether `.planning/` files are committed to git (default: true if absent)
-- `intel.enabled` — enable queryable codebase intelligence (/gsd-map-codebase --query) (default: false if absent)
-- `graphify.enabled` — enable project knowledge graph (/gsd-graphify) (default: false if absent)
+- `intel.enabled` — enable queryable codebase intelligence (/gsd:map-codebase --query) (default: false if absent)
+- `graphify.enabled` — enable project knowledge graph (/gsd:graphify) (default: false if absent)
 - `model_profile` — which model each agent uses (default: `balanced`)
 - `git.branching_strategy` — branching approach (default: `"none"`)
 - `workflow.use_worktrees` — whether parallel executor agents run in worktree isolation (default: `true`)
@@ -58,9 +58,9 @@ Parse current values (default to `true` if not present):
 
 <step name="present_settings">
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 
-**Non-the agent runtime note:** If `TEXT_MODE` is active (i.e. the runtime is non-the agent), prepend the following notice before the model profile question:
+**Non-Claude runtime note:** If `TEXT_MODE` is active (i.e. the runtime is non-Claude), prepend the following notice before the model profile question:
 
 ```
 Note: Quality, Balanced, Budget, and Adaptive profiles assign semantic tiers
@@ -69,7 +69,7 @@ tiers resolve to runtime-native model IDs — on Codex that's gpt-5.4 / gpt-5.3-
 gpt-5.4-mini with appropriate reasoning effort. See "Runtime-Aware Profiles" in
 docs/CONFIGURATION.md.
 
-If `runtime` is unset on a non-the agent runtime, the profile tiers have no effect on
+If `runtime` is unset on a non-Claude runtime, the profile tiers have no effect on
 actual model selection — agents use the runtime's default model. Choose "Inherit" to
 force session-model behavior, set `runtime` + a profile to get tiered models, or
 configure `model_overrides` manually in .planning/config.json to target specific
@@ -107,10 +107,10 @@ AskUserQuestion([
     header: "Model",
     multiSelect: false,
     options: [
-      { label: "Quality", description: "Opus everywhere except verification (highest cost) — the agent only" },
-      { label: "Balanced (Recommended)", description: "Opus for planning, Sonnet for research/execution/verification — the agent only" },
-      { label: "Budget", description: "Sonnet for writing, Haiku for research/verification (lowest cost) — the agent only" },
-      { label: "Inherit", description: "Use current session model for all agents (required for non-the agent runtimes: Codex, Gemini CLI, OpenRouter, local models)" }
+      { label: "Quality", description: "Opus everywhere except verification (highest cost) — Claude only" },
+      { label: "Balanced (Recommended)", description: "Opus for planning, Sonnet for research/execution/verification — Claude only" },
+      { label: "Budget", description: "Sonnet for writing, Haiku for research/verification (lowest cost) — Claude only" },
+      { label: "Inherit", description: "Use current session model for all agents (required for non-Claude runtimes: Codex, Gemini CLI, OpenRouter, local models)" }
     ]
   },
   {
@@ -150,11 +150,11 @@ AskUserQuestion([
     ]
   },
   {
-    question: "Enable Code Review? (/gsd-code-review and /gsd-code-review --fix commands)",
+    question: "Enable Code Review? (/gsd:code-review and /gsd:code-review --fix commands)",
     header: "Code Review",
     multiSelect: false,
     options: [
-      { label: "Yes (Recommended)", description: "Enable /gsd-code-review commands for reviewing source files changed during a phase." },
+      { label: "Yes (Recommended)", description: "Enable /gsd:code-review commands for reviewing source files changed during a phase." },
       { label: "No", description: "Commands exit with a configuration gate message. Use when code review is handled externally." }
     ]
   },
@@ -162,7 +162,7 @@ AskUserQuestion([
   // chosen code_review value is "Yes". If code_review is "No", omit this question from
   // the AskUserQuestion call and do not touch the existing workflow.code_review_depth value.
   {
-    question: "Code Review Depth? (default depth for /gsd-code-review — override per-run with --depth=)",
+    question: "Code Review Depth? (default depth for /gsd:code-review — override per-run with --depth=)",
     header: "Review Depth",
     multiSelect: false,
     options: [
@@ -172,7 +172,7 @@ AskUserQuestion([
     ]
   },
   {
-    question: "Enable UI Review? (visual quality audit via /gsd-ui-review in autonomous mode)",
+    question: "Enable UI Review? (visual quality audit via /gsd:ui-review in autonomous mode)",
     header: "UI Review",
     multiSelect: false,
     options: [
@@ -219,11 +219,11 @@ AskUserQuestion([
     ]
   },
   {
-    question: "Enable UI Safety Gate? (prompts to run /gsd-ui-phase before planning frontend phases)",
+    question: "Enable UI Safety Gate? (prompts to run /gsd:ui-phase before planning frontend phases)",
     header: "UI Gate",
     multiSelect: false,
     options: [
-      { label: "Yes (Recommended)", description: "plan-phase asks to run /gsd-ui-phase first when frontend indicators detected." },
+      { label: "Yes (Recommended)", description: "plan-phase asks to run /gsd:ui-phase first when frontend indicators detected." },
       { label: "No", description: "No prompt — plan-phase proceeds without UI-SPEC check." }
     ]
   },
@@ -232,7 +232,7 @@ AskUserQuestion([
     header: "AI Phase",
     multiSelect: false,
     options: [
-      { label: "Yes (Recommended)", description: "Run /gsd-ai-integration-phase before planning AI system phases. Surfaces the right framework, researches its docs, and designs the evaluation strategy." },
+      { label: "Yes (Recommended)", description: "Run /gsd:ai-integration-phase before planning AI system phases. Surfaces the right framework, researches its docs, and designs the evaluation strategy." },
       { label: "No", description: "Skip AI design contract. Good for non-AI phases or when framework is already decided." }
     ]
   },
@@ -261,7 +261,7 @@ AskUserQuestion([
     multiSelect: false,
     options: [
       { label: "Yes (Recommended)", description: "Warn when context usage exceeds 65%. Helps avoid losing work." },
-      { label: "No", description: "Disable warnings. Allows the agent to reach auto-compact naturally. Good for long unattended runs." }
+      { label: "No", description: "Disable warnings. Allows Claude to reach auto-compact naturally. Good for long unattended runs." }
     ]
   },
   {
@@ -288,7 +288,7 @@ AskUserQuestion([
     multiSelect: false,
     options: [
       { label: "No (Recommended)", description: "Run smart discuss before each phase — surfaces gray areas and captures decisions." },
-      { label: "Yes", description: "Skip discuss in /gsd-autonomous — chain directly to plan. Best for backend/pipeline work where phase descriptions are the spec." }
+      { label: "Yes", description: "Skip discuss in /gsd:autonomous — chain directly to plan. Best for backend/pipeline work where phase descriptions are the spec." }
     ]
   },
   {
@@ -301,21 +301,21 @@ AskUserQuestion([
     ]
   },
   {
-    question: "Enable Intel? (queryable codebase intelligence via /gsd-map-codebase --query — builds a JSON index in .planning/intel/)",
+    question: "Enable Intel? (queryable codebase intelligence via /gsd:map-codebase --query — builds a JSON index in .planning/intel/)",
     header: "Intel",
     multiSelect: false,
     options: [
       { label: "No (Recommended)", description: "Skip intel indexing. Use when codebase is small or intel queries are not needed." },
-      { label: "Yes", description: "Enable /gsd-map-codebase --query commands. Builds and queries a JSON index of the codebase." }
+      { label: "Yes", description: "Enable /gsd:map-codebase --query commands. Builds and queries a JSON index of the codebase." }
     ]
   },
   {
-    question: "Enable Graphify? (project knowledge graph via /gsd-graphify — builds a graph in .planning/graphs/)",
+    question: "Enable Graphify? (project knowledge graph via /gsd:graphify — builds a graph in .planning/graphs/)",
     header: "Graphify",
     multiSelect: false,
     options: [
       { label: "No (Recommended)", description: "Skip knowledge graph. Use when dependency graphs are not needed." },
-      { label: "Yes", description: "Enable /gsd-graphify commands. Builds and queries a project knowledge graph." }
+      { label: "Yes", description: "Enable /gsd:graphify commands. Builds and queries a project knowledge graph." }
     ]
   }
 ])
@@ -465,15 +465,15 @@ Display:
 | Context Warnings     | {On/Off} |
 | Saved as Defaults    | {Yes/No} |
 
-These settings apply to future /gsd-plan-phase and /gsd-execute-phase runs.
+These settings apply to future /gsd:plan-phase and /gsd:execute-phase runs.
 
 Quick commands:
-- /gsd-config --integrations — configure API keys (Brave/Firecrawl/Exa), review.models CLI routing, and agent_skills injection
-- /gsd-config --profile <profile> — switch model profile
-- /gsd-plan-phase --research — force research
-- /gsd-plan-phase --skip-research — skip research
-- /gsd-plan-phase --skip-verify — skip plan check
-- /gsd-config --advanced — power-user tuning (plan bounce, timeouts, branch templates, cross-AI, context window)
+- /gsd:config --integrations — configure API keys (Brave/Firecrawl/Exa), review.models CLI routing, and agent_skills injection
+- /gsd:config --profile <profile> — switch model profile
+- /gsd:plan-phase --research — force research
+- /gsd:plan-phase --skip-research — skip research
+- /gsd:plan-phase --skip-verify — skip plan check
+- /gsd:config --advanced — power-user tuning (plan bounce, timeouts, branch templates, cross-AI, context window)
 ```
 </step>
 

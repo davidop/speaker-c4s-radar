@@ -2,7 +2,15 @@
 name: gsd-ingest-docs
 description: "Bootstrap or merge a .planning/ setup from existing ADRs, PRDs, SPECs, and docs in a repo."
 argument-hint: "[path] [--mode new|merge] [--manifest <file>] [--resolve auto|interactive]"
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion, Agent
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
+  - Agent
 ---
 
 
@@ -20,10 +28,10 @@ Auto-synthesizes most conflicts using the precedence rule `ADR > SPEC > PRD > DO
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/ingest-docs.md
-@.github/get-shit-done/references/ui-brand.md
-@.github/get-shit-done/references/gate-prompts.md
-@.github/get-shit-done/references/doc-conflict-engine.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/ingest-docs.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/gate-prompts.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/doc-conflict-engine.md
 </execution_context>
 
 <context>

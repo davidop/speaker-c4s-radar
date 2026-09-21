@@ -2,7 +2,13 @@
 name: gsd-spec-phase
 description: "Clarify WHAT a phase delivers with ambiguity scoring; produces a SPEC.md before discuss-phase."
 argument-hint: "<phase> [--auto] [--text]"
-allowed-tools: Read, Write, Bash, Glob, Grep, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
 ---
 
 
@@ -23,8 +29,8 @@ Clarify phase requirements through structured Socratic questioning with quantita
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/spec-phase.md
-@.github/get-shit-done/templates/spec.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/spec-phase.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/templates/spec.md
 </execution_context>
 
 <runtime_note>
@@ -35,7 +41,7 @@ Clarify phase requirements through structured Socratic questioning with quantita
 Phase number: $ARGUMENTS (required)
 
 **Flags:**
-- `--auto` — Skip interactive questions; the agent selects recommended defaults and writes SPEC.md
+- `--auto` — Skip interactive questions; Claude selects recommended defaults and writes SPEC.md
 - `--text` — Use plain-text numbered lists instead of TUI menus (required for `/rc` remote sessions)
 
 Context files are resolved in-workflow using `init phase-op`.
@@ -53,5 +59,5 @@ Execute end-to-end.
 - Gate passed: ambiguity ≤ 0.20 AND all dimension minimums met
 - SPEC.md written with falsifiable requirements, explicit boundaries, and acceptance criteria
 - SPEC.md committed atomically
-- User knows they can now run /gsd-discuss-phase which will load SPEC.md automatically
+- User knows they can now run /gsd:discuss-phase which will load SPEC.md automatically
 </success_criteria>

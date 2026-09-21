@@ -51,7 +51,7 @@ Display the full audit report to the user.
 Then ask:
 ```
 These items are open. Choose an action:
-[R] Resolve — stop and fix items, then re-run /gsd-complete-milestone
+[R] Resolve — stop and fix items, then re-run /gsd:complete-milestone
 [A] Acknowledge all — document as deferred and proceed with close
 [C] Cancel — exit without closing
 ```
@@ -124,7 +124,7 @@ Requirements: {N}/{M} v1 requirements checked off
 
 MUST present 3 options:
 1. **Proceed anyway** — mark milestone complete with known gaps
-2. **Run audit first** — `/gsd-audit-milestone` to assess gap severity
+2. **Run audit first** — `/gsd:audit-milestone` to assess gap severity
 3. **Abort** — return to development
 
 If user selects "Proceed anyway": note incomplete requirements in MILESTONES.md under `### Known Gaps` with REQ-IDs and descriptions.
@@ -430,7 +430,7 @@ Verify: `✅ Milestone archived to .planning/milestones/`
 **Phase archival (optional):** After archival completes, ask the user:
 
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 AskUserQuestion(header="Archive Phases", question="Archive phase directories to milestones/?", options: "Yes — move to milestones/v[X.Y]-phases/" | "Skip — keep phases in place")
 
 If "Yes": move phase directories to the milestone archive:
@@ -441,7 +441,7 @@ mv .planning/phases/{phase-dir} .planning/milestones/v[X.Y]-phases/
 ```
 Verify: `✅ Phase directories archived to .planning/milestones/v[X.Y]-phases/`
 
-If "Skip": Phase directories remain in `.planning/phases/` as raw execution history. Use `/gsd-cleanup` later to archive retroactively.
+If "Skip": Phase directories remain in `.planning/phases/` as raw execution history. Use `/gsd:cleanup` later to archive retroactively.
 
 After archival, the AI still handles:
 - Reorganizing ROADMAP.md with milestone grouping (requires judgment) — overwrite in place after extracting Backlog section
@@ -518,7 +518,7 @@ ls .planning/RETROSPECTIVE.md 2>/dev/null || true
 
 **If exists:** Read the file, append new milestone section before the "## Cross-Milestone Trends" section.
 
-**If doesn't exist:** Create from template at `.github/get-shit-done/templates/retrospective.md`.
+**If doesn't exist:** Create from template at `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/templates/retrospective.md`.
 
 **Gather retrospective data:**
 
@@ -793,7 +793,7 @@ Tag: v[X.Y]
 
 `/clear` then:
 
-`/gsd-new-milestone`
+`/gsd:new-milestone`
 
 ---
 ```
@@ -849,6 +849,6 @@ Milestone completion is successful when:
 - [ ] Known gaps recorded in MILESTONES.md if user proceeded with incomplete requirements
 - [ ] RETROSPECTIVE.md updated with milestone section
 - [ ] Cross-milestone trends updated
-- [ ] User knows next step (/gsd-new-milestone)
+- [ ] User knows next step (/gsd:new-milestone)
 
 </success_criteria>

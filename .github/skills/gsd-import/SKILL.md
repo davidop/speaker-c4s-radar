@@ -2,7 +2,15 @@
 name: gsd-import
 description: "Ingest external plans with conflict detection against project decisions before writing anything."
 argument-hint: "--from <filepath> | --from-gsd2"
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion, Agent
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
+  - Agent
 ---
 
 
@@ -14,10 +22,10 @@ Import external plan files into the GSD planning system with conflict detection 
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/import.md
-@.github/get-shit-done/references/ui-brand.md
-@.github/get-shit-done/references/gate-prompts.md
-@.github/get-shit-done/references/doc-conflict-engine.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/import.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/gate-prompts.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/doc-conflict-engine.md
 </execution_context>
 
 <context>
@@ -26,7 +34,7 @@ $ARGUMENTS
 
 <process>
 If `--from-gsd2` is in $ARGUMENTS:
-Run: `node ".github/get-shit-done/bin/gsd-tools.cjs" from-gsd2`
+Run: `node "$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/bin/gsd-tools.cjs" from-gsd2`
 Pass `--path <dir>` if provided. Present the migration result to the user.
 Stop here (do not run the standard import workflow).
 
