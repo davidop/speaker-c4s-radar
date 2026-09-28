@@ -2,7 +2,15 @@
 name: gsd-docs-update
 description: "Generate or update project documentation verified against the codebase"
 argument-hint: "[--force] [--verify-only]"
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - Agent
+  - AskUserQuestion
 ---
 
 <objective>
@@ -18,7 +26,7 @@ Flag handling rule:
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/docs-update.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/docs-update.md
 </execution_context>
 
 <context>

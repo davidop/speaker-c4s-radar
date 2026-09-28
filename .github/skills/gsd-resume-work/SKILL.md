@@ -1,7 +1,12 @@
 ---
 name: gsd-resume-work
 description: "Resume work from previous session with full context restoration"
-allowed-tools: Read, Bash, Write, AskUserQuestion, SlashCommand
+allowed-tools:
+  - Read
+  - Bash
+  - Write
+  - AskUserQuestion
+  - SlashCommand
 ---
 
 
@@ -18,7 +23,7 @@ Routes to the resume-project workflow which handles:
   </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/resume-project.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/resume-project.md
 </execution_context>
 
 <process>

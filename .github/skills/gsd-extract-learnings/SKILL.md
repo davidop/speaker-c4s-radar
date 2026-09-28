@@ -2,7 +2,13 @@
 name: gsd-extract-learnings
 description: "Extract decisions, lessons, patterns, and surprises from completed phase artifacts"
 argument-hint: "<phase-number>"
-allowed-tools: Read, Write, Bash, Grep, Glob, Agent
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Grep
+  - Glob
+  - Agent
 ---
 
 <objective>
@@ -10,7 +16,7 @@ Extract structured learnings from completed phase artifacts (PLAN.md, SUMMARY.md
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/extract-learnings.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/extract-learnings.md
 </execution_context>
 
-Execute the extract-learnings workflow from @.github/get-shit-done/workflows/extract-learnings.md end-to-end.
+Execute the extract-learnings workflow from @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/extract-learnings.md end-to-end.
