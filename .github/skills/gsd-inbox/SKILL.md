@@ -2,7 +2,13 @@
 name: gsd-inbox
 description: "Triage and review open GitHub issues and PRs against project templates and contribution guidelines."
 argument-hint: "[--issues] [--prs] [--label] [--close-incomplete] [--repo owner/repo]"
-allowed-tools: Read, Bash, Write, Grep, Glob, AskUserQuestion
+allowed-tools:
+  - Read
+  - Bash
+  - Write
+  - Grep
+  - Glob
+  - AskUserQuestion
 ---
 
 <objective>
@@ -15,7 +21,7 @@ and optionally applies labels or closes non-compliant submissions.
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/inbox.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/inbox.md
 </execution_context>
 
 <context>

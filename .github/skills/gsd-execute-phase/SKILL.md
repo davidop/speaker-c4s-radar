@@ -2,7 +2,16 @@
 name: gsd-execute-phase
 description: "Execute all plans in a phase with wave-based parallelization"
 argument-hint: "<phase-number> [--wave N] [--gaps-only] [--interactive] [--tdd]"
-allowed-tools: Read, Write, Edit, Glob, Grep, Bash, Agent, TodoWrite, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Glob
+  - Grep
+  - Bash
+  - Agent
+  - TodoWrite
+  - AskUserQuestion
 ---
 
 <objective>
@@ -23,8 +32,8 @@ Context budget: ~15% orchestrator, 100% fresh per subagent.
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/execute-phase.md
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/execute-phase.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <runtime_note>

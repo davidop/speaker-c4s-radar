@@ -2,7 +2,18 @@
 name: gsd-sketch
 description: "Sketch UI/design ideas with throwaway HTML mockups, or propose what to sketch next (frontier mode)"
 argument-hint: "[design idea to explore] [--quick] [--text] [--wrap-up] or [frontier]"
-allowed-tools: Read, Write, Edit, Bash, Grep, Glob, AskUserQuestion, WebSearch, WebFetch, mcp__context7__resolve-library-id, mcp__context7__query-docs
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Grep
+  - Glob
+  - AskUserQuestion
+  - WebSearch
+  - WebFetch
+  - mcp__context7__resolve-library-id
+  - mcp__context7__query-docs
 ---
 
 <objective>
@@ -19,13 +30,13 @@ Does not require prior new-project setup — auto-creates `.planning/sketches/` 
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/sketch.md
-@.github/get-shit-done/workflows/sketch-wrap-up.md
-@.github/get-shit-done/references/ui-brand.md
-@.github/get-shit-done/references/sketch-theme-system.md
-@.github/get-shit-done/references/sketch-interactivity.md
-@.github/get-shit-done/references/sketch-tooling.md
-@.github/get-shit-done/references/sketch-variant-patterns.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/sketch.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/sketch-wrap-up.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/sketch-theme-system.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/sketch-interactivity.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/sketch-tooling.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/sketch-variant-patterns.md
 </execution_context>
 
 <runtime_note>

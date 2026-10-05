@@ -2,7 +2,11 @@
 name: gsd-phase
 description: "CRUD for phases in ROADMAP.md — add, insert, remove, or edit phases"
 argument-hint: "[--insert | --remove | --edit] <phase-name-or-number>"
-allowed-tools: Read, Write, Bash, Glob
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
 ---
 
 
@@ -28,10 +32,10 @@ Mode routing:
 </routing>
 
 <execution_context>
-@.github/get-shit-done/workflows/add-phase.md
-@.github/get-shit-done/workflows/insert-phase.md
-@.github/get-shit-done/workflows/remove-phase.md
-@.github/get-shit-done/workflows/edit-phase.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/add-phase.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/insert-phase.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/remove-phase.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/edit-phase.md
 </execution_context>
 
 <context>

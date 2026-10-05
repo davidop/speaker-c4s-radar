@@ -1,7 +1,9 @@
 ---
 name: gsd-ns-context
 description: "codebase intelligence | map graphify docs learnings"
-allowed-tools: Read, Skill
+allowed-tools:
+  - Read
+  - Skill
 ---
 
 

@@ -2,7 +2,15 @@
 name: gsd-manager
 description: "Interactive command center for managing multiple phases from one terminal"
 argument-hint: "[--analyze-deps]"
-allowed-tools: Read, Write, Bash, Glob, Grep, AskUserQuestion, Skill, Agent
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
+  - Skill
+  - Agent
 ---
 
 <objective>
@@ -18,8 +26,8 @@ Designed for power users who want to parallelize work across phases from one ter
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/manager.md
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/manager.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <context>
@@ -30,7 +38,7 @@ Project context, phase list, dependencies, and recommendations are resolved insi
 
 <process>
 If `--analyze-deps` is in $ARGUMENTS:
-Read and execute `.github/get-shit-done/workflows/analyze-dependencies.md` end-to-end.
+Read and execute `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/analyze-dependencies.md` end-to-end.
 
 Execute end-to-end.
 Maintain the dashboard refresh loop until the user exits or all phases complete.

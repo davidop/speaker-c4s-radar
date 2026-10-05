@@ -2,7 +2,15 @@
 name: gsd-add-tests
 description: "Generate tests for a completed phase based on UAT criteria and implementation"
 argument-hint: "<phase> [additional instructions]"
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, Agent, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - Agent
+  - AskUserQuestion
 ---
 
 <objective>
@@ -14,7 +22,7 @@ Output: Test files committed with message `test(phase-{N}): add unit and E2E tes
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/add-tests.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/add-tests.md
 </execution_context>
 
 <context>

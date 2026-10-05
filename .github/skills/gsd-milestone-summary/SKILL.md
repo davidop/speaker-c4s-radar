@@ -2,7 +2,12 @@
 name: gsd-milestone-summary
 description: "Generate a comprehensive project summary from milestone artifacts for team onboarding and review"
 argument-hint: "[version]"
-allowed-tools: Read, Write, Bash, Grep, Glob
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Grep
+  - Glob
 ---
 
 
@@ -14,7 +19,7 @@ Output: MILESTONE_SUMMARY written to `.planning/reports/`, presented inline, opt
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/milestone-summary.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/milestone-summary.md
 </execution_context>
 
 <context>
