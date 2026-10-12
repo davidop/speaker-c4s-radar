@@ -2,7 +2,13 @@
 name: gsd-progress
 description: "Check progress, advance workflow, or dispatch freeform intent — the unified GSD situational command"
 argument-hint: "[--forensic | --next | --do \\\"task description\\\"]"
-allowed-tools: Read, Bash, Grep, Glob, SlashCommand, AskUserQuestion
+allowed-tools:
+  - Read
+  - Bash
+  - Grep
+  - Glob
+  - SlashCommand
+  - AskUserQuestion
 ---
 
 <objective>
@@ -23,10 +29,10 @@ Three modes:
 </flags>
 
 <execution_context>
-@.github/get-shit-done/workflows/progress.md
-@.github/get-shit-done/workflows/next.md
-@.github/get-shit-done/workflows/do.md
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/progress.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/next.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/do.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <process>

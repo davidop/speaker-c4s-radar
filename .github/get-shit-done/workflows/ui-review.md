@@ -3,7 +3,7 @@ Retroactive 6-pillar visual audit of implemented frontend code. Standalone comma
 </purpose>
 
 <required_reading>
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </required_reading>
 
 <available_agent_types>
@@ -42,10 +42,10 @@ UI_SPEC_FILE=$(ls "${PHASE_DIR}"/*-UI-SPEC.md 2>/dev/null | head -1)
 UI_REVIEW_FILE=$(ls "${PHASE_DIR}"/*-UI-REVIEW.md 2>/dev/null | head -1)
 ```
 
-**If `SUMMARY_FILES` empty:** Exit — "Phase {N} not executed. Run /gsd-execute-phase {N} first."
+**If `SUMMARY_FILES` empty:** Exit — "Phase {N} not executed. Run /gsd:execute-phase {N} first."
 
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 **If `UI_REVIEW_FILE` non-empty:** Use AskUserQuestion:
 - header: "Existing UI Review"
 - question: "UI-REVIEW.md already exists for Phase {N}."
@@ -73,7 +73,7 @@ Build file list for auditor:
 Build prompt:
 
 ```markdown
-Read .github/agents/gsd-ui-auditor.md for instructions.
+Read $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/agents/gsd-ui-auditor.md for instructions.
 
 <objective>
 Conduct 6-pillar visual audit of Phase {phase_number}: {phase_name}
@@ -144,11 +144,11 @@ Full review: {path to UI-REVIEW.md}
 
 `/clear` then one of:
 
-- `/gsd-verify-work {N}` — UAT testing
-- `/gsd-plan-phase {N+1}` — plan next phase
+- `/gsd:verify-work {N}` — UAT testing
+- `/gsd:plan-phase {N+1}` — plan next phase
 
-- `/gsd-verify-work {N}` — UAT testing
-- `/gsd-plan-phase {N+1}` — plan next phase
+- `/gsd:verify-work {N}` — UAT testing
+- `/gsd:plan-phase {N+1}` — plan next phase
 
 ───────────────────────────────────────────────────────────────
 ```

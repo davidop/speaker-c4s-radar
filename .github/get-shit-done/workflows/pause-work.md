@@ -1,5 +1,5 @@
 <purpose>
-Create structured `.planning/HANDOFF.json` and `.continue-here.md` handoff files to preserve complete work state across sessions. The JSON provides machine-readable state for `/gsd-resume-work`; the markdown provides human-readable context.
+Create structured `.planning/HANDOFF.json` and `.continue-here.md` handoff files to preserve complete work state across sessions. The JSON provides machine-readable state for `/gsd:resume-work`; the markdown provides human-readable context.
 </purpose>
 
 <required_reading>
@@ -197,7 +197,7 @@ Start with: [specific first action when resuming]
 </next_action>
 ```
 
-Be specific enough for a fresh the agent to understand immediately.
+Be specific enough for a fresh Claude to understand immediately.
 
 Use `current-timestamp` for last_updated field. You can use init todos (which provides timestamps) or call directly:
 ```bash
@@ -226,7 +226,7 @@ Current state:
 - Blockers: [count] ({human_actions_pending count} need human action)
 - Committed as WIP
 
-To resume: /gsd-resume-work
+To resume: /gsd:resume-work
 
 ```
 </step>

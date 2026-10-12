@@ -1,7 +1,9 @@
 ---
 name: gsd-ns-workflow
 description: "workflow | discuss plan execute verify phase progress"
-allowed-tools: Read, Skill
+allowed-tools:
+  - Read
+  - Skill
 ---
 
 
