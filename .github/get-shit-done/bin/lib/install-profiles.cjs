@@ -25,7 +25,7 @@
  *  - mostRestrictiveProfile: resolve multi-runtime disagreement to smallest set
  *
  * Companion module (Phase 2): get-shit-done/bin/lib/surface.cjs owns the
- * runtime /gsd-surface command. It reuses stageSkillsForProfile and
+ * runtime /gsd:surface command. It reuses stageSkillsForProfile and
  * stageAgentsForProfile from this module for cluster-level enable/disable
  * without reinstall, persisting state in <runtimeConfigDir>/.gsd-surface.json.
  *
@@ -382,7 +382,7 @@ const PROFILE_MARKER_NAME = '.gsd-profile';
 /**
  * Read the active profile from a runtime config directory.
  *
- * @param {string} runtimeConfigDir absolute path (e.g. .github/skills)
+ * @param {string} runtimeConfigDir absolute path (e.g. ~/.claude/skills)
  * @returns {string|null} profile name (e.g. 'core', 'standard', 'core,audit') or null
  */
 function readActiveProfile(runtimeConfigDir) {
@@ -401,7 +401,7 @@ function readActiveProfile(runtimeConfigDir) {
 /**
  * Persist the active profile to a runtime config directory.
  *
- * @param {string} runtimeConfigDir absolute path (e.g. .github/skills)
+ * @param {string} runtimeConfigDir absolute path (e.g. ~/.claude/skills)
  * @param {string} profileName e.g. 'core', 'standard', 'full'
  */
 function writeActiveProfile(runtimeConfigDir, profileName) {
@@ -460,7 +460,7 @@ function mostRestrictiveProfile(profileNames) {
  *
  * @param {object} opts
  * @param {string|null} opts.requestedProfileName explicit flag value (or null)
- * @param {string} opts.targetDir runtime config dir (e.g. .github)
+ * @param {string} opts.targetDir runtime config dir (e.g. ~/.claude)
  * @returns {string} profile name, e.g. 'core', 'standard', 'full'
  */
 function resolveEffectiveProfile({ requestedProfileName, targetDir }) {

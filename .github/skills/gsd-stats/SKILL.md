@@ -1,7 +1,9 @@
 ---
 name: gsd-stats
 description: "Display project statistics — phases, plans, requirements, git metrics, and timeline"
-allowed-tools: Read, Bash
+allowed-tools:
+  - Read
+  - Bash
 ---
 
 <objective>
@@ -9,7 +11,7 @@ Display comprehensive project statistics including phase progress, plan executio
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/stats.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/stats.md
 </execution_context>
 
 <process>
