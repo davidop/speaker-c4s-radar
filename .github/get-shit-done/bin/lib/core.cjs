@@ -58,7 +58,7 @@ function detectSubRepos(cwd) {
 /**
  * Walk up from `startDir` to find the project root that owns `.planning/`.
  *
- * In multi-repo workspaces, the agent may open inside a sub-repo (e.g. `backend/`)
+ * In multi-repo workspaces, Claude may open inside a sub-repo (e.g. `backend/`)
  * instead of the project root. This function prevents `.planning/` from being
  * created inside the sub-repo by locating the nearest ancestor that already has
  * a `.planning/` directory.
@@ -300,12 +300,12 @@ const CONFIG_DEFAULTS = {
   exa_search: false,
   text_mode: false, // when true, use plain-text numbered lists instead of AskUserQuestion menus
   sub_repos: [],
-  resolve_model_ids: false, // false: return alias as-is | true: map to full the agent model ID | "omit": return '' (runtime uses its default)
+  resolve_model_ids: false, // false: return alias as-is | true: map to full Claude model ID | "omit": return '' (runtime uses its default)
   context_window: 200000, // default 200k; set to 1000000 for Opus/Sonnet 4.6 1M models
   phase_naming: 'sequential', // 'sequential' (default, auto-increment) or 'custom' (arbitrary string IDs)
   project_code: null, // optional short prefix for phase dirs (e.g., 'CK' → 'CK-01-foundation')
   subagent_timeout: 300000, // 5 min default; increase for large codebases or slower models (ms)
-  security_enforcement: true, // workflow.security_enforcement — threat-model-anchored security verification via /gsd-secure-phase
+  security_enforcement: true, // workflow.security_enforcement — threat-model-anchored security verification via /gsd:secure-phase
   security_asvs_level: 1, // workflow.security_asvs_level — OWASP ASVS verification level (1=opportunistic, 2=standard, 3=comprehensive)
   security_block_on: 'high', // workflow.security_block_on — minimum severity that blocks phase advancement ('high' | 'medium' | 'low')
   post_planning_gaps: true, // workflow.post_planning_gaps — unified post-planning gap report (#2493): scan REQUIREMENTS.md + CONTEXT.md decisions vs all PLAN.md files
@@ -1226,7 +1226,7 @@ function _warnUnknownProfileOverrides(parsed, configLabel) {
       _warnedConfigKeys.add(key);
       try {
         process.stderr.write(
-          `gsd- warning — config key "runtime" has unknown value "${runtime}". ` +
+          `gsd: warning — config key "runtime" has unknown value "${runtime}". ` +
           `Known runtimes: ${[...KNOWN_RUNTIMES].sort().join(', ')}. ` +
           `Resolution will fall back to safe defaults. (#2517)\n`
         );
@@ -1243,7 +1243,7 @@ function _warnUnknownProfileOverrides(parsed, configLabel) {
         _warnedConfigKeys.add(key);
         try {
           process.stderr.write(
-            `gsd- warning — model_profile_overrides.${overrideRuntime}.* uses ` +
+            `gsd: warning — model_profile_overrides.${overrideRuntime}.* uses ` +
             `unknown runtime "${overrideRuntime}". Known runtimes: ` +
             `${[...KNOWN_RUNTIMES].sort().join(', ')}. (#2517)\n`
           );
@@ -1258,7 +1258,7 @@ function _warnUnknownProfileOverrides(parsed, configLabel) {
           _warnedConfigKeys.add(key);
           try {
             process.stderr.write(
-              `gsd- warning — model_profile_overrides.${overrideRuntime}.${tierName} ` +
+              `gsd: warning — model_profile_overrides.${overrideRuntime}.${tierName} ` +
               `uses unknown tier "${tierName}". Allowed tiers: opus, sonnet, haiku. (#2517)\n`
             );
           } catch { /* ok */ }
@@ -1370,9 +1370,9 @@ function resolveModelInternal(cwd, agentType) {
       : (agentModels ? (agentModels[profile] || agentModels['balanced']) : null));
 
   // 3. Runtime-aware resolution (#2517) — only when `runtime` is explicitly set
-  // to a non-the agent runtime. `runtime: "claude"` is the implicit default and is
+  // to a non-Claude runtime. `runtime: "claude"` is the implicit default and is
   // treated as a no-op here so it does not silently override `resolve_model_ids:
-  // "omit"` (review finding #4). Deliberate ordering for non-the agent runtimes:
+  // "omit"` (review finding #4). Deliberate ordering for non-Claude runtimes:
   // explicit opt-in beats `resolve_model_ids: "omit"` so users on Codex installs
   // that auto-set "omit" can still flip on tiered behavior by setting runtime
   // alone. Gate on tier !== 'inherit' (not profile !== 'inherit') so a
@@ -1386,8 +1386,8 @@ function resolveModelInternal(cwd, agentType) {
   }
 
   // 4. resolve_model_ids: "omit" — return empty string so the runtime uses its
-  // configured default model. For non-the agent runtimes (OpenCode, Codex, etc.) that
-  // don't recognize the agent aliases. Set automatically during install. See #1156.
+  // configured default model. For non-Claude runtimes (OpenCode, Codex, etc.) that
+  // don't recognize Claude aliases. Set automatically during install. See #1156.
   if (config.resolve_model_ids === 'omit') {
     return '';
   }
@@ -1407,7 +1407,7 @@ function resolveModelInternal(cwd, agentType) {
   // resolves to a string. Keep the local for readability — no defensive fallback.
   const alias = tier;
 
-  // resolve_model_ids: true — map alias to full the agent model ID.
+  // resolve_model_ids: true — map alias to full Claude model ID.
   // Prevents 404s when the Task tool passes aliases directly to the API.
   if (config.resolve_model_ids) {
     return MODEL_ALIAS_MAP[alias] || alias;
@@ -1512,7 +1512,7 @@ function resolveModelForTier(cwd, agentType, attempt) {
  *   - profile is not 'inherit',
  *   - the resolved tier entry has a `reasoning_effort` value.
  *
- * Never returns a value for the agent — keeps reasoning_effort out of the agent spawn paths.
+ * Never returns a value for Claude — keeps reasoning_effort out of Claude spawn paths.
  */
 function resolveReasoningEffortInternal(cwd, agentType) {
   const config = loadConfig(cwd);
@@ -1521,7 +1521,7 @@ function resolveReasoningEffortInternal(cwd, agentType) {
   // install path actually accepts it. Adding a new runtime here is the only
   // way to enable effort propagation — overrides cannot bypass the gate.
   // Without this, a typo in `runtime` (e.g. `"codx"`) plus a user override
-  // for that typo would leak `xhigh` into a the agent or unknown install
+  // for that typo would leak `xhigh` into a Claude or unknown install
   // (review finding #3).
   if (!RUNTIMES_WITH_REASONING_EFFORT.has(config.runtime)) return null;
   // Per-agent override means user supplied a fully-qualified ID; reasoning_effort

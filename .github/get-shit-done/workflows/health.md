@@ -43,7 +43,7 @@ model's own session telemetry). If the runtime exposes neither, prompt the user
 once via AskUserQuestion for both numbers.
 
 **TEXT_MODE fallback:** when `text_mode` is true (config or `--text` flag) the
-runtime is non-the agent (Codex, Gemini, etc.) and `AskUserQuestion` is not
+runtime is non-Claude (Codex, Gemini, etc.) and `AskUserQuestion` is not
 available — replace the prompt with a plain-text two-question sequence
 ("Approximate tokens used? Context window size?") and read the answers as
 plain text from the user's response.
@@ -101,10 +101,10 @@ Errors: N | Warnings: N | Info: N
 ## Errors
 
 - [E001] config.json: JSON parse error at line 5
-  Fix: Run /gsd-health --repair to reset to defaults
+  Fix: Run /gsd:health --repair to reset to defaults
 
 - [E002] PROJECT.md not found
-  Fix: Run /gsd-new-project to create
+  Fix: Run /gsd:new-project to create
 ```
 
 **If warnings exist:**
@@ -129,7 +129,7 @@ Errors: N | Warnings: N | Info: N
 **Footer (if repairable issues exist and --repair was NOT used):**
 ```
 ---
-N issues can be auto-repaired. Run: /gsd-health --repair
+N issues can be auto-repaired. Run: /gsd:health --repair
 ```
 </step>
 
@@ -139,7 +139,7 @@ N issues can be auto-repaired. Run: /gsd-health --repair
 Ask user if they want to run repairs:
 
 ```
-Would you like to run /gsd-health --repair to fix N issues automatically?
+Would you like to run /gsd:health --repair to fix N issues automatically?
 ```
 
 If yes, re-run with --repair flag and display results.
@@ -208,13 +208,13 @@ When `--repair` is active, detect and clean up:
 
 ```bash
 # Check for stale task directories (older than 24 hours)
-TASKS_DIR=".github/tasks"
+TASKS_DIR="$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/tasks"
 if [ -d "$TASKS_DIR" ]; then
   STALE_COUNT=$( (find "$TASKS_DIR" -maxdepth 1 -type d -mtime +1 2>/dev/null || true) | wc -l )
   if [ "$STALE_COUNT" -gt 0 ]; then
-    echo "⚠️  Found $STALE_COUNT stale task directories in .github/tasks/"
+    echo "⚠️  Found $STALE_COUNT stale task directories in $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/tasks/"
     echo "   These are leftover from crashed subagent sessions."
-    echo "   Run: rm -rf .github/tasks/*  (safe — only affects dead sessions)"
+    echo "   Run: rm -rf $HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/tasks/*  (safe — only affects dead sessions)"
   fi
 fi
 ```

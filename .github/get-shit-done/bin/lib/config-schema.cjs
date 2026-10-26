@@ -79,7 +79,7 @@ const VALID_CONFIG_KEYS = new Set([
   'claude_md_assembly.mode',
   // #2517 — runtime-aware model profiles
   'runtime',
-  // #3162 — documented top-level key: controls model ID resolution for non-the agent runtimes
+  // #3162 — documented top-level key: controls model ID resolution for non-Claude runtimes
   'resolve_model_ids',
 ]);
 
