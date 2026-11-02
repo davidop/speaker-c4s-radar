@@ -119,7 +119,7 @@ function getGlobalConfigDir(runtime) {
       return path.join(home, '.config', 'kilo');
     }
 
-    // ── Default (the agent fallback) ─────────────────────────────────────────────
+    // ── Default (Claude fallback) ─────────────────────────────────────────────
     default:
       return env.CLAUDE_CONFIG_DIR ? expandTilde(env.CLAUDE_CONFIG_DIR) : path.join(home, '.claude');
   }

@@ -64,7 +64,7 @@ Each task gets its own commit immediately after completion.
 > **Parallel agents:** When running as a parallel executor (spawned by execute-phase),
 > run commits normally — let pre-commit hooks run. Do NOT pass `--no-verify` by default
 > (#2924). Hooks should fire on the introducing commit; silent bypass violates project
-> copilot-instructions.md guidance. If a project explicitly opts out via
+> CLAUDE.md guidance. If a project explicitly opts out via
 > `workflow.worktree_skip_hooks=true`, the orchestrator surfaces that flag in the
 > executor prompt; absent that signal, hooks run normally.
 
@@ -232,14 +232,14 @@ Each plan produces 2-4 commits (tasks + metadata). Clear, granular, bisectable.
 ## Why Per-Task Commits?
 
 **Context engineering for AI:**
-- Git history becomes primary context source for future the agent sessions
+- Git history becomes primary context source for future Claude sessions
 - `git log --grep="{phase}-{plan}"` shows all work for a plan
 - `git diff <hash>^..<hash>` shows exact changes per task
 - Less reliance on parsing SUMMARY.md = more context for actual work
 
 **Failure recovery:**
 - Task 1 committed ✅, Task 2 failed ❌
-- the agent in next session: sees task 1 complete, can retry task 2
+- Claude in next session: sees task 1 complete, can retry task 2
 - Can `git reset --hard` to last successful task
 
 **Debugging:**
@@ -248,9 +248,9 @@ Each plan produces 2-4 commits (tasks + metadata). Clear, granular, bisectable.
 - Each commit is independently revertable
 
 **Observability:**
-- Solo developer + the agent workflow benefits from granular attribution
+- Solo developer + Claude workflow benefits from granular attribution
 - Atomic commits are git best practice
-- "Commit noise" irrelevant when consumer is the agent, not humans
+- "Commit noise" irrelevant when consumer is Claude, not humans
 
 </commit_strategy_rationale>
 
@@ -277,7 +277,7 @@ Set `commit_docs: false` so planning docs stay local and are not committed to an
 
 ### How It Works
 
-1. **Auto-detection:** During `/gsd-new-project`, directories with their own `.git` folder are detected and offered for selection as sub-repos. On subsequent runs, `loadConfig` auto-syncs the `sub_repos` list with the filesystem — adding newly created repos and removing deleted ones. This means `config.json` may be rewritten automatically when repos change on disk.
+1. **Auto-detection:** During `/gsd:new-project`, directories with their own `.git` folder are detected and offered for selection as sub-repos. On subsequent runs, `loadConfig` auto-syncs the `sub_repos` list with the filesystem — adding newly created repos and removing deleted ones. This means `config.json` may be rewritten automatically when repos change on disk.
 2. **File grouping:** Code files are grouped by their sub-repo prefix (e.g., `backend/src/api/users.ts` belongs to the `backend/` repo).
 3. **Independent commits:** Each sub-repo receives its own atomic commit via `gsd-tools.cjs commit-to-subrepo`. File paths are made relative to the sub-repo root before staging.
 4. **Planning stays local:** The `.planning/` directory is not committed; it acts as cross-repo coordination.

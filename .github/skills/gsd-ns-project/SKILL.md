@@ -1,7 +1,9 @@
 ---
 name: gsd-ns-project
 description: "project lifecycle | milestones audits summary"
-allowed-tools: Read, Skill
+allowed-tools:
+  - Read
+  - Skill
 ---
 
 

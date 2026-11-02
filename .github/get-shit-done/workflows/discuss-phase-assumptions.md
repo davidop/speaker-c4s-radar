@@ -77,7 +77,7 @@ Parse JSON for: `commit_docs`, `phase_found`, `phase_dir`, `phase_number`, `phas
 ```
 Phase [X] not found in roadmap.
 
-Use /gsd-progress to see available phases.
+Use /gsd:progress to see available phases.
 ```
 Exit workflow.
 
@@ -236,7 +236,7 @@ keeps raw file contents out of the main context window, protecting token budget.
 **Resolve calibration tier (if USER-PROFILE.md exists):**
 
 ```bash
-PROFILE_PATH=".github/get-shit-done/USER-PROFILE.md"
+PROFILE_PATH="$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/USER-PROFILE.md"
 ```
 
 If file exists at PROFILE_PATH:
@@ -441,7 +441,7 @@ Map assumptions to CONTEXT.md sections:
 ### {Area Name 2}
 - **D-03:** {Decision}
 
-### the agent's Discretion
+### Claude's Discretion
 {Any assumptions where the user confirmed "you decide" or left as-is with Likely confidence}
 
 ### Folded Todos
@@ -524,7 +524,7 @@ Write audit trail of assumptions and corrections.
 {If corrections were made:}
 
 ### {Area Name}
-- **Original assumption:** {what the agent assumed}
+- **Original assumption:** {what Claude assumed}
 - **User correction:** {what the user chose instead}
 - **Reason:** {user's rationale, if provided}
 
@@ -603,13 +603,13 @@ Created: .planning/phases/${PADDED_PHASE}-${SLUG}/${PADDED_PHASE}-CONTEXT.md
 
 `/clear` then:
 
-`/gsd-plan-phase ${PHASE}`
+`/gsd:plan-phase ${PHASE}`
 
 ---
 
 **Also available:**
-- `/gsd-plan-phase ${PHASE} --skip-research` — plan without research
-- `/gsd-ui-phase ${PHASE}` — generate UI design contract (if frontend work)
+- `/gsd:plan-phase ${PHASE} --skip-research` — plan without research
+- `/gsd:ui-phase ${PHASE}` — generate UI design contract (if frontend work)
 - Review/edit CONTEXT.md before continuing
 
 ---
