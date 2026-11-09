@@ -5,9 +5,9 @@ You are a thinking partner, not an interviewer. The user is the visionary — yo
 </purpose>
 
 <required_reading>
-@.github/get-shit-done/references/domain-probes.md
-@.github/get-shit-done/references/gate-prompts.md
-@.github/get-shit-done/references/universal-anti-patterns.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/domain-probes.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/gate-prompts.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/universal-anti-patterns.md
 </required_reading>
 
 <progressive_disclosure>
@@ -44,7 +44,7 @@ Do not Read mode files unless the corresponding flag/condition is set.
 </downstream_awareness>
 
 <philosophy>
-**User = founder/visionary. the agent = builder.**
+**User = founder/visionary. Claude = builder.**
 
 The user knows: how they imagine it working, what it should look/feel like, what's essential vs nice-to-have, specific behaviors or references they have in mind.
 
@@ -89,7 +89,7 @@ Phase: "CLI for database backups"→ Output format, Flag design, Progress report
 Phase: "API documentation"       → Structure/navigation, Code examples depth, Versioning approach, Interactive elements
 ```
 
-**the agent handles these (don't ask):** technical implementation details, architecture patterns, performance optimization, scope (roadmap defines this).
+**Claude handles these (don't ask):** technical implementation details, architecture patterns, performance optimization, scope (roadmap defines this).
 </gray_area_identification>
 
 <answer_validation>
@@ -103,7 +103,7 @@ Phase: "API documentation"       → Structure/navigation, Code examples depth, 
 
 <process>
 
-**Express path available:** If you already have a PRD or acceptance criteria document, use `/gsd-plan-phase {phase} --prd path/to/prd.md` to skip this discussion and go straight to planning.
+**Express path available:** If you already have a PRD or acceptance criteria document, use `/gsd:plan-phase {phase} --prd path/to/prd.md` to skip this discussion and go straight to planning.
 
 <step name="initialize" priority="first">
 Phase number from argument (required).
@@ -121,7 +121,7 @@ Parse JSON for: `commit_docs`, `phase_found`, `phase_dir`, `phase_number`, `phas
 **If `phase_found` is false:**
 ```
 Phase [X] not found in roadmap.
-Use /gsd-progress ${GSD_WS} to see available phases.
+Use /gsd:progress ${GSD_WS} to see available phases.
 ```
 Exit workflow.
 
@@ -129,7 +129,7 @@ Exit workflow.
 
 ```bash
 # Detect advisor mode (file-existence guard — no Read until needed)
-if [ -f ".github/get-shit-done/USER-PROFILE.md" ]; then
+if [ -f "$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/USER-PROFILE.md" ]; then
   ADVISOR_MODE=true
 else
   ADVISOR_MODE=false
@@ -172,7 +172,7 @@ Write these answers inline before continuing. If a blocking anti-pattern cannot 
 </step>
 
 <step name="check_spec">
-Check if a SPEC.md (from `/gsd-spec-phase`) exists for this phase. SPEC.md locks requirements before implementation decisions.
+Check if a SPEC.md (from `/gsd:spec-phase`) exists for this phase. SPEC.md locks requirements before implementation decisions.
 
 ```bash
 ls ${phase_dir}/*-SPEC.md 2>/dev/null | grep -v AI-SPEC | head -1 || true
@@ -187,7 +187,7 @@ ls ${phase_dir}/*-SPEC.md 2>/dev/null | grep -v AI-SPEC | head -1 || true
 
 **If no SPEC.md is found:** Continue with `spec_loaded = false`.
 
-**Note:** SPEC.md files named `AI-SPEC.md` (from `/gsd-ai-integration-phase`) are excluded — different purpose.
+**Note:** SPEC.md files named `AI-SPEC.md` (from `/gsd:ai-integration-phase`) are excluded — different purpose.
 </step>
 
 <step name="check_existing">
@@ -244,15 +244,15 @@ For each CONTEXT.md read: extract `<decisions>` (locked preferences), `<specific
 
 **Spike/sketch findings:** Check for project-local skills:
 ```bash
-SPIKE_FINDINGS=$(ls ./.github/skills/spike-findings-*/SKILL.md 2>/dev/null | head -1 || true)
-SKETCH_FINDINGS=$(ls ./.github/skills/sketch-findings-*/SKILL.md 2>/dev/null | head -1 || true)
+SPIKE_FINDINGS=$(ls ./.claude/skills/spike-findings-*/SKILL.md 2>/dev/null | head -1 || true)
+SKETCH_FINDINGS=$(ls ./.claude/skills/sketch-findings-*/SKILL.md 2>/dev/null | head -1 || true)
 RAW_SPIKES=$(ls .planning/spikes/MANIFEST.md 2>/dev/null)
 RAW_SKETCHES=$(ls .planning/sketches/MANIFEST.md 2>/dev/null)
 ```
 
 If findings skills exist, read SKILL.md and reference files; extract validated patterns, landmines, constraints, design decisions. Add them to `<prior_decisions>`.
 
-If raw spikes/sketches exist but no findings skill, note: `⚠ Unpackaged spikes/sketches detected — run /gsd-spike --wrap-up or /gsd-sketch --wrap-up to make findings available.`
+If raw spikes/sketches exist but no findings skill, note: `⚠ Unpackaged spikes/sketches detected — run /gsd:spike --wrap-up or /gsd:sketch --wrap-up to make findings available.`
 
 Build internal `<prior_decisions>` with sections for Project-Level (from PROJECT.md / REQUIREMENTS.md), From Prior Phases (per-phase decisions), and From Spike/Sketch Findings (validated patterns, landmines, design decisions).
 
@@ -280,7 +280,7 @@ Parse JSON for: `todo_count`, `matches[]` (each with `file`, `title`, `area`, `s
 <step name="scout_codebase">
 Lightweight scan of existing code to inform gray area identification (~10% context).
 
-Read `@.github/get-shit-done/references/scout-codebase.md` — it contains the phase-type→map selection table, single-read rule, no-maps fallback, and `<codebase_context>` output schema. Then execute:
+Read `@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/scout-codebase.md` — it contains the phase-type→map selection table, single-read rule, no-maps fallback, and `<codebase_context>` output schema. Then execute:
 1. `ls .planning/codebase/*.md` to find existing maps
 2. Select 2–3 maps via the reference's table; or grep fallback if none exist
 3. Build internal `<codebase_context>` per the reference's output schema
@@ -346,7 +346,7 @@ Continue to `discuss_areas` with selected areas (or to `advisor_research` per `m
 Discussion behavior is defined by the active mode file(s):
 
 - **Advisor mode (ADVISOR_MODE = true):** follow `workflows/discuss-phase/modes/advisor.md` — research-backed comparison tables, table-first selection.
-- **--auto:** follow `workflows/discuss-phase/modes/auto.md` — the agent picks recommended option for every question; no AskUserQuestion. Single-pass cap enforced.
+- **--auto:** follow `workflows/discuss-phase/modes/auto.md` — Claude picks recommended option for every question; no AskUserQuestion. Single-pass cap enforced.
 - **Default (no flags):** follow `workflows/discuss-phase/modes/default.md` — 4 single-question turns per area, then check whether to continue.
 
 Overlays (combine with the active mode):
@@ -420,11 +420,11 @@ Created: .planning/phases/${PADDED_PHASE}-${SLUG}/${PADDED_PHASE}-CONTEXT.md
 
 `/clear` then:
 
-`/gsd-plan-phase ${PHASE} ${GSD_WS}`
+`/gsd:plan-phase ${PHASE} ${GSD_WS}`
 
 ---
 
-**Also available:** `--chain` for auto plan+execute after; `/gsd-plan-phase ${PHASE} --skip-research ${GSD_WS}` to plan without research; `/gsd-ui-phase ${PHASE} ${GSD_WS}` for UI design contracts; review/edit CONTEXT.md before continuing.
+**Also available:** `--chain` for auto plan+execute after; `/gsd:plan-phase ${PHASE} --skip-research ${GSD_WS}` to plan without research; `/gsd:ui-phase ${PHASE} ${GSD_WS}` for UI design contracts; review/edit CONTEXT.md before continuing.
 ```
 </step>
 
@@ -438,7 +438,7 @@ Created: .planning/phases/${PADDED_PHASE}-${SLUG}/${PADDED_PHASE}-CONTEXT.md
 Read(workflows/discuss-phase/templates/discussion-log.md)
 ```
 
-Substitute live values from the discussion log accumulator (area names, options presented, user selections, notes, deferred ideas, the agent's discretion items). Write the file.
+Substitute live values from the discussion log accumulator (area names, options presented, user selections, notes, deferred ideas, Claude's discretion items). Write the file.
 
 **Clean up checkpoint file** — CONTEXT.md is now the canonical record:
 ```bash

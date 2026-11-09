@@ -8,7 +8,7 @@
 ## Dispatch
 
 ```
-Read @.github/get-shit-done/workflows/discuss-phase-power.md
+Read @$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/discuss-phase-power.md
 ```
 
 Execute it end-to-end. Do not continue with the standard interactive steps.

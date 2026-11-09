@@ -2,7 +2,13 @@
 name: gsd-audit-milestone
 description: "Audit milestone completion against original intent before archiving"
 argument-hint: "[version]"
-allowed-tools: Read, Glob, Grep, Bash, Agent, Write
+allowed-tools:
+  - Read
+  - Glob
+  - Grep
+  - Bash
+  - Agent
+  - Write
 ---
 
 <objective>
@@ -12,7 +18,7 @@ Verify milestone achieved its definition of done. Check requirements coverage, c
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/audit-milestone.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/audit-milestone.md
 </execution_context>
 
 <context>

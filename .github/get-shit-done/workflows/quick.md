@@ -41,7 +41,7 @@ After parsing, normalize: if `$DISCUSS_MODE` and `$RESEARCH_MODE` and `$VALIDATE
 If `$DESCRIPTION` is empty after parsing, prompt user interactively:
 
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 
 ```
 AskUserQuestion(
@@ -126,13 +126,13 @@ If `$VALIDATE_MODE` only:
 
 ```bash
 if ! command -v gsd-sdk &>/dev/null; then
-  echo "⚠ gsd-sdk not found in PATH — /gsd-quick requires it."
+  echo "⚠ gsd-sdk not found in PATH — /gsd:quick requires it."
   echo ""
   echo "Install the query-capable GSD SDK CLI:"
   echo "  npm install -g get-shit-done-cc"
   echo ""
   echo "Or update GSD to get the latest packages:"
-  echo "  /gsd-update"
+  echo "  /gsd:update"
   exit 1
 fi
 ```
@@ -170,7 +170,7 @@ fi
 
 Quick mode does not have a pre-declared `files_modified` list (the task is freeform), so use a fail-loud guard at commit time: when the executor stages files for the quick-task commit, if any staged path falls inside a `SUBMODULE_PATHS` entry, abort with a clear error explaining that worktree-isolated commits cannot safely span submodule boundaries — the user can re-run with `workflow.use_worktrees=false` to fall back to sequential execution on the main tree. If `SUBMODULE_PATHS` is empty (no `.gitmodules` in the repo), worktree isolation proceeds normally.
 
-**If `roadmap_exists` is false:** Error — Quick mode requires an active project with ROADMAP.md. Run `/gsd-new-project` first.
+**If `roadmap_exists` is false:** Error — Quick mode requires an active project with ROADMAP.md. Run `/gsd:new-project` first.
 
 Quick tasks can run mid-phase - validation only checks ROADMAP.md exists, not phase status.
 
@@ -315,7 +315,7 @@ AskUserQuestion(
     { label: "${concrete_choice_1}", description: "${what_this_means}" },
     { label: "${concrete_choice_2}", description: "${what_this_means}" },
     { label: "${concrete_choice_3}", description: "${what_this_means}" },
-    { label: "You decide", description: "the agent's discretion" }
+    { label: "You decide", description: "Claude's discretion" }
   ],
   multiSelect: false
 )
@@ -325,7 +325,7 @@ Rules:
 - Options must be concrete choices, not abstract categories
 - Highlight recommended choice where you have a clear opinion
 - If user selects "Other" with freeform text, switch to plain text follow-up (per questioning.md freeform rule)
-- If user selects "You decide", capture as the agent's Discretion in CONTEXT.md
+- If user selects "You decide", capture as Claude's Discretion in CONTEXT.md
 - Max 2 questions per area — this is lightweight, not a deep dive
 
 Collect all decisions into `$DECISIONS`.
@@ -356,7 +356,7 @@ ${DESCRIPTION}
 ### ${area_2_name}
 - ${decision_from_discussion}
 
-### the agent's Discretion
+### Claude's Discretion
 ${areas_where_user_said_you_decide_or_areas_not_discussed}
 
 </decisions>
@@ -413,7 +413,7 @@ Agent(
 <files_to_read>
 - .planning/STATE.md (Project state — what's already built)
 - .planning/PROJECT.md (Project context)
-- ./copilot-instructions.md (if exists — project-specific guidelines)
+- ./CLAUDE.md (if exists — project-specific guidelines)
 ${DISCUSS_MODE ? '- ' + QUICK_DIR + '/' + quick_id + '-CONTEXT.md (User decisions — research should align with these)' : ''}
 </files_to_read>
 
@@ -470,14 +470,14 @@ Agent(
 
 <files_to_read>
 - .planning/STATE.md (Project State)
-- ./copilot-instructions.md (if exists — follow project-specific guidelines)
+- ./CLAUDE.md (if exists — follow project-specific guidelines)
 ${DISCUSS_MODE ? '- ' + QUICK_DIR + '/' + quick_id + '-CONTEXT.md (User decisions — locked, do not revisit)' : ''}
 ${RESEARCH_MODE ? '- ' + QUICK_DIR + '/' + quick_id + '-RESEARCH.md (Research findings — use to inform implementation choices)' : ''}
 </files_to_read>
 
 ${AGENT_SKILLS_PLANNER}
 
-**Project skills:** Check .github/skills/ or .agents/skills/ directory (if either exists) — read SKILL.md files, plans should account for project skill rules
+**Project skills:** Check .claude/skills/ or .agents/skills/ directory (if either exists) — read SKILL.md files, plans should account for project skill rules
 
 </planning_context>
 
@@ -710,8 +710,8 @@ This corrects a known issue where EnterWorktree creates branches from main inste
 <files_to_read>
 - ${QUICK_DIR}/${quick_id}-PLAN.md (Plan)
 - .planning/STATE.md (Project state)
-- ./copilot-instructions.md (Project instructions, if exists)
-- .github/skills/ or .agents/skills/ (Project skills, if either exists — list skills, read SKILL.md for each, follow relevant rules during implementation)
+- ./CLAUDE.md (Project instructions, if exists)
+- .claude/skills/ or .agents/skills/ (Project skills, if either exists — list skills, read SKILL.md for each, follow relevant rules during implementation)
 </files_to_read>
 
 ${AGENT_SKILLS_EXECUTOR}
@@ -789,7 +789,7 @@ After executor returns:
 
    # Find worktrees recorded by the executor manifest only.
    # Inclusion-based filter (#2774): match ONLY agent-spawned worktrees under
-   # `.github/worktrees/agent-` (the namespace Claude Code's `isolation="worktree"`
+   # `.claude/worktrees/agent-` (the namespace Claude Code's `isolation="worktree"`
    # uses). The previous exclusion filter (`grep -v "$(pwd)$"`) destroyed the parent
    # workspace's `.git` whenever the workspace itself was a worktree (multi-workspace
    # setups, and the cross-drive Windows case where `git worktree list` reports the
@@ -1128,7 +1128,7 @@ Commit: ${commit_hash}
 
 ---
 
-Ready for next task: /gsd-quick ${GSD_WS}
+Ready for next task: /gsd:quick ${GSD_WS}
 ```
 
 **If NOT `$VALIDATE_MODE`:**
@@ -1145,7 +1145,7 @@ Commit: ${commit_hash}
 
 ---
 
-Ready for next task: /gsd-quick ${GSD_WS}
+Ready for next task: /gsd:quick ${GSD_WS}
 ```
 
 </process>
