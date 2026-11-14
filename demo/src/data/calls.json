@@ -1,6 +1,25 @@
 [
   {
     "id": "cfs-001",
+    "name": "Power Platform World Tour 2026 — Buenos Aires",
+    "community": "Microsoft Power Community (Sessionize)",
+    "deadline": "2026-05-10",
+    "city": "Buenos Aires, Argentina",
+    "format": "Hybrid",
+    "tags": [
+      "Power Platform",
+      "Power Automate",
+      "Copilot Studio",
+      "Low Code"
+    ],
+    "status": "Rejected",
+    "proposalId": "p-001",
+    "audience": "Power Users, citizen developers y equipos de negocio.",
+    "source": "https://sessionize.com/power-platform-world-tour/",
+    "deadlineConfidence": "estimated"
+  },
+  {
+    "id": "cfs-002",
     "name": "Azure AI Foundry: Construyendo agentes con MCP",
     "community": "Microsoft Reactor Madrid",
     "deadline": "2026-06-03",
@@ -19,7 +38,7 @@
     "deadlineConfidence": "exact"
   },
   {
-    "id": "cfs-002",
+    "id": "cfs-003",
     "name": "GitHub Universe 2026 — Call for Speakers",
     "community": "GitHub (Sessionize)",
     "deadline": "2026-06-15",
@@ -38,7 +57,7 @@
     "deadlineConfidence": "estimated"
   },
   {
-    "id": "cfs-003",
+    "id": "cfs-004",
     "name": "DotNetConf LATAM 2026",
     "community": "DotNet Foundation (Sessionize)",
     "deadline": "2026-07-01",
@@ -57,7 +76,7 @@
     "deadlineConfidence": "estimated"
   },
   {
-    "id": "cfs-004",
+    "id": "cfs-005",
     "name": "DevOps Days España 2026",
     "community": "DevOps Days España (Sessionize)",
     "deadline": "2026-07-20",
@@ -76,7 +95,7 @@
     "deadlineConfidence": "estimated"
   },
   {
-    "id": "cfs-005",
+    "id": "cfs-006",
     "name": "Global Azure AI Community Day",
     "community": "Microsoft Azure Community (Sessionize)",
     "deadline": "2026-08-01",
@@ -95,7 +114,7 @@
     "deadlineConfidence": "estimated"
   },
   {
-    "id": "cfs-006",
+    "id": "cfs-007",
     "name": "GitHub Constellation Madrid 2026",
     "community": "GitHub Community (Meetup)",
     "deadline": "2026-08-15",
@@ -112,25 +131,6 @@
     "audience": "Comunidad developer de Madrid: contributors, maintainers y tech leads.",
     "source": "https://github.com/community",
     "deadlineConfidence": "exact"
-  },
-  {
-    "id": "cfs-007",
-    "name": "Power Platform World Tour 2026 — Buenos Aires",
-    "community": "Microsoft Power Community (Sessionize)",
-    "deadline": "2026-05-10",
-    "city": "Buenos Aires, Argentina",
-    "format": "Hybrid",
-    "tags": [
-      "Power Platform",
-      "Power Automate",
-      "Copilot Studio",
-      "Low Code"
-    ],
-    "status": "Rejected",
-    "proposalId": "p-001",
-    "audience": "Power Users, citizen developers y equipos de negocio.",
-    "source": "https://sessionize.com/power-platform-world-tour/",
-    "deadlineConfidence": "estimated"
   },
   {
     "id": "cfs-008",
