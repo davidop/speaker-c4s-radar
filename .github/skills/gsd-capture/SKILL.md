@@ -2,7 +2,14 @@
 name: gsd-capture
 description: "Capture ideas, tasks, notes, and seeds to their destination"
 argument-hint: "[--note | --backlog | --seed | --list] [text]"
-allowed-tools: Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Glob
+  - Grep
+  - AskUserQuestion
 ---
 
 
@@ -30,12 +37,12 @@ Mode routing:
 </routing>
 
 <execution_context>
-@.github/get-shit-done/workflows/add-todo.md
-@.github/get-shit-done/workflows/note.md
-@.github/get-shit-done/workflows/add-backlog.md
-@.github/get-shit-done/workflows/plant-seed.md
-@.github/get-shit-done/workflows/check-todos.md
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/add-todo.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/note.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/add-backlog.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/plant-seed.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/check-todos.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <context>

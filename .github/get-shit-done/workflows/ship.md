@@ -151,7 +151,7 @@ CUSTOM_PR_SECTIONS=$(gsd-sdk query config-get ship.pr_body_sections --default '[
 
 `ship.pr_body_sections` is an onboarding-time extension point for teams that need extra PRD-style sections such as `User Stories & Acceptance Criteria`, `Risks & Dependencies`, `Success Metrics`, `Release Criteria`, or `Stakeholder Review & Approval`.
 
-Use these sections for lean/agile PRD material that should travel with the PR without making the core `/gsd-ship` body configurable:
+Use these sections for lean/agile PRD material that should travel with the PR without making the core `/gsd:ship` body configurable:
 
 - User stories and acceptance criteria that explain the functional increment from the user's point of view.
 - Definition of Done or release criteria that make the completion standard explicit.
@@ -277,7 +277,7 @@ If `REVIEW_CMD` is non-empty and not `"null"`, run the external review:
 Ask if user wants to trigger a code review:
 
 
-**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-the agent runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
+**Text mode (`workflow.text_mode: true` in config or `--text` flag):** Set `TEXT_MODE=true` if `--text` is present in `$ARGUMENTS` OR `text_mode` from init JSON is `true`. When TEXT_MODE is active, replace every `AskUserQuestion` call with a plain-text numbered list and ask the user to type their choice number. This is required for non-Claude runtimes (OpenAI Codex, Gemini CLI, etc.) where `AskUserQuestion` is not available.
 
 ```
 AskUserQuestion:
@@ -329,8 +329,8 @@ Requirements: {N} REQ-IDs addressed
 Next steps:
 - Review/approve PR
 - Merge when CI passes
-- /gsd-complete-milestone (if last phase in milestone)
-- /gsd-progress (to see what's next)
+- /gsd:complete-milestone (if last phase in milestone)
+- /gsd:progress (to see what's next)
 
 ───────────────────────────────────────────────────────────────
 ```
@@ -341,9 +341,9 @@ Next steps:
 <offer_next>
 After shipping:
 
-- /gsd-complete-milestone — if all phases in milestone are done
-- /gsd-progress — see overall project state
-- /gsd-execute-phase {next} — continue to next phase
+- /gsd:complete-milestone — if all phases in milestone are done
+- /gsd:progress — see overall project state
+- /gsd:execute-phase {next} — continue to next phase
 </offer_next>
 
 <success_criteria>

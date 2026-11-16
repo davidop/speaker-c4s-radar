@@ -2,7 +2,12 @@
 name: gsd-new-project
 description: "Initialize a new project with deep context gathering and PROJECT.md"
 argument-hint: "[--auto]"
-allowed-tools: Read, Bash, Write, Agent, AskUserQuestion
+allowed-tools:
+  - Read
+  - Bash
+  - Write
+  - Agent
+  - AskUserQuestion
 ---
 
 <runtime_note>
@@ -25,15 +30,15 @@ Initialize a new project through unified flow: questioning → research (optiona
 - `.planning/ROADMAP.md` — phase structure
 - `.planning/STATE.md` — project memory
 
-**After this command:** Run `/gsd-plan-phase 1` to start execution.
+**After this command:** Run `/gsd:plan-phase 1` to start execution.
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/new-project.md
-@.github/get-shit-done/references/questioning.md
-@.github/get-shit-done/references/ui-brand.md
-@.github/get-shit-done/templates/project.md
-@.github/get-shit-done/templates/requirements.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/new-project.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/questioning.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/templates/project.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/templates/requirements.md
 </execution_context>
 
 <process>

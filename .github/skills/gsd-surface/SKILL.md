@@ -2,12 +2,15 @@
 name: gsd-surface
 description: "Toggle which skills are surfaced — apply a profile, list, or disable a cluster without reinstall"
 argument-hint: "[list|status|profile <name>|disable <cluster>|enable <cluster>|reset]"
-allowed-tools: Read, Write, Bash
+allowed-tools:
+  - Read
+  - Write
+  - Bash
 ---
 
 
 <objective>
-Manage the runtime skill surface without reinstall. Reads/writes `.github/skills/.gsd-surface.json`
+Manage the runtime skill surface without reinstall. Reads/writes `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/skills/.gsd-surface.json`
 (sibling to `.gsd-profile`) and re-stages the active commands/gsd directory in place.
 
 Sub-commands: list · status · profile · disable · enable · reset
@@ -101,11 +104,11 @@ Valid cluster names: `core_loop`, `audit_review`, `milestone`, `research_ideate`
 
 ```bash
 # Claude Code
-RUNTIME_CONFIG_DIR=.github/skills
+RUNTIME_CONFIG_DIR=$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/skills
 
 # Resolve commandsDir and agentsDir
-COMMANDS_DIR=.github/commands/gsd
-AGENTS_DIR=.github/agents
+COMMANDS_DIR=$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/commands/gsd
+AGENTS_DIR=$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/agents
 ```
 
 All paths can be overridden by reading the `CLAUDE_CONFIG_DIR` env var if set.
@@ -119,8 +122,8 @@ All paths can be overridden by reading the `CLAUDE_CONFIG_DIR` env var if set.
 - Missing `surface.cjs` → prompt: "Run `npm i -g get-shit-done` to reinstall GSD."
 
 <execution_context>
-Surface state file: `.github/skills/.gsd-surface.json`
-Install profile marker: `.github/skills/.gsd-profile`
-Engine module: `.github/get-shit-done/bin/lib/surface.cjs`
-Cluster definitions: `.github/get-shit-done/bin/lib/clusters.cjs`
+Surface state file: `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/skills/.gsd-surface.json`
+Install profile marker: `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/skills/.gsd-profile`
+Engine module: `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/bin/lib/surface.cjs`
+Cluster definitions: `$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/bin/lib/clusters.cjs`
 </execution_context>
