@@ -2,7 +2,17 @@
 name: gsd-ai-integration-phase
 description: "Generate an AI-SPEC.md design contract for phases that involve building AI systems."
 argument-hint: "[phase number]"
-allowed-tools: Read, Write, Bash, Glob, Grep, Agent, WebFetch, WebSearch, AskUserQuestion, mcp__context7__*
+allowed-tools:
+  - Read
+  - Write
+  - Bash
+  - Glob
+  - Grep
+  - Agent
+  - WebFetch
+  - WebSearch
+  - AskUserQuestion
+  - mcp__context7__*
 ---
 
 <objective>
@@ -12,9 +22,9 @@ Flow: Select Framework → Research Docs → Research Domain → Design Eval Str
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/ai-integration-phase.md
-@.github/get-shit-done/references/ai-frameworks.md
-@.github/get-shit-done/references/ai-evals.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/ai-integration-phase.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ai-frameworks.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ai-evals.md
 </execution_context>
 
 <context>

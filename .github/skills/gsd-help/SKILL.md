@@ -1,7 +1,8 @@
 ---
 name: gsd-help
 description: "Show available GSD commands and usage guide"
-allowed-tools: Read
+allowed-tools:
+  - Read
 ---
 
 <objective>
@@ -15,7 +16,7 @@ Output ONLY the reference content below. Do NOT add:
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/help.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/help.md
 </execution_context>
 
 <process>

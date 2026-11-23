@@ -1,8 +1,8 @@
 <purpose>
 Curate sketch design findings and package them into a persistent project skill for future
-UI implementation. Reads from `.planning/sketches/`, writes skill to `./.github/skills/sketch-findings-[project]/`
+UI implementation. Reads from `.planning/sketches/`, writes skill to `./.claude/skills/sketch-findings-[project]/`
 (project-local) and summary to `.planning/sketches/WRAP-UP-SUMMARY.md`.
-Companion to `/gsd-sketch`.
+Companion to `/gsd:sketch`.
 </purpose>
 
 <required_reading>
@@ -24,14 +24,14 @@ Read all files referenced by the invoking prompt's execution_context before star
 
 1. Read `.planning/sketches/MANIFEST.md` for the design direction and reference points
 2. Glob `.planning/sketches/*/README.md` and parse YAML frontmatter from each
-3. Check if `./.github/skills/sketch-findings-*/SKILL.md` exists for this project
+3. Check if `./.claude/skills/sketch-findings-*/SKILL.md` exists for this project
    - If yes: read its `processed_sketches` list and filter those out
    - If no: all sketches are candidates
 
 If no unprocessed sketches exist:
 ```
 No unprocessed sketches found in `.planning/sketches/`.
-Run `/gsd-sketch` first to create design explorations.
+Run `/gsd:sketch` first to create design explorations.
 ```
 Exit.
 
@@ -93,7 +93,7 @@ Each group becomes one reference file in the generated skill.
 <step name="skill_name">
 ## Determine Output Skill Name
 
-Derive from the project directory name: `./.github/skills/sketch-findings-[project-dir-name]/`
+Derive from the project directory name: `./.claude/skills/sketch-findings-[project-dir-name]/`
 
 If a skill already exists at that path (append mode), update in place.
 </step>
@@ -198,7 +198,7 @@ Write `.planning/sketches/WRAP-UP-SUMMARY.md` for project history:
 **Date:** [date]
 **Sketches processed:** [count]
 **Design areas:** [list]
-**Skill output:** `./.github/skills/sketch-findings-[project]/`
+**Skill output:** `./.claude/skills/sketch-findings-[project]/`
 
 ## Included Sketches
 | # | Name | Winner | Design Area |
@@ -217,7 +217,7 @@ Write `.planning/sketches/WRAP-UP-SUMMARY.md` for project history:
 </step>
 
 <step name="update_claude_md">
-## Update Project copilot-instructions.md
+## Update Project CLAUDE.md
 
 Add an auto-load routing line:
 
@@ -244,9 +244,9 @@ gsd-sdk query commit "docs(sketch-wrap-up): package [N] sketch findings into pro
 
 **Curated:** {N} sketches ({included} included, {excluded} excluded)
 **Design areas:** {list}
-**Skill:** `./.github/skills/sketch-findings-[project]/`
+**Skill:** `./.claude/skills/sketch-findings-[project]/`
 **Summary:** `.planning/sketches/WRAP-UP-SUMMARY.md`
-**copilot-instructions.md:** routing line added
+**CLAUDE.md:** routing line added
 
 The sketch-findings skill will auto-load when building the UI.
 ```
@@ -257,15 +257,15 @@ The sketch-findings skill will auto-load when building the UI.
 
 **Explore frontier sketches** — see what else is worth sketching based on what we've explored
 
-`/gsd-sketch` (run with no argument — its frontier mode analyzes the sketch landscape and proposes consistency and frontier sketches)
+`/gsd:sketch` (run with no argument — its frontier mode analyzes the sketch landscape and proposes consistency and frontier sketches)
 
 ───────────────────────────────────────────────────────────────
 
 **Also available:**
-- `/gsd-plan-phase` — start building the real UI
-- `/gsd-ui-phase` — generate a UI design contract for a frontend phase
-- `/gsd-sketch [idea]` — sketch a specific new design area
-- `/gsd-explore` — continue exploring
+- `/gsd:plan-phase` — start building the real UI
+- `/gsd:ui-phase` — generate a UI design contract for a frontend phase
+- `/gsd:sketch [idea]` — sketch a specific new design area
+- `/gsd:explore` — continue exploring
 
 ───────────────────────────────────────────────────────────────
 </step>
@@ -275,11 +275,11 @@ The sketch-findings skill will auto-load when building the UI.
 <success_criteria>
 - [ ] Every unprocessed sketch presented for individual curation
 - [ ] Design-area grouping proposed and approved
-- [ ] Sketch-findings skill exists at `./.github/skills/` with SKILL.md, references/, sources/
+- [ ] Sketch-findings skill exists at `./.claude/skills/` with SKILL.md, references/, sources/
 - [ ] Winning theme.css copied into skill sources
 - [ ] Reference files contain design decisions, CSS patterns, HTML structures, anti-patterns
 - [ ] `.planning/sketches/WRAP-UP-SUMMARY.md` written for project history
-- [ ] Project copilot-instructions.md has auto-load routing line
+- [ ] Project CLAUDE.md has auto-load routing line
 - [ ] Summary presented
-- [ ] Next-step options presented (including frontier sketch exploration via `/gsd-sketch`)
+- [ ] Next-step options presented (including frontier sketch exploration via `/gsd:sketch`)
 </success_criteria>

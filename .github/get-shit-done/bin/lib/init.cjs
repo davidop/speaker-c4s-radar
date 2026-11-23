@@ -40,7 +40,7 @@ function getLatestCompletedMilestone(cwd) {
 
 /**
  * Inject `project_root` into an init result object.
- * Workflows use this to prefix `.planning/` paths correctly when the agent's CWD
+ * Workflows use this to prefix `.planning/` paths correctly when Claude's CWD
  * differs from the project root (e.g., inside a sub-repo).
  */
 function withProjectRoot(cwd, result) {
@@ -250,7 +250,7 @@ function cmdInitPlanPhase(cwd, phase, raw, options = {}) {
   const phase_req_ids = (reqExtracted && reqExtracted !== 'TBD') ? reqExtracted : null;
 
   // #3287: compute the canonical directory name with project_code prefix so
-  // the first-touch mkdir in /gsd-plan-phase stays consistent with phase.add.
+  // the first-touch mkdir in /gsd:plan-phase stays consistent with phase.add.
   const phaseDirPlan = phaseInfo?.directory || null;
   const phaseNumberPlan = phaseInfo?.phase_number || null;
   const phaseNamePlan = phaseInfo?.phase_name || null;
@@ -296,7 +296,7 @@ function cmdInitPlanPhase(cwd, phase, raw, options = {}) {
     padded_phase: phaseNumberPlan ? normalizePhaseName(phaseNumberPlan) : null,
     phase_req_ids,
 
-    // #3569: surface phase lifecycle status so /gsd-plan-phase can short-circuit
+    // #3569: surface phase lifecycle status so /gsd:plan-phase can short-circuit
     // on closed (Complete) phases instead of silently replanning over shipped
     // code. Reuses determinePhaseStatus — the project-wide vocabulary
     // (Pending | Planned | In Progress | Executed | Complete | Needs Review).
@@ -774,7 +774,7 @@ function cmdInitPhaseOp(cwd, phase, raw) {
   }
 
   // #3287: compute the canonical directory name with project_code prefix so
-  // the first-touch mkdir in /gsd-discuss-phase stays consistent with phase.add.
+  // the first-touch mkdir in /gsd:discuss-phase stays consistent with phase.add.
   const phaseDir = phaseInfo?.directory || null;
   const phaseNumber = phaseInfo?.phase_number || null;
   const phaseName = phaseInfo?.phase_name || null;
@@ -1076,10 +1076,10 @@ function cmdInitManager(cwd, raw) {
 
   // Validate prerequisites
   if (!fs.existsSync(paths.roadmap)) {
-    error('No ROADMAP.md found. Run /gsd-new-milestone first.');
+    error('No ROADMAP.md found. Run /gsd:new-milestone first.');
   }
   if (!fs.existsSync(paths.state)) {
-    error('No STATE.md found. Run /gsd-new-milestone first.');
+    error('No STATE.md found. Run /gsd:new-milestone first.');
   }
   const rawContent = fs.readFileSync(paths.roadmap, 'utf-8');
   const content = extractCurrentMilestone(rawContent, cwd);
@@ -1259,7 +1259,7 @@ function cmdInitManager(cwd, raw) {
         phase_name: phase.name,
         action: 'execute',
         reason: `${phase.plan_count} plans ready, dependencies met`,
-        command: `/gsd-execute-phase ${phase.number}`,
+        command: `/gsd:execute-phase ${phase.number}`,
       });
     } else if (phase.disk_status === 'discussed' || phase.disk_status === 'researched') {
       recommendedActions.push({
@@ -1267,7 +1267,7 @@ function cmdInitManager(cwd, raw) {
         phase_name: phase.name,
         action: 'plan',
         reason: 'Context gathered, ready for planning',
-        command: `/gsd-plan-phase ${phase.number}`,
+        command: `/gsd:plan-phase ${phase.number}`,
       });
     } else if ((phase.disk_status === 'empty' || phase.disk_status === 'no_directory') && phase.is_next_to_discuss) {
       recommendedActions.push({
@@ -1275,7 +1275,7 @@ function cmdInitManager(cwd, raw) {
         phase_name: phase.name,
         action: 'discuss',
         reason: 'Unblocked, ready to gather context',
-        command: `/gsd-discuss-phase ${phase.number}`,
+        command: `/gsd:discuss-phase ${phase.number}`,
       });
     }
   }
@@ -1820,7 +1820,7 @@ function buildSkillManifest(cwd, skillsDir = null) {
     kind: 'skills',
   }] : [
     {
-      root: '.github/skills',
+      root: '.claude/skills',
       path: path.join(cwd, '.claude', 'skills'),
       scope: 'project',
       kind: 'skills',
@@ -1850,7 +1850,7 @@ function buildSkillManifest(cwd, skillsDir = null) {
       kind: 'skills',
     },
     {
-      root: '.github/skills',
+      root: '~/.claude/skills',
       path: getGlobalSkillsBase('claude'),
       scope: 'global',
       kind: 'skills',
@@ -1862,14 +1862,14 @@ function buildSkillManifest(cwd, skillsDir = null) {
       kind: 'skills',
     },
     {
-      root: '.github/get-shit-done/skills',
+      root: '.claude/get-shit-done/skills',
       path: path.join(os.homedir(), '.claude', 'get-shit-done', 'skills'),
       scope: 'import-only',
       kind: 'skills',
       deprecated: true,
     },
     {
-      root: '.github/commands/gsd',
+      root: '.claude/commands/gsd',
       path: path.join(os.homedir(), '.claude', 'commands', 'gsd'),
       scope: 'legacy-commands',
       kind: 'commands',

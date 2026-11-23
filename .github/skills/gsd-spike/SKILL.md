@@ -2,7 +2,18 @@
 name: gsd-spike
 description: "Spike an idea through experiential exploration, or propose what to spike next (frontier mode)"
 argument-hint: "[idea to validate] [--quick] [--text] [--wrap-up] or [frontier]"
-allowed-tools: Read, Write, Edit, Bash, Grep, Glob, AskUserQuestion, WebSearch, WebFetch, mcp__context7__resolve-library-id, mcp__context7__query-docs
+allowed-tools:
+  - Read
+  - Write
+  - Edit
+  - Bash
+  - Grep
+  - Glob
+  - AskUserQuestion
+  - WebSearch
+  - WebFetch
+  - mcp__context7__resolve-library-id
+  - mcp__context7__query-docs
 ---
 
 <objective>
@@ -19,9 +30,9 @@ Does not require prior new-project setup — auto-creates `.planning/spikes/` if
 </objective>
 
 <execution_context>
-@.github/get-shit-done/workflows/spike.md
-@.github/get-shit-done/workflows/spike-wrap-up.md
-@.github/get-shit-done/references/ui-brand.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/spike.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/workflows/spike-wrap-up.md
+@$HOME/work/speaker-c4s-radar/speaker-c4s-radar/.github/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <runtime_note>
@@ -33,7 +44,7 @@ Idea: $ARGUMENTS
 
 **Available flags:**
 - `--quick` — Skip decomposition/alignment, jump straight to building. Use when you already know what to spike.
-- `--text` — Use plain-text numbered lists instead of AskUserQuestion (for non-the agent runtimes).
+- `--text` — Use plain-text numbered lists instead of AskUserQuestion (for non-Claude runtimes).
 - `--wrap-up` — Package spike findings into a persistent project skill for future build conversations. Runs the spike-wrap-up workflow.
 </context>
 
